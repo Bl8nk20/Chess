@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2023-01-25T12:27:26.907Z" agent="5.0 (Windows)" etag="yFr-jXf8GvxHaJRp--OK" version="20.8.10" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-25T13:12:45.101Z" agent="5.0 (Windows)" etag="lhfEoHm_-Cte-6RVu-Cm" version="20.8.10" type="github">
   <diagram name="Seite-1" id="8dhn65Cj3MbclAA8dtAb">
-    <mxGraphModel dx="5620" dy="343" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="5572" dy="381" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Scy77tW3S1ukV7C9qBci-56" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Game&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;whitePlayer&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;blackPlayer&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;board&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;Play() : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;UpdateBoard() : void // Updating Board &lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;nbsp; // and Pieces&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;GameEnd() : bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;CheckKills() : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;MoveIsValid() : bool&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-2420" y="1760" width="210" height="180" as="geometry" />
+        <mxCell id="Scy77tW3S1ukV7C9qBci-56" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Game&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;whitePlayer&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;blackPlayer&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;board&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;Play() : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;UpdateBoard() : void // Updating Board &lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;nbsp; // and Pieces&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;GameEnd() : bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;CheckKills() : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;MoveIsValid() : bool&lt;br&gt;&lt;/p&gt;&lt;div&gt;&amp;nbsp;TranslateLocationToCoord()&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-2420" y="1760" width="210" height="190" as="geometry" />
         </mxCell>
         <mxCell id="Scy77tW3S1ukV7C9qBci-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -16,8 +16,8 @@
         <mxCell id="Scy77tW3S1ukV7C9qBci-59" value="«enumeration»&lt;br&gt;&lt;b&gt;PieceColor&lt;/b&gt;" style="html=1;" parent="1" vertex="1">
           <mxGeometry x="-3060" y="1784" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="Scy77tW3S1ukV7C9qBci-62" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IPieces&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;color: enum&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;image: image&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;points: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;previousLoc:&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;futureLoc:&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;Move move()&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div&gt;IsValidMove():&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;br&gt;&lt;/div&gt;&lt;div&gt;remove() :&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-2830" y="1760" width="190" height="210" as="geometry" />
+        <mxCell id="Scy77tW3S1ukV7C9qBci-62" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IPieces&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;color: enum&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;image: image&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;points: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;previousLoc:&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;futureLoc:&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div&gt;IsValidMove():&lt;/div&gt;&lt;div&gt;Move(): &lt;br&gt;&lt;/div&gt;&lt;div&gt;PossibleMove():&amp;nbsp; &lt;br&gt;&lt;/div&gt;&lt;div&gt;remove() :&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-2830" y="1760" width="190" height="190" as="geometry" />
         </mxCell>
         <mxCell id="IA7U_873xqGfDjJFMJLf-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;strokeColor=#000000;endArrow=block;endFill=0;" edge="1" parent="1" source="Scy77tW3S1ukV7C9qBci-75" target="Scy77tW3S1ukV7C9qBci-62">
           <mxGeometry relative="1" as="geometry" />
@@ -150,7 +150,7 @@
             <mxPoint x="-1560" y="1950" as="sourcePoint" />
             <mxPoint x="-1400" y="1950" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="-3005" y="1865" />
+              <mxPoint x="-3005" y="1860" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -240,21 +240,6 @@
               <mxPoint x="-1400" y="1798" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="IA7U_873xqGfDjJFMJLf-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;startArrow=block;startFill=0;endArrow=none;endFill=0;" edge="1" parent="1" source="IA7U_873xqGfDjJFMJLf-64" target="Scy77tW3S1ukV7C9qBci-62">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="IA7U_873xqGfDjJFMJLf-64" value="Move" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
-          <mxGeometry x="-2815" y="2140" width="160" height="130" as="geometry" />
-        </mxCell>
-        <mxCell id="IA7U_873xqGfDjJFMJLf-65" value="currentLoc: " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="IA7U_873xqGfDjJFMJLf-64">
-          <mxGeometry y="26" width="160" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="IA7U_873xqGfDjJFMJLf-66" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="IA7U_873xqGfDjJFMJLf-64">
-          <mxGeometry y="52" width="160" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="IA7U_873xqGfDjJFMJLf-67" value="MoveForward():&#xa;MoveBackward()&#xa;MoveLeft()&#xa;MoveRight()&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="IA7U_873xqGfDjJFMJLf-64">
-          <mxGeometry y="60" width="160" height="70" as="geometry" />
         </mxCell>
         <mxCell id="IA7U_873xqGfDjJFMJLf-72" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Computer AI&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
           <mxGeometry x="-2890" y="1605" width="160" height="25" as="geometry" />
