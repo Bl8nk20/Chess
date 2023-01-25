@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-01-25T11:02:31.787Z" agent="5.0 (Windows)" etag="tq29BY17TYquQeumsNkZ" version="20.8.10" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-25T11:11:41.990Z" agent="5.0 (Windows)" etag="PhIYVDYFVs9MNUBx7RUf" version="20.8.10" type="github">
   <diagram name="Seite-1" id="8dhn65Cj3MbclAA8dtAb">
-    <mxGraphModel dx="1702" dy="448" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1994" dy="598" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -176,6 +176,15 @@
             <Array as="points">
               <mxPoint x="520" y="398" />
               <mxPoint x="380" y="398" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IA7U_873xqGfDjJFMJLf-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;startArrow=classicThin;startFill=1;endArrow=classicThin;endFill=1;" edge="1" parent="1" source="IA7U_873xqGfDjJFMJLf-38" target="Scy77tW3S1ukV7C9qBci-56">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="490" />
+              <mxPoint x="870" y="250" />
+              <mxPoint x="810" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
