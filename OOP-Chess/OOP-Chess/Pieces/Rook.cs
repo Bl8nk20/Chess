@@ -5,9 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using OOP_Chess.Interfaces;
 
-namespace OOP_Chess.Pieces
+namespace OOP_Chess.Pieces;
+
+internal class Rook : IPieces
 {
-    internal class Rook : IPieces
+    private enum _Colors { B, W };
+
+    private int[][]? _currentLoc;
+    public int[][]  currentLoc
+    { get; set; }
+
+
+    public bool IsValidMove()
     {
+        return true;
+    }
+
+    public void Move()
+    {
+
+    }
+    public void Remove()
+    {
+
     }
 }
+
