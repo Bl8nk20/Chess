@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using OOP_Chess.Interfaces;
 
 
-namespace OOP_Chess.Pieces
+namespace OOP_Chess.Pieces;
+
+internal class King : IPieces
 {
-    internal class King : IPieces
-    {
-    }
 }

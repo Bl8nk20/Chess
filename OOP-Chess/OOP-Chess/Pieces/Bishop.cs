@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using OOP_Chess.Interfaces;
 
-namespace OOP_Chess.Pieces
-{
-    internal class Bishop : IPieces
-    {
+namespace OOP_Chess.Pieces;
 
-    }
+internal class Bishop : IPieces
+{
+
 }

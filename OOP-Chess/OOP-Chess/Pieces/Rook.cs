@@ -9,12 +9,21 @@ namespace OOP_Chess.Pieces;
 
 internal class Rook : IPieces
 {
-    private enum _Colors { B, W };
+    private enum Colors
+    {
+        B,
+        W
+    }
 
     private int[][]? _currentLoc;
     public int[][]  currentLoc
     { get; set; }
 
+    public bool Moved
+    {
+        set;
+        get;
+    }
 
     public bool IsValidMove()
     {
