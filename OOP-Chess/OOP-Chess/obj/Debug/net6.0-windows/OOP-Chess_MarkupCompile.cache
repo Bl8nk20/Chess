@@ -1,5 +1,5 @@
 ﻿OOP-Chess
-
+1.0.0.0
 
 winexe
 C#
@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\App.xaml
-11407045341
+1-370187465
 
-121307190858
+161726854003
 194-1103864946
-MainWindow.xaml;
+GUI-Parts\MainWindow.xaml;
 
 True
 
