@@ -6,7 +6,6 @@ using System.Security.RightsManagement;
 
 public class GeneratingChessBoard
 {
-
 	/// <summary>
 	/// 
 	/// </summary>
@@ -15,3 +14,4 @@ public class GeneratingChessBoard
 
 	}
 }
+

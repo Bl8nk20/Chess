@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOP_Chess.Pieces;
+using System;
 
 public class MainProcess
 {
@@ -10,7 +11,6 @@ public class MainProcess
 
 	public MainProcess()
 	{
-
 	}
 
 	~MainProcess()

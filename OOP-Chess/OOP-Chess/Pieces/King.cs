@@ -23,6 +23,11 @@ internal class King : IPieces
         get; set;
     }
 
+    public void FigureColor(int PlayerTurn)
+    {
+
+    }
+
     /// assumption: xTarget and yTarget between 0 and 7
     /// assumption: Target != Current
     /// assumption: nobody is in the way

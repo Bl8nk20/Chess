@@ -14,12 +14,22 @@ internal class Bishop : IPieces
     private byte yCurrent; // rows 0...7, bottom is row 0
     protected byte XCurrent
     {
-        get; set;
+        get { return xCurrent; }
+        set { xCurrent = value; }
     }
 
     protected byte YCurrent
     {
-        get; set;
+        get { return yCurrent; }
+        set { yCurrent = value; }
+    }
+
+    public Bishop(byte YCurrent, byte XCurrent)
+    {
+        this.YCurrent = YCurrent;
+        this.XCurrent = XCurrent;
+        // (turn % 2 != 0) ? PlayersTurn.W : PlayersTurn.B;
+
     }
 
     /// assumption: xTarget and yTarget between 0 and 7
@@ -28,13 +38,13 @@ internal class Bishop : IPieces
     /// Return: Is move possible
     public bool IsValidMove(byte xTarget, byte yTarget)
     {
-        return true;
+        return yTarget == YCurrent + xCurrent - xTarget || yTarget == yTarget - xCurrent + xTarget;
     }
 
     //
     public void Move(byte xTarget, byte yTarget)
     {
-        if(!IsValidMove(xTarget, yTarget))
+        if (!IsValidMove(xTarget, yTarget))
         {
             throw new Exception("No Valid Move!");
         }
@@ -47,4 +57,6 @@ internal class Bishop : IPieces
     {
 
     }
+
 }
+
