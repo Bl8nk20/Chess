@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 C:\Users\ms85866\source\repos\Chess\OOP-Chess\OOP-Chess\App.xaml
-11407045341
+1-370187465
 
-14890646527
+14583678080
 194-1103864946
-MainWindow.xaml;
+GUI-Parts\MainWindow.xaml;
 
 True
 
