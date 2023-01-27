@@ -9,18 +9,27 @@ namespace OOP_Chess.Pieces;
 
 internal class Rook : IPieces
 {
-    
+    /// constructor to place the Rook
+    public Rook(byte xPosRook, byte yPosRook)
+    {
+        this.XCurrent = xPosRook;
+        this.YCurrent = yPosRook;
+        
+    }
+
     // Locations of the pieces
     private byte xCurrent; // cols 0...7
     private byte yCurrent; // rows 0...7, bottom is row 0
-    public byte XCurrent
+    protected byte XCurrent
     {
-        get; set;
+        get {return xCurrent; }
+        set {xCurrent = value; }
     }
 
-    public byte YCurrent
+    protected byte YCurrent
     {
-        get; set;
+        get {return yCurrent; }
+        set {yCurrent = value; }
     }
 
     /// assumption: xTarget and yTarget between 0 and 7

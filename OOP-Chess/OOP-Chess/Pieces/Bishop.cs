@@ -12,12 +12,12 @@ internal class Bishop : IPieces
     // Locations of the pieces
     private byte xCurrent; // cols 0...7
     private byte yCurrent; // rows 0...7, bottom is row 0
-    public byte XCurrent
+    protected byte XCurrent
     {
         get; set;
     }
 
-    public byte YCurrent
+    protected byte YCurrent
     {
         get; set;
     }
@@ -28,7 +28,7 @@ internal class Bishop : IPieces
     /// Return: Is move possible
     public bool IsValidMove(byte xTarget, byte yTarget)
     {
-
+        return true;
     }
 
     //
