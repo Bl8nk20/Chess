@@ -1,15 +1,11 @@
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.csproj.AssemblyReference.cache
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\GUI-Parts\MainWindow.g.cs
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess_MarkupCompile.cache
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess_MarkupCompile.lref
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\bin\Debug\net6.0-windows\OOP-Chess.exe
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\bin\Debug\net6.0-windows\OOP-Chess.deps.json
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\bin\Debug\net6.0-windows\OOP-Chess.runtimeconfig.json
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\bin\Debug\net6.0-windows\OOP-Chess.dll
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\bin\Debug\net6.0-windows\OOP-Chess.pdb
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\GUI-Parts\MainWindow.baml
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.g.resources
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.AssemblyInfoInputs.cache
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.AssemblyInfo.cs
@@ -19,3 +15,7 @@ C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.pdb
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.genruntimeconfig.cache
 C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\ref\OOP-Chess.dll
+C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess_MarkupCompile.lref
+C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\OOP-Chess.g.resources
