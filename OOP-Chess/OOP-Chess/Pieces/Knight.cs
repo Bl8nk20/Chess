@@ -10,38 +10,42 @@ namespace OOP_Chess.Pieces;
 
 internal class Knight : IPieces
 {
-    private enum Colors
-    {
-        B,
-        W
-    }
-
-    
     // Locations of the pieces
-    private int xCurrent; // cols 0...7
-    private int yCurrent; // rows 0...7, bottom is row 0
-    public int XCurrent
-    {
-        get; set;
-    }
-    public int YCurrent
+    private byte xCurrent; // cols 0...7
+    private byte yCurrent; // rows 0...7, bottom is row 0
+    public byte XCurrent
     {
         get; set;
     }
 
-    public bool IsValidMove()
+    public byte YCurrent
     {
-        return true;
+        get; set;
     }
 
-    public bool Move(int xTarget, int yTarget)
+    /// assumption: xTarget and yTarget between 0 and 7
+    /// assumption: Target != Current
+    /// assumption: nobody is in the way
+    /// Return: Is move possible
+    public bool IsValidMove(byte xTarget, byte yTarget)
     {
-        return true;
+
     }
 
+    //
+    public void Move(byte xTarget, byte yTarget)
+    {
+        if(!IsValidMove(xTarget, yTarget))
+        {
+            throw new Exception("No Valid Move!");
+        }
+        XCurrent = xTarget;
+        YCurrent = yTarget;
+    }
+
+    //
     public void Remove()
     {
 
     }
-
 }
