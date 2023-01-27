@@ -17,7 +17,7 @@ internal interface IPieces
     /// </summary>
     /// <returns>a true value if the user-movement is possible
     /// return a false value if the user-movement is not possible </returns>
-    bool IsValidMove();
+    bool IsValidMove(byte xTarget, byte yTarget);
 
     /// <summary>
     /// a Method to get the basic movement of each piece
@@ -26,7 +26,7 @@ internal interface IPieces
     ///        on its first movement 2 fields forward
     ///        the Pawn can throw diagonal only if there is a enemy piece
     /// </summary>
-    bool Move(int xTarget, int yTarget);
+    void Move(byte xTarget, byte yTarget);
 
     /// <summary>
     /// a Method to remove the piece from the 

@@ -17,36 +17,33 @@ internal class Rook : IPieces
     {
         get; set;
     }
+
     public byte YCurrent
     {
         get; set;
     }
 
-    public Rook()
-    {
-        this.xCurrent = 0;
-        this.yCurrent = 0;
-
-    }
-
-    
-    // assumption: xTarget and yTarget between 0 and 7
-    // assumption: Target != Current
-    // Return: Is move possible
+    /// assumption: xTarget and yTarget between 0 and 7
+    /// assumption: Target != Current
+    /// assumption: nobody is in the way
+    /// Return: Is move possible
     public bool IsValidMove(byte xTarget, byte yTarget)
     {
-        if(xTarget == xCurrent || yTarget == yCurrent)
-        {
-            return true;
-        }
-        return true;
+        return xTarget == xCurrent || yTarget == yCurrent;
     }
 
+    //
     public void Move(byte xTarget, byte yTarget)
     {
-
+        if(!IsValidMove(xTarget, yTarget))
+        {
+            throw new Exception("No Valid Move!");
+        }
+        XCurrent = xTarget;
+        YCurrent = yTarget;
     }
 
+    //
     public void Remove()
     {
 
