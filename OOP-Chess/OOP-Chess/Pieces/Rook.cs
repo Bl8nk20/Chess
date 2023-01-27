@@ -9,34 +9,48 @@ namespace OOP_Chess.Pieces;
 
 internal class Rook : IPieces
 {
-    private enum Colors
+    
+    // Locations of the pieces
+    private byte xCurrent; // cols 0...7
+    private byte yCurrent; // rows 0...7, bottom is row 0
+    public byte XCurrent
     {
-        B,
-        W
+        get; set;
+    }
+    public byte YCurrent
+    {
+        get; set;
     }
 
-    private int[][]? _currentLoc;
-    public int[][]  currentLoc
-    { get; set; }
-
-    public bool Moved
+    public Rook()
     {
-        set;
-        get;
+        this.xCurrent = 0;
+        this.yCurrent = 0;
+
     }
 
-    public bool IsValidMove()
+    
+    // assumption: xTarget and yTarget between 0 and 7
+    // assumption: Target != Current
+    // Return: Is move possible
+    public bool IsValidMove(byte xTarget, byte yTarget)
     {
+        if(xTarget == xCurrent || yTarget == yCurrent)
+        {
+            return true;
+        }
         return true;
     }
 
-    public void Move()
+    public void Move(byte xTarget, byte yTarget)
     {
 
     }
+
     public void Remove()
     {
 
     }
+
 }
 

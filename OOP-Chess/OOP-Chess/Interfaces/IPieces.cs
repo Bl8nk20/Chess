@@ -6,29 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_Chess.Interfaces;
 
+// a interface for the main Piece Logic as a blueprint.
 internal interface IPieces
 {
-
-    /// <summary>
-    /// Enum to switch between the different
-    /// turns and to get the board status / different classifiers 
-    /// </summary>
-    private enum Color
-    {
-        B,
-        W
-    };
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool Moved
-    {
-        protected set;
-        get;
-    }
-
-
     /// <summary>
     /// a Method to check if the move the 
     /// user want to do is possible or not.
@@ -46,7 +26,7 @@ internal interface IPieces
     ///        on its first movement 2 fields forward
     ///        the Pawn can throw diagonal only if there is a enemy piece
     /// </summary>
-    void Move();
+    bool Move(int xTarget, int yTarget);
 
     /// <summary>
     /// a Method to remove the piece from the 

@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\OOP-Chess"
+    "\\OOP-Chess",
+    "\\OOP-Chess\\OOP-Chess",
+    "\\OOP-Chess\\OOP-Chess\\GUI-Parts",
+    "\\OOP-Chess\\OOP-Chess\\Interfaces",
+    "\\OOP-Chess\\OOP-Chess\\Pieces"
   ],
-  "SelectedNode": "\\OOP-Chess\\OOP-Chess.sln",
   "PreviewInSolutionExplorer": false
 }

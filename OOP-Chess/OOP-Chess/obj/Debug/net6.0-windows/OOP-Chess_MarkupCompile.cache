@@ -1,20 +1,20 @@
 ﻿OOP-Chess
-1.0.0.0
+
 
 winexe
 C#
 .cs
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\
+C:\Users\ms85866\source\repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\
 OOP_Chess
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\App.xaml
+C:\Users\ms85866\source\repos\Chess\OOP-Chess\OOP-Chess\App.xaml
 1-370187465
 
-161726854003
+14583678080
 194-1103864946
 GUI-Parts\MainWindow.xaml;
 
-True
+False
 
