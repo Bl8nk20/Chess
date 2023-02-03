@@ -1,56 +1,90 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OOP_Chess.Interfaces;
 
+namespace OOP_Chess;
 
-namespace OOP_Chess.Pieces;
-
-internal class King : IPieces
+public class King : Pieces
 {
-    // Locations of the pieces
-    private byte xCurrent; // cols 0...7
-    private byte yCurrent; // rows 0...7, bottom is row 0
-    protected byte XCurrent
+    // bool for the Castling movement if done
+    private bool isCastlingDone = false;
+    public bool IsCastlingDone
     {
-        get; set;
+        get { return isCastlingDone; }
+        set { isCastlingDone = value; }
     }
 
-    protected byte YCurrent
+    /// <summary>
+    /// Constructor for the King Piece Class
+    /// </summary>
+    /// <param name="isWhite"></param>
+    public King(bool isWhite) : base(isWhite)
     {
-        get; set;
+
     }
 
-    public void FigureColor(int PlayerTurn)
+    /// <summary>
+    /// Overridden method for the King movement
+    /// King Movement: 1 forward around the King
+    /// </summary>
+    /// <param name="board"></param>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    public override bool CanMove(Board board, Spot start, Spot end)
     {
-
-    }
-
-    /// assumption: xTarget and yTarget between 0 and 7
-    /// assumption: Target != Current
-    /// assumption: nobody is in the way
-    /// Return: Is move possible
-    public bool IsValidMove(byte xTarget, byte yTarget)
-    {
-        return true;
-    }
-
-    //
-    public void Move(byte xTarget, byte yTarget)
-    {
-        if(!IsValidMove(xTarget, yTarget))
+        // we can't move the piece to a Spot that
+        // has a piece of the same color
+        if (end.Piece.IsWhite == this.IsWhite)
         {
-            throw new Exception("No Valid Move!");
+            return false;
         }
-        XCurrent = xTarget;
-        YCurrent = yTarget;
+
+        int x = Math.Abs(start.X - end.X);
+        int y = Math.Abs(start.Y - end.Y);
+        if (x + y == 1)
+        {
+            // check if this move will not result in the king
+            // being attacked if so return true
+            return true;
+        }
+
+        return this.isValidCastling(board, start, end);
     }
 
-    //
-    public void Remove()
+    /// <summary>
+    /// check if the castlingmoevemnt is valid
+    /// castling: rook not moved!
+    ///           king not moved
+    ///           knight and bishop out of the way
+    /// </summary>
+    /// <param name="board"></param>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    private bool isValidCastling(Board board,
+                                    Spot start, Spot end)
     {
+        // check if it has been done before
+        if (this.isCastlingDone)
+        {
+            return false;
+        }
 
+        // Logic for returning true or false
+        // implement it
+        return false;
+    }
+
+    /// <summary>
+    /// execute the castling moevement !
+    /// IMPLEMENTION NEEDED !!!
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    public bool isCastlingMove(Spot start, Spot end)
+    {
+        // check if the starting and
+        // ending position are correct
+        return false;
     }
 }

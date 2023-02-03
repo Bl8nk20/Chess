@@ -1,57 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OOP_Chess.Interfaces;
+﻿namespace OOP_Chess;
 
-
-namespace OOP_Chess.Pieces;
-
-internal class Pawn : IPieces
+public class Pawn : Pieces
 {
-    // Locations of the pieces
-    private byte xCurrent; // cols 0...7
-    private byte yCurrent; // rows 0...7, bottom is row 0
-    protected byte XCurrent
-    {
-        get; set;
-    }
-
-    protected byte YCurrent
-    {
-        get; set;
-    }
-
-
-    public void FigureColor(int PlayerTurn)
+    /// <summary>
+    /// Constructor for the Pawn Chesspiece
+    /// </summary>
+    /// <param name="isWhite"></param>
+    public Pawn(bool isWhite) : base(isWhite)
     {
 
     }
 
-    /// assumption: xTarget and yTarget between 0 and 7
-    /// assumption: Target != Current
-    /// assumption: nobody is in the way
-    /// Return: Is move possible
-    public bool IsValidMove(byte xTarget, byte yTarget)
+    /// <summary>
+    /// overridden movement method to check the move
+    /// pawn movement: if first time moving: pawn can step forward 2 spots
+    ///                if !first time moving: pawn can step forward 1 spot
+    ///                if enemy diagonal: can throw diagonaly
+    ///                if enemy has moved 2 steps and is standing on the same level as pawn: en passant!
+    /// </summary>
+    /// <param name="board"></param>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    public override bool CanMove(Board board, Spot start, Spot end)
     {
+        // we can't move the piece to a spot that has
+        // a piece of the same colour
+        if (end.Piece.IsWhite == this.IsWhite)
+        {
+            return false;
+        }
+
+        // update movement
+        // write movement method further!
         return true;
     }
 
-    //
-    public void Move(byte xTarget, byte yTarget)
-    {
-        if(!IsValidMove(xTarget, yTarget))
-        {
-            throw new Exception("No Valid Move!");
-        }
-        XCurrent = xTarget;
-        YCurrent = yTarget;
-    }
 
-    //
-    public void Remove()
+    public bool EnPassant()
     {
-
+        return true;
     }
 }

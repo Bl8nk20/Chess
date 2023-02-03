@@ -1,62 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OOP_Chess.Interfaces;
+﻿namespace OOP_Chess;
 
-namespace OOP_Chess.Pieces;
-
-internal class Rook : IPieces
+public class Rook : Pieces
 {
-    // Locations of the pieces
-    private byte xCurrent; // cols 0...7
-    private byte yCurrent; // rows 0...7, bottom is row 0
-    protected byte XCurrent
-    {
-        get {return xCurrent; }
-        set {xCurrent = value; }
-    } 
 
-    protected byte YCurrent
+    /// <summary>
+    /// Constructor for the Roock Chesspiece
+    /// </summary>
+    /// <param name="isWhite"></param>
+    public Rook(bool isWhite) : base(isWhite)
     {
-        get {return yCurrent; }
-        set {yCurrent = value; }
+        // empty Constructor cause nothing is needed :D
     }
 
-    public Rook(byte YCurrent, byte XCurrent)
+    /// <summary>
+    /// overridden method for the movement of the Rook
+    /// movement of Rook: directly horizontal or vertical
+    /// </summary>
+    /// <param name="board"></param>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    public override bool CanMove(Board board, Spot start, Spot end)
     {
-        this.YCurrent = YCurrent;
-        this.XCurrent = XCurrent;
-        // (turn % 2 != 0) ? PlayersTurn.W : PlayersTurn.B;
-
-    }
-
-    /// assumption: xTarget and yTarget between 0 and 7
-    /// assumption: Target != Current
-    /// assumption: nobody is in the way
-    /// Return: Is move possible
-    public bool IsValidMove(byte xTarget, byte yTarget)
-    {
-        return xTarget == xCurrent || yTarget == yCurrent;
-    }
-
-    //
-    public void Move(byte xTarget, byte yTarget)
-    {
-        if(!IsValidMove(xTarget, yTarget))
+        // we can't move the piece to a spot that has
+        // a piece of the same colour
+        if (end.Piece.IsWhite == this.IsWhite)
         {
-            throw new Exception("No Valid Move!");
+            return false;
         }
-        XCurrent = xTarget;
-        YCurrent = yTarget;
+
+        return end.Y == start.Y || end.X == start.X;
     }
-
-    //
-    public void Remove()
-    {
-
-    }
-
 }
-

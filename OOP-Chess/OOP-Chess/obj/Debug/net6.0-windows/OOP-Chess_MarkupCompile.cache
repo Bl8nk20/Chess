@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\OOP-Chess\obj\Debug\net6.0-windows\
 OOP_Chess
 none
 false
-TRACE;RELEASE;NET;NET6_0;NETCOREAPP
-C:\Users\ms85866\Source\Repos\Chess\OOP-Chess\OOP-Chess\App.xaml
+TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\OOP-Chess\App.xaml
 11407045341
 
-16621598432
-3882087237404
+18-1937401583
+194-1103864946
 MainWindow.xaml;
 
-True
+False
 
