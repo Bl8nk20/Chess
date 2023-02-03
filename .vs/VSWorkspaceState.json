@@ -1,11 +1,18 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Docs",
     "\\OOP-Chess",
     "\\OOP-Chess\\OOP-Chess",
-    "\\OOP-Chess\\OOP-Chess\\GUI-Parts",
-    "\\OOP-Chess\\OOP-Chess\\Interfaces",
-    "\\OOP-Chess\\OOP-Chess\\Pieces"
+    "\\OOP-Chess\\OOP-Chess\\bin",
+    "\\OOP-Chess\\OOP-Chess\\bin\\Debug",
+    "\\OOP-Chess\\OOP-Chess\\bin\\Debug\\net6.0-windows",
+    "\\OOP-Chess\\OOP-Chess\\bin\\Release",
+    "\\OOP-Chess\\OOP-Chess\\bin\\Release\\net6.0-windows",
+    "\\OOP-Chess\\OOP-Chess\\obj",
+    "\\OOP-Chess\\OOP-Chess\\obj\\Debug",
+    "\\OOP-Chess\\OOP-Chess\\obj\\Debug\\net6.0-windows",
+    "\\OOP-Chess\\OOP-Chess\\obj\\Debug\\net6.0-windows\\ref"
   ],
   "PreviewInSolutionExplorer": false
 }
