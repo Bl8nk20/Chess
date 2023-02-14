@@ -26,7 +26,7 @@ public class Game
     /// </summary>
     /// <param name="p1"></param>
     /// <param name="p2"></param>
-    private void initialize(Player p1, Player p2)
+    public void initialize(Player p1, Player p2)
     {
         players[0] = p1;
         players[1] = p2;
@@ -54,7 +54,7 @@ public class Game
     }
 
     // movement of the player
-    public bool playerMove(Player player, int startX, int startY, int endX, int endY)
+    public bool playerMove(Player player, byte startX, byte startY, byte endX, byte endY)
     {
         Spot startBox = board.getBox(startX, startY);
         Spot endBox = board.getBox(startY, endY);

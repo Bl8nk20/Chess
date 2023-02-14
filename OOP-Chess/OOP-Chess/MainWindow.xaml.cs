@@ -1,7 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Timers;
 using System.Windows.Threading;
+using OOP_Chess;
 
 namespace Chess
 {
@@ -27,6 +44,10 @@ namespace Chess
 
             timer.Tick += new EventHandler(timer_tick);
             timer.Interval = new TimeSpan(0, 0, 2);
+
+            // load the board to the gui
+            //Board Board = new Board();
+            //Board.resetBoard();
         }
 
         /// <summary>
@@ -53,37 +74,6 @@ namespace Chess
         }
 
         /// <summary>
-        /// closes the application
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        /// <summary>
-        /// makes the GameOverOverlay and StartOverlay hidden
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PlayAgain_Click(object sender, RoutedEventArgs e)
-        {
-            GameOverOverlay.Visibility = Visibility.Hidden;
-            StartOverlay.Visibility = Visibility.Hidden;
-        }
-
-        /// <summary>
-        ///  makes the StartOverlay Visible
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StartWindow(object sender, RoutedEventArgs e)
-        {
-            StartOverlay.Visibility = Visibility.Visible;
-        }
-
-        /// <summary>
         /// makes the GameOverOverlay Visible
         /// </summary>
         /// <param name="sender"></param>
@@ -94,18 +84,6 @@ namespace Chess
         }
 
         /// <summary>
-        ///  makes the NotImplementedOverlay Visible
-        ///  starts the timer
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NotImplemented(object sender, RoutedEventArgs e)
-        {
-            NotImplementedOverlay.Visibility = Visibility.Visible;
-            timer.Start();
-        }
-
-        /// <summary>
         /// makes the NotImplementedOverlay Hidden
         /// </summary>
         /// <param name="sender"></param>
@@ -113,6 +91,33 @@ namespace Chess
         private void timer_tick(object sender, EventArgs e)
         {
             NotImplementedOverlay.Visibility = Visibility.Hidden;
+        }
+
+        private void Resume(object sender, MouseButtonEventArgs e)
+        {
+            GameOverOverlay.Visibility = Visibility.Hidden;
+            StartOverlay.Visibility = Visibility.Hidden;
+        }
+
+        private void MainMenu(object sender, MouseButtonEventArgs e)
+        {
+            StartOverlay.Visibility = Visibility.Visible;
+        }
+
+        private void Exit(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        private void Won(object sender, MouseButtonEventArgs e)
+        {
+            GameOverOverlay.Visibility = Visibility.Visible;
+        }
+
+        private void notImplementedYet(object sender, MouseButtonEventArgs e)
+        {
+            NotImplementedOverlay.Visibility = Visibility.Visible;
+            timer.Start();
         }
     }
 }

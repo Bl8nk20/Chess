@@ -18,10 +18,10 @@ public abstract class Player
     /// <summary>
     /// a bool value to check if the user is a human or the computer enemy
     /// </summary>
-    private bool isHumanSide;
+    private bool isHumanPlyer;
     public bool IsHumanPlayer
     {
-        get { return isHumanSide; }
-        set { isHumanSide = value; }
+        get { return isHumanPlyer; }
+        set { isHumanPlyer = value; }
     }
 }
