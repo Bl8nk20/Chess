@@ -19,3 +19,24 @@ C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-
 C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.pdb
 C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.genruntimeconfig.cache
 C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\ref\Tryout OOP.dll
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.exe
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.deps.json
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.runtimeconfig.json
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.dll
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.pdb
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.csproj.AssemblyReference.cache
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP_MarkupCompile.cache
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP_MarkupCompile.lref
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.g.resources
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.AssemblyInfoInputs.cache
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.AssemblyInfo.cs
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.csproj.CoreCompileInputs.cache
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.dll
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\refint\Tryout OOP.dll
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.pdb
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.genruntimeconfig.cache
+C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\ref\Tryout OOP.dll

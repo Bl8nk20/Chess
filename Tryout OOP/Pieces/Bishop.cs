@@ -10,8 +10,8 @@ public class Bishop : Pieces
     /// <param name="x">Current X Coordinate</param>
     /// <param name="y">Current Y Coordinate</param>
     /// <param name="isWhite">Bool value if the Piece is White or not</param>
-    public Bishop(PointStruct Point, bool isWhite)
-        : base(Point, isWhite, isWhite ? '\u2657' : '\u265D')
+    public Bishop(PointStruct Point, bool isWhite, bool isKilled)
+        : base(Point, isWhite, isKilled, isWhite ? '\u2657' : '\u265D')
     {
         // unicode: '\u2657' -> white Bishop
         // unicode: '\u265D' -> black Bishop

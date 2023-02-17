@@ -19,8 +19,8 @@ public class King : Pieces
     /// <param name="x">Current X Coordinate</param>
     /// <param name="y">Current Y Coordinate</param>
     /// <param name="isWhite">Bool value if the Piece is White or not</param>
-    public King(PointStruct Point, bool isWhite)
-        : base(Point, isWhite, isWhite ? '\u2654' : '\u265A')
+    public King(PointStruct Point, bool isWhite, bool isKilled)
+        : base(Point, isWhite, isKilled, isWhite ? '\u2654' : '\u265A')
     {
         // unicode: '\u2654' -> white King
         // unicode: '\u265A' -> black King

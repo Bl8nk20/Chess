@@ -20,9 +20,8 @@ namespace Tryout_OOP;
 /// </summary>
 public partial class MainWindow : Window
 {
-
     TextBlock[,] textBlocks = new TextBlock[8, 8];
-    Pieces[] pieces = new Pieces[32];
+    List<Pieces> pieces = new List<Pieces>();
     Pieces movedPiece;
 
     public MainWindow()
@@ -33,7 +32,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 
+    /// Method to Draw the Chessboard using 64 TextBlocks
     /// </summary>
     private void DrawBoard()
     {
@@ -54,19 +53,21 @@ public partial class MainWindow : Window
                 Canvas.SetBottom(b, 72.5 * j);
                 b.MouseDown += MouseClicked;
                 b.MouseUp += MouseReleased;
-                //b.MouseEnter += MouseEntered;
-                b.MouseLeave += MouseLeaved;
-
             }
         }
 
         //pieces[0].MoveTo(new PointStruct(0, 4));
-        //
+        
+        // Draw Pieces / Update Pieces
         DrawPieces();
     }
 
     /// <summary>
-    /// 
+    /// Method to Draw the Chesspieces 
+    /// by checking if there is a piece 
+    /// at the Same Coordinates of each Textblock
+    /// then Draw the UniCode Symbol for the According ChessPiece
+    /// else draw an empty String to the TextBlock
     /// </summary>
     void DrawPieces()
     {
@@ -75,15 +76,15 @@ public partial class MainWindow : Window
         {
             for (byte j = 0; j < 8; j++)
             {
-                //
+                // Write a empty String to the TextBlock
                 textBlocks[i, j].Text = "";
-                //
-                for (byte k = 0; k < pieces.Length; k++)
+                //search the Array for a piece that fits
+                for (byte k = 0; k < pieces.Count; k++)
                 {
-                    //
+                    // Checking if the coodinates match up
                     if (pieces[k].Position.X == i && pieces[k].Position.Y == j)
                     {
-                        //
+                        // Write the Unicode Symbol and escape the for loop
                         textBlocks[i, j].Text = pieces[k].Look.ToString();
                         break;
                     }
@@ -95,10 +96,13 @@ public partial class MainWindow : Window
     void MouseClicked(object sender, MouseEventArgs e)
     {
         TextBlock s = (TextBlock)sender;
-        //
+        // finding the TextBlock Coordinates
         PointStruct p = findTexBlockCoordinates(s);
-        //
-        Title = "clicked";
+        // Debugging
+        //Title = "clicked";
+
+        // search for the Piece which is clicked
+        // on an set the according piece
         searchPiece(p);
 
         // coloring
@@ -109,9 +113,11 @@ public partial class MainWindow : Window
             {
                 for (byte j = 0; j < 8; j++)
                 {
-                    //
+                    // check if the piece can move legally
                     if (movedPiece.CanMove(new PointStruct(i, j)))
                     {
+                        // helping the Move Decision
+                        // by coloring the Background in Yellow
                         textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
                     }
                 }
@@ -123,18 +129,31 @@ public partial class MainWindow : Window
     {
         TextBlock s = (TextBlock)sender;
 
-        //
+        // Get TextBlock where the Mouse was clicked again 
         PointStruct targetedPoint = findTexBlockCoordinates(s);
+
         // do temp copy of piece array
         // piecearray.copy;
-        Title = "let go";
+
+        // debugging
+        // Title = "let go";
 
         // check if entered TextBlock is empty or not
         if (movedPiece != null)
         {
+            // move the Piece and draw the Pieces again
             if (movedPiece.MoveTo(targetedPoint))
             {
                 DrawPieces();
+            }
+        }
+        
+        // coloring the Pieces back at its original colors
+        for (byte i = 0; i < 8; i++)
+        {
+            for (byte j = 0; j < 8; j++)
+            {
+                textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
             }
         }
 
@@ -145,77 +164,45 @@ public partial class MainWindow : Window
         //}
     }
 
-    //void MouseEntered(object sender, MouseEventArgs e)
-    //{
-    //    TextBlock s = (TextBlock)sender;
-    //    //
-    //    PointStruct p = findTexBlockCoordinates(s);
-    //    //
-    //    searchPiece(p);
-
-    //    if (movedPiece != null)
-    //    {
-    //        // color Possible Moves
-    //        for (byte i = 0; i < 8; i++)
-    //        {
-    //            for (byte j = 0; j < 8; j++)
-    //            {
-    //                //
-    //                if (movedPiece.CanMove(new PointStruct(i,j)))
-    //                {
-    //                    textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //}
-
-    void MouseLeaved(object sender, MouseEventArgs e)
-    {
-        for (byte i = 0; i < 8; i++)
-        {
-            for (byte j = 0; j < 8; j++)
-            {
-                textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-            }
-        }
-    }
     
     /// <summary>
-    /// 
+    /// A method to find the Textblock 
+    /// which is clicked 
+    /// and where the mouse was released afterwards
     /// </summary>
     /// <param name="s"></param>
-    /// <returns></returns>
+    /// <returns>the custom Struct "Pointstruct" with both the X and Y Coordinate</returns>
     PointStruct findTexBlockCoordinates(TextBlock s)
     {
-        //
+        // looping for each element of the 2D-Array
         for (byte i = 0; i < 8; i++)
         {
             for (byte j = 0; j < 8; j++)
             {
-                //
+                // if the TextBlock matches,
+                // then return the X and Y Coordinate
                 if (textBlocks[i, j] == s)
                 {
                     return new PointStruct(i, j);
                 }
             }
         }
-        // return Point
+        // when nothing matches -> return Point
         return new PointStruct(0,0);
     }
 
     /// <summary>
-    /// 
+    /// A Method to search The ChessPieces 
+    /// in the Array, which should be moved
     /// </summary>
     /// <param name="p"></param>
-    /// <returns></returns>
+    /// <returns>nothing (void)</returns>
     void searchPiece(PointStruct p)
     {
         // Find Piece to move
-        for (byte i = 0; i < pieces.Length; i++)
+        for (byte i = 0; i < pieces.Count; i++)
         {
-            //
+            // if it matches set the movedPiece to the piece at the corresponding index
             if (pieces[i].Position.X == p.X && pieces[i].Position.Y == p.Y)
             {
                 movedPiece = pieces[i];
@@ -224,55 +211,63 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 
+    /// Initial Setup to set the Pieces to their official start positions
     /// </summary>
     /// <returns></returns>
-    Pieces[] InitialPieces()
+    List<Pieces> InitialPieces()
     {
-        Pieces[] pieces = new Pieces[32];
+        List<Pieces> pieces = new List<Pieces>();
 
-        // add rooks
-        pieces[0] = new Rook(new PointStruct(0,7), false);
-        pieces[1] = new Rook(new PointStruct(7, 7), false);
-        pieces[2] = new Rook(new PointStruct(0, 0), true);
-        pieces[3] = new Rook(new PointStruct(7, 0), true);
-        // add bishops
-        pieces[4] = new Bishop(new PointStruct(2, 7), false);
-        pieces[5] = new Bishop(new PointStruct(5, 7), false);
-        pieces[6] = new Bishop(new PointStruct(2, 0), true);
-        pieces[7] = new Bishop(new PointStruct(5, 0), true);
+        // add white pieces
+        // add white Pawns
+        for(byte i = 0; i < textBlocks.GetLength(0); i++)
+        {
+            pieces.Add(new Pawn(new PointStruct(i, 1), true, false));
+
+        }
+        // add white Knights
+        pieces.Add(new Knight(new PointStruct(1, 0), true, false));
+        pieces.Add(new Knight(new PointStruct(6, 0), true, false));
+
+        // add white Bishops
+        pieces.Add(new Bishop(new PointStruct(2, 0), true, false));
+        pieces.Add(new Bishop(new PointStruct(5, 0), true, false));
+
+        // add white Rooks
+        pieces.Add(new Rook(new PointStruct(0, 0), true, false));
+        pieces.Add(new Rook(new PointStruct(7, 0), true, false));
+        
+        // add white Queen
+        pieces.Add(new Queen(new PointStruct(3, 0), true, false));
+
+        // add White King
+        pieces.Add(new King(new PointStruct(4, 0), true, false));
+
+        // add black pieces
+        // add Pawns
+        for (byte i = 0; i < textBlocks.GetLength(0); i++)
+        {
+            pieces.Add(new Pawn(new PointStruct(i, 6), false, false));
+
+        }
+
+        // add Black Knights
+        pieces.Add(new Knight(new PointStruct(1, 7), false, false));
+        pieces.Add(new Knight(new PointStruct(6, 7), false, false));
+
+        // add Black Bishops
+        pieces.Add(new Bishop(new PointStruct(2, 7), false, false));
+        pieces.Add(new Bishop(new PointStruct(5, 7), false, false));
+        
+        // add black Rooks
+        pieces.Add(new Rook(new PointStruct(0, 7), false, false));
+        pieces.Add(new Rook(new PointStruct(7, 7), false, false));
+
+        // add Queens
+        pieces.Add(new Queen(new PointStruct(3, 7), false, false));
 
         // add Kings
-        pieces[8] = new King(new PointStruct(4, 7), false);
-        pieces[9] = new King(new PointStruct(4, 0), true);
-        
-        // add Queens
-        pieces[10] = new Queen(new PointStruct(3, 7), false);
-        pieces[11] = new Queen(new PointStruct(3, 0), true);
-
-        // add Knights
-        pieces[12] = new Knight(new PointStruct(1, 7), false);
-        pieces[13] = new Knight(new PointStruct(6, 7), false);
-        pieces[14] = new Knight(new PointStruct(1, 0), true);
-        pieces[15] = new Knight(new PointStruct(6, 0), true);
-        
-        // add Pawns
-        pieces[16] = new Pawn(new PointStruct(0, 6), false);
-        pieces[17] = new Pawn(new PointStruct(1, 6), false);
-        pieces[18] = new Pawn(new PointStruct(2, 6), false);
-        pieces[19] = new Pawn(new PointStruct(3, 6), false);
-        pieces[20] = new Pawn(new PointStruct(4, 6), false);
-        pieces[21] = new Pawn(new PointStruct(5, 6), false);
-        pieces[22] = new Pawn(new PointStruct(6, 6), false);
-        pieces[23] = new Pawn(new PointStruct(7, 6), false);
-        pieces[24] = new Pawn(new PointStruct(0, 1), true);
-        pieces[25] = new Pawn(new PointStruct(1, 1), true);
-        pieces[26] = new Pawn(new PointStruct(2, 1), true);
-        pieces[27] = new Pawn(new PointStruct(3, 1), true);
-        pieces[28] = new Pawn(new PointStruct(4, 1), true);
-        pieces[29] = new Pawn(new PointStruct(5, 1), true);
-        pieces[30] = new Pawn(new PointStruct(6, 1), true);
-        pieces[31] = new Pawn(new PointStruct(7, 1), true);
+        pieces.Add(new King(new PointStruct(4, 7), false, false));
 
         return pieces;
     }

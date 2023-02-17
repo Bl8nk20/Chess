@@ -17,6 +17,11 @@ public abstract class Pieces
     protected bool isWhite;
     protected bool hasMoved = false;
     protected bool isKilled = false;
+    public bool IsKilled
+    {
+        get { return isKilled; }
+        set { isKilled = value; }
+    }
     protected char look; // unicode design currently
     public char Look
     {
@@ -30,10 +35,11 @@ public abstract class Pieces
     /// <param name="y">Current Y Position</param>
     /// <param name="isWhite">bool if piece is black or white</param>
     /// <param name="look">char for the Unicode Image</param>
-    public Pieces(PointStruct p, bool isWhite, char look)
+    public Pieces(PointStruct p, bool isWhite, bool isKilled, char look)
     {
         this.Point = p;
         this.isWhite = isWhite;
+        this.isKilled = isKilled;
         this.look = look;
     }
 
