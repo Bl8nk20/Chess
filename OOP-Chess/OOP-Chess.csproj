@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>OOP_Chess</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BBishop.png" />
+    <None Remove="BKing.png" />
+    <None Remove="BKnight.png" />
+    <None Remove="BPawn.png" />
+    <None Remove="BQueen.png" />
+    <None Remove="BRook.png" />
+    <None Remove="WBishop.png" />
+    <None Remove="WKing.png" />
+    <None Remove="WKnight.png" />
+    <None Remove="WPawn.png" />
+    <None Remove="WQueen.png" />
+    <None Remove="WRook.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BBishop.png" />
+    <Resource Include="BKing.png" />
+    <Resource Include="BKnight.png" />
+    <Resource Include="BPawn.png" />
+    <Resource Include="BQueen.png" />
+    <Resource Include="BRook.png" />
+    <Resource Include="WBishop.png" />
+    <Resource Include="WKing.png" />
+    <Resource Include="WKnight.png" />
+    <Resource Include="WPawn.png" />
+    <Resource Include="WQueen.png" />
+    <Resource Include="WRook.png" />
+  </ItemGroup>
+
+</Project>

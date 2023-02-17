@@ -1,0 +1,21 @@
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.csproj.AssemblyReference.cache
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\App.g.cs
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP_MarkupCompile.cache
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP_MarkupCompile.lref
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.exe
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.deps.json
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.runtimeconfig.json
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.dll
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\bin\Debug\net6.0-windows\Tryout OOP.pdb
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\MainWindow.baml
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.g.resources
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.GeneratedMSBuildEditorConfig.editorconfig
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.AssemblyInfoInputs.cache
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.AssemblyInfo.cs
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.csproj.CoreCompileInputs.cache
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.dll
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\refint\Tryout OOP.dll
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.pdb
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.genruntimeconfig.cache
+C:\#Moritz\#Ausbildungsskripte\1.Lehrjahr\OOP-Chess\Tryout OOP\obj\Debug\net6.0-windows\ref\Tryout OOP.dll
