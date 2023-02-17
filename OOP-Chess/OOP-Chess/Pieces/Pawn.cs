@@ -1,7 +1,16 @@
-﻿namespace OOP_Chess;
+﻿using System.IO;
+
+namespace OOP_Chess;
 
 public class Pawn : Pieces
 {
+    private bool hasMoved = false;
+    public bool HasMoved
+    {
+        get { return hasMoved; }
+        set { hasMoved = value; }
+    }
+
     /// <summary>
     /// Constructor for the Pawn Chesspiece
     /// </summary>
@@ -11,6 +20,7 @@ public class Pawn : Pieces
 
     }
 
+    
     /// <summary>
     /// overridden movement method to check the move
     /// pawn movement: if first time moving: pawn can step forward 2 spots
@@ -30,15 +40,50 @@ public class Pawn : Pieces
         {
             return false;
         }
-
+        if (hasMoved)
+        {
+            return false;
+        }
         // update movement
         // write movement method further!
+        // movement
+        hasMoved = true; // set movement afterwards to true
         return true;
     }
 
-
-    public bool EnPassant()
+    /// <summary>
+    /// Method to check if en passant is executeable
+    /// if so do it
+    /// if pawn is above/ has crossed the middle line 
+    /// AND a pawn has moved from his init-position
+    /// -> pawn can then throw like 
+    /// </summary>
+    /// <returns></returns>
+    public bool EnPassant(Board board, Spot start, Spot end)
     {
-        return true;
+        // if pawn is above/ has crossed the middle line 
+        // AND a pawn has moved from his init-position
+        // -> pawn can then throw like the other pawn dont stand near him
+        if(end.Piece. != this.IsWhite) // now only thing left is the checking if left or right is another pawn
+        {
+
+        }
+        
+
+        return false;
+    }
+
+    /// <summary>
+    /// Method to check for promotion availability
+    /// if so execute it
+    /// </summary>
+    /// <returns></returns>
+    public bool Promotion()
+    {
+        // Pawn needs to be at the end of the board
+        // Popup ? to which piece the pawn should be promoted
+        // execute promotion logic -> pawn no longer behaves like pawn
+
+        return false;
     }
 }

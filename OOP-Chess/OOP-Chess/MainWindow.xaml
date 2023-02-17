@@ -161,67 +161,79 @@
         <Rectangle HorizontalAlignment="Left" Height="5" Margin="725,317,0,0" VerticalAlignment="Top" Width="175" Fill="White"/>
 
         <!-- Placeholder for the Images of the Pieces -->
-        <!-- White pieces -->
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,33,90,0" VerticalAlignment="Top" Width="72" Source="/Assets/BPawn.png" Stretch="Fill">
+        <!-- Black pieces -->
+
+        <Image HorizontalAlignment="Right" Height="71" Margin="0,33,90,0" VerticalAlignment="Top" Width="72" Source="/BPawn.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WPawn.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,33,10,0" VerticalAlignment="Top" Width="72" Source="/Assets/BBishop.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="71" Margin="0,33,10,0" VerticalAlignment="Top" Width="72" Source="/BBishop.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WBishop.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/BBishop.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,129,90,0" VerticalAlignment="Top" Width="72" Source="/Assets/BKnight.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="71" Margin="0,129,90,0" VerticalAlignment="Top" Width="72" Source="/BKnight.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/BKnight.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/BKnight.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,129,10,0" VerticalAlignment="Top" Width="72" Source="/Assets/BRook.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="71" Margin="0,129,10,0" VerticalAlignment="Top" Width="72" Source="/BRook.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/BRook.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/BRook.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,222,90,0" VerticalAlignment="Top" Width="72" Source="/Assets/BQueen.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="71" Margin="0,222,90,0" VerticalAlignment="Top" Width="72" Source="/BQueen.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/BQueen.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/BQueen.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,222,10,0" VerticalAlignment="Top" Width="72" Source="/Assets/BKing.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="71" Margin="0,222,10,0" VerticalAlignment="Top" Width="72" Source="/BKing.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/BKing.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/BKing.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
 
         <!-- White pieces -->
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,326,90,0" VerticalAlignment="Top" Width="72" Source="/Assets/WPawn.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="72" Margin="0,326,90,0" VerticalAlignment="Top" Width="72" Source="/WPawn.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WPawn.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,326,10,0" VerticalAlignment="Top" Width="72" Source="/Assets/WBishop.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="72" Margin="0,326,10,0" VerticalAlignment="Top" Width="72" Source="/WBishop.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WBishop.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/WBishop.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,413,10,0" VerticalAlignment="Top" Width="72" Source="/Assets/WRook.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="72" Margin="0,413,10,0" VerticalAlignment="Top" Width="72" Source="/WKnight.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WRook.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/WKnight.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,413,90,0" VerticalAlignment="Top" Width="72" Source="/Assets/WKnight.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="72" Margin="0,413,90,0" VerticalAlignment="Top" Width="72" Source="/WRook.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WKnight.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/WRook.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,506,10,0" VerticalAlignment="Top" Width="72" Source="/Assets/WKing.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="72" Margin="0,506,10,0" VerticalAlignment="Top" Width="72" Source="/WKing.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WKing.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/WKing.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,506,90,0" VerticalAlignment="Top" Width="72" Source="/Assets/WQueen.png" Stretch="Fill">
+
+        <Image HorizontalAlignment="Right" Height="72" Margin="0,506,90,0" VerticalAlignment="Top" Width="72" Source="/WQueen.png" Stretch="Fill">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Assets/WQueen.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/WQueen.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
 
@@ -324,7 +336,7 @@
                                         <Storyboard>
                                             <ColorAnimation
                                                     Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                    To="#dbdbdb"
+                                                    To="#FF4B4B4B"
                                                     Duration="0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -347,22 +359,23 @@
 
                 <!--  Restart  -->
                 <Border>
-                    <Button Content="Restart" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="NotImplemented"/>
+                    <!--<Button Content="Restart" Foreground="White" BorderBrush="Transparent" Background="Transparent" Click="NotImplemented" Padding="0,0,0,0" BorderThickness="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"/> -->
+                    <Label Foreground="White" Content="Resume" MouseDown="Resume" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
 
                 <!--  Main Menu  -->
                 <Border>
-                    <Button Content="Main Menu" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="StartWindow"/>
+                    <Label Foreground="White" Content="Main Menu" MouseDown="MainMenu" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
 
                 <!--  Exit  -->
                 <Border>
-                    <Button Content="Exit" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="Exit" />
+                    <Label Foreground="White" Content="Exit" MouseDown="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
 
                 <!--  Won Window  -->
                 <Border>
-                    <Button Content="Won" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="WonWindow" />
+                    <Label Foreground="White" Content="Won" MouseDown="Won" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
             </StackPanel>
         </Border>
@@ -374,12 +387,12 @@
               Grid.ColumnSpan="3"
               Visibility="Hidden">
             <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center" Height="309" Width="439">
                 <!-- Win text -->
                 <Label Content="~~ ... Won ~~" VerticalAlignment="Center" 
                        Height="90" FontSize="60" 
                        Foreground="White" 
-                       FontFamily="Tw Cen MT">
+                       FontFamily="Tw Cen MT" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,-5">
                     <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="Green" Offset="0.259"/>
@@ -388,72 +401,51 @@
                     </Label.Background>
                 </Label>
 
-                <!-- Play again Button -->
-                <Button Content="Play Again"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Opacity="0.8"
-                        Click="PlayAgain_Click">
-                    <Button.Background>
+                <!--  Play again button  -->
+                <Label Foreground="White" Content="Play again" MouseDown="Resume" VerticalAlignment="Center" Margin="0,30,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF313131" Offset="0.478"/>
                             <GradientStop Color="Transparent" Offset="1"/>
                             <GradientStop Color="#A7555555" Offset="0.769"/>
                             <GradientStop Color="#3DC0C0C0" Offset="0.96"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
 
                 <!-- Main Menu Button -->
-                <Button Content="Main Menu"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Opacity="0.8"
-                        Click="StartWindow">
-                    <Button.Background>
+                <Label Foreground="White" Content="Main Menu" MouseDown="MainMenu" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF313131" Offset="0.478"/>
                             <GradientStop Color="Transparent" Offset="1"/>
                             <GradientStop Color="#A7555555" Offset="0.769"/>
                             <GradientStop Color="#3DC0C0C0" Offset="0.96"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
 
                 <!-- Exit Button -->
-                <Button Content="Exit"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Opacity="0.6"
-                        Click="Exit">
-                    <Button.Background>
+                <Label Foreground="White" Content="Exit" MouseDown="Exit" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF313131" Offset="0.478"/>
                             <GradientStop Color="Transparent" Offset="1"/>
                             <GradientStop Color="#A7555555" Offset="0.769"/>
                             <GradientStop Color="#3DC0C0C0" Offset="0.96"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
             </StackPanel>
         </Grid>
 
-
         <!--     dont forget if you want to see the main window (board) you have to set the Start overlay to hidden    -->
-
-
         <!-- Start window -->
         <Grid x:Name="StartOverlay"
               Background="{StaticResource BackgroundS}"
               Grid.RowSpan="2"
               Grid.ColumnSpan="3"
-              Visibility="Hidden">
+              Visibility="Visible">
             <!--     RIGHT HERE       -->
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center" Height="600" Width="900">
@@ -472,80 +464,55 @@
                 </Label>
 
                 <!-- Play Button -->
-                <Button Content="Play"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Click="PlayAgain_Click">
-                    <Button.Background>
+                <Label Foreground="White" Content="Play" MouseDown="Resume" VerticalAlignment="Center" Margin="0,20,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF6C6C6C" Offset="0.116"/>
                             <GradientStop Color="#CC313131" Offset="1"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
 
                 <!-- Game Mode Button -->
-                <Button Content="GameMode"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Click="NotImplemented">
-                    <Button.Background>
+                <Label Foreground="White" Content="Game Mode" MouseDown="notImplementedYet" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,5,0,0" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF6C6C6C" Offset="0.116"/>
                             <GradientStop Color="#C9313131" Offset="1"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
 
                 <!-- Settings Button -->
-                <Button Content="Settings"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Click="NotImplemented">
-                    <Button.Background>
+                <Label Foreground="White" Content="Settings" MouseDown="notImplementedYet" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,8,0,0" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF6C6C6C" Offset="0.116"/>
                             <GradientStop Color="#CC313131" Offset="1"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
 
                 <!-- Exit Button -->
-                <Button Content="Exit"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Click="Exit">
-                    <Button.Background>
+                <Label Foreground="White" Content="Exit" MouseDown="Exit" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" >
+                    <Label.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF6C6C6C" Offset="0.116"/>
                             <GradientStop Color="#CC313131" Offset="1"/>
                         </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
-
-                <!-- Credits Button -->
-                <Button Content="Credits"
-                        Margin="0,170,0,0"
-                        Padding="5"
-                        BorderBrush="Transparent"
-                        Foreground="White"
-                        Click="NotImplemented" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="150">
-                    <Button.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color="#FF6C6C6C" Offset="0.116"/>
-                            <GradientStop Color="#CC313131" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Button.Background>
-                </Button>
+                    </Label.Background>
+                </Label>
             </StackPanel>
+
+            <!-- Credits Button -->
+            <Label Foreground="White" Content="Credits" MouseDown="notImplementedYet" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,0,0,10" Height="35" Width="55" >
+                <Label.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF6C6C6C" Offset="0.116"/>
+                        <GradientStop Color="#CC313131" Offset="1"/>
+                    </RadialGradientBrush>
+                </Label.Background>
+            </Label>
         </Grid>
 
         <!-- Not implemented yet overlay -->
