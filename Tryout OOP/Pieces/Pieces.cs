@@ -15,6 +15,10 @@ public abstract class Pieces
         set { Point = value; }
     }
     protected bool isWhite;
+    public bool IsWhite
+    {
+        get { return isWhite; }
+    }
     protected bool hasMoved = false;
     protected bool isKilled = false;
     public bool IsKilled
@@ -75,6 +79,7 @@ public abstract class Pieces
         }
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
+        this.hasMoved = true;
         return true;
     }
 }

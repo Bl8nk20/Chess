@@ -27,13 +27,11 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        pieces = InitialPieces();
+        Logic logic = new Logic(pieces, textBlocks, movedPiece);
+        pieces = logic.InitialPieces();
         DrawBoard();
     }
 
-    /// <summary>
-    /// Method to Draw the Chessboard using 64 TextBlocks
-    /// </summary>
     private void DrawBoard()
     {
         // load the board to the gui
@@ -100,29 +98,13 @@ public partial class MainWindow : Window
         PointStruct p = findTexBlockCoordinates(s);
         // Debugging
         //Title = "clicked";
+        Logic logic = new Logic(pieces, textBlocks, movedPiece);
 
         // search for the Piece which is clicked
         // on an set the according piece
-        searchPiece(p);
+        movedPiece = logic.searchPiece(p);
 
-        // coloring
-        if (movedPiece != null)
-        {
-            // color Possible Moves
-            for (byte i = 0; i < 8; i++)
-            {
-                for (byte j = 0; j < 8; j++)
-                {
-                    // check if the piece can move legally
-                    if (movedPiece.CanMove(new PointStruct(i, j)))
-                    {
-                        // helping the Move Decision
-                        // by coloring the Background in Yellow
-                        textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
-                    }
-                }
-            }
-        }
+        colorMovement();
     }
 
     void MouseReleased(object sender, MouseEventArgs e)
@@ -191,85 +173,51 @@ public partial class MainWindow : Window
         return new PointStruct(0,0);
     }
 
-    /// <summary>
-    /// A Method to search The ChessPieces 
-    /// in the Array, which should be moved
-    /// </summary>
-    /// <param name="p"></param>
-    /// <returns>nothing (void)</returns>
-    void searchPiece(PointStruct p)
+    void colorMovement()
     {
-        // Find Piece to move
-        for (byte i = 0; i < pieces.Count; i++)
+        // coloring
+        if (movedPiece == null)
         {
-            // if it matches set the movedPiece to the piece at the corresponding index
-            if (pieces[i].Position.X == p.X && pieces[i].Position.Y == p.Y)
+            return;
+        }
+        // color Possible Moves
+        for (byte i = 0; i < 8; i++)
+        {
+            for (byte j = 0; j < 8; j++)
             {
-                movedPiece = pieces[i];
+                // check if the piece can move legally
+                if (movedPiece.CanMove(new PointStruct(i, j)))
+                {
+                    // helping the Move Decision
+                    // by coloring the Background in Yellow
+                    textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
+                }
+
+                // coloring the enemys / opponent pieces
+                foreach (var piece in pieces)
+                {
+                    // if x and y == AND enemy color AND Piece can move to that
+                    // color background
+                    if (piece.Position.X == i
+                        && piece.Position.Y == j
+                        && movedPiece.IsWhite != piece.IsWhite
+                        && movedPiece.CanMove(new PointStruct(i, j)))
+                    {
+                        textBlocks[i, j].Background = Brushes.IndianRed;
+                    }
+
+                    if (piece.Position.X == i
+                        && piece.Position.Y == j
+                        && movedPiece.IsWhite == piece.IsWhite
+                        && movedPiece.CanMove(new PointStruct(i, j)))
+                    {
+                        textBlocks[i,j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
+
+                    }
+
+                }
             }
         }
-    }
-
-    /// <summary>
-    /// Initial Setup to set the Pieces to their official start positions
-    /// </summary>
-    /// <returns></returns>
-    List<Pieces> InitialPieces()
-    {
-        List<Pieces> pieces = new List<Pieces>();
-
-        // add white pieces
-        // add white Pawns
-        for(byte i = 0; i < textBlocks.GetLength(0); i++)
-        {
-            pieces.Add(new Pawn(new PointStruct(i, 1), true, false));
-
-        }
-        // add white Knights
-        pieces.Add(new Knight(new PointStruct(1, 0), true, false));
-        pieces.Add(new Knight(new PointStruct(6, 0), true, false));
-
-        // add white Bishops
-        pieces.Add(new Bishop(new PointStruct(2, 0), true, false));
-        pieces.Add(new Bishop(new PointStruct(5, 0), true, false));
-
-        // add white Rooks
-        pieces.Add(new Rook(new PointStruct(0, 0), true, false));
-        pieces.Add(new Rook(new PointStruct(7, 0), true, false));
-        
-        // add white Queen
-        pieces.Add(new Queen(new PointStruct(3, 0), true, false));
-
-        // add White King
-        pieces.Add(new King(new PointStruct(4, 0), true, false));
-
-        // add black pieces
-        // add Pawns
-        for (byte i = 0; i < textBlocks.GetLength(0); i++)
-        {
-            pieces.Add(new Pawn(new PointStruct(i, 6), false, false));
-
-        }
-
-        // add Black Knights
-        pieces.Add(new Knight(new PointStruct(1, 7), false, false));
-        pieces.Add(new Knight(new PointStruct(6, 7), false, false));
-
-        // add Black Bishops
-        pieces.Add(new Bishop(new PointStruct(2, 7), false, false));
-        pieces.Add(new Bishop(new PointStruct(5, 7), false, false));
-        
-        // add black Rooks
-        pieces.Add(new Rook(new PointStruct(0, 7), false, false));
-        pieces.Add(new Rook(new PointStruct(7, 7), false, false));
-
-        // add Queens
-        pieces.Add(new Queen(new PointStruct(3, 7), false, false));
-
-        // add Kings
-        pieces.Add(new King(new PointStruct(4, 7), false, false));
-
-        return pieces;
     }
 }
 
