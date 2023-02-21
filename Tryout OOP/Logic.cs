@@ -84,32 +84,46 @@ public class Logic
 
     /// <summary>
     /// A Method to search The ChessPieces 
-    /// in the Array, which should be moved
+    /// in the List, which should be moved
     /// </summary>
     /// <param name="p"></param>
     /// <returns>nothing (void)</returns>
     public Pieces searchPiece(PointStruct p)
     {
         // Find Piece to move
-        for (byte i = 0; i < pieces.Count; i++)
+        foreach(var piece in pieces)
         {
             // if it matches set the movedPiece to the piece at the corresponding index
-            if (pieces[i].Position.X == p.X && pieces[i].Position.Y == p.Y)
+            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
             {
-                movedPiece = pieces[i];
+                movedPiece = piece;
             }
         }
         return movedPiece;
     }
 
     /// <summary>
-    /// 
+    /// a method to validate if certain moves are valid
+    /// e.g. En passant or Castling or Promoting
     /// </summary>
-    /// <param name="p"></param>
-    void searchPossibleMoves(PointStruct p)
+    public void specialMoves()
     {
-        // method to search each tile if there is a
-        // piece in the way of a piece which is clicked on
-        // doing that using a for loop to search in the List of pieces, if 
+        // En Passant:
+        // check if movedPiece is from type Pawn
+        // check if on the left or right is another (enemy) pawn
+        // check if he has moved two forward
+        // throw diagonally
+
+        // Castling
+        // check if movedPiece is from type King
+        // check if king and one of the Rooks haven´t been moved yet
+        // check if the way is free (no bishop or knight or other piece is on same line)
+        // move king two steps in rooks direction -> place rook on the left or right nearby
+        // set king and rook to moved
+
+        // Promotion
+        // check if pawn has reached end of board
+        // ask player to which piece the pawn should be promoted
+        // remove pawn -> replace it with players choice
     }
 }

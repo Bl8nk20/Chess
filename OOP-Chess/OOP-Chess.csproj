@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="BBishop.png" />
     <Resource Include="BKing.png" />
     <Resource Include="BKnight.png" />

@@ -8,24 +8,37 @@ namespace Tryout_OOP;
 /// </summary>
 public abstract class Pieces
 {
+    // custom struct to creat simplicity
+    // and to store the coordinates / current positions
     protected PointStruct Point; 
     public PointStruct Position
     {
         get { return Point; }
         set { Point = value; }
     }
+    // bool to check if piece is white
+    // -> for player control
     protected bool isWhite;
     public bool IsWhite
     {
         get { return isWhite; }
     }
+    // bool for checking if the piece has moved
+    // and if so restict it to its "basic" movement
     protected bool hasMoved = false;
+    public bool HasMoved
+    {
+        get { return hasMoved; }
+        set { hasMoved = value; }
+    }
+    // bool for updating the list and removing any captured piece
     protected bool isKilled = false;
     public bool IsKilled
     {
         get { return isKilled; }
         set { isKilled = value; }
     }
+    // unicode visuals
     protected char look; // unicode design currently
     public char Look
     {
@@ -79,7 +92,6 @@ public abstract class Pieces
         }
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
-        this.hasMoved = true;
         return true;
     }
 }

@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
 
 public class Capture
 {
-    Pieces movedPiece;
-    TextBlock[,] textBlocks = new TextBlock[8, 8];
-
-    public Capture(Pieces movedPiece)
+    public Capture()
     {
-        this.movedPiece = movedPiece;
+    
     }
 
     /// <summary>
@@ -26,19 +24,15 @@ public class Capture
     /// <param name="pieces">list with every pieces / current pieces in the game</param>
     public void updateList(List<Pieces> pieces)
     {
-        foreach(var piece in pieces)
+        // looping and checking if any piece is lately updated
+        foreach (var piece in pieces)
         {
             // check if bool variable is true and if so remove the piece from the board
             if (piece.IsKilled)
             {
                 pieces.Remove(piece);
+                break;
             }
         }
     }
-
-    void capturing(List<Pieces> pieces)
-    {
-
-    }
-
 }

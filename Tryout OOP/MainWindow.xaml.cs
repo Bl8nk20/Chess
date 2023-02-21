@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,65 +34,6 @@ public partial class MainWindow : Window
         DrawBoard();
     }
 
-    private void DrawBoard()
-    {
-        // load the board to the gui
-        for (byte i = 0; i < 8; i++)
-        {
-            for (byte j = 0; j < 8; j++)
-            {
-                TextBlock b = new TextBlock();
-                // draw the chessboard
-                b.Width = 72.5;
-                b.Height = 72.5;
-                b.FontSize = 45;
-                b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                spielfeld.Children.Add(b);
-                textBlocks[i, j] = b;
-                Canvas.SetLeft(b, 72.5 * i);
-                Canvas.SetBottom(b, 72.5 * j);
-                b.MouseDown += MouseClicked;
-                b.MouseUp += MouseReleased;
-            }
-        }
-
-        //pieces[0].MoveTo(new PointStruct(0, 4));
-        
-        // Draw Pieces / Update Pieces
-        DrawPieces();
-    }
-
-    /// <summary>
-    /// Method to Draw the Chesspieces 
-    /// by checking if there is a piece 
-    /// at the Same Coordinates of each Textblock
-    /// then Draw the UniCode Symbol for the According ChessPiece
-    /// else draw an empty String to the TextBlock
-    /// </summary>
-    void DrawPieces()
-    {
-        // Draw the ChessPieces
-        for (byte i = 0; i < 8; i++)
-        {
-            for (byte j = 0; j < 8; j++)
-            {
-                // Write a empty String to the TextBlock
-                textBlocks[i, j].Text = "";
-                //search the Array for a piece that fits
-                for (byte k = 0; k < pieces.Count; k++)
-                {
-                    // Checking if the coodinates match up
-                    if (pieces[k].Position.X == i && pieces[k].Position.Y == j)
-                    {
-                        // Write the Unicode Symbol and escape the for loop
-                        textBlocks[i, j].Text = pieces[k].Look.ToString();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     void MouseClicked(object sender, MouseEventArgs e)
     {
         TextBlock s = (TextBlock)sender;
@@ -119,30 +61,9 @@ public partial class MainWindow : Window
         // do temp copy of piece array
         // piecearray.copy;
 
-        // debugging
-        // Title = "let go";
-
-        // check if entered TextBlock is empty or not
-        if (movedPiece == null)
-        {
-            return;
-        }
-
-        // move the Piece and draw the Pieces again
-        if (movedPiece.MoveTo(targetedPoint))
-        {
-            for(byte i = 0; i < pieces.Count; i++)
-            {
-                if (pieces[i].Position.X == targetedPoint.X 
-                    && pieces[i].Position.Y == targetedPoint.Y)
-                {
-                    pieces[i].IsKilled = true;
-                    capture.updateList(pieces);
-                }
-            }
-
-            DrawPieces();
-        }
+        // method for the Piece Movement
+        // -> capturing and moving the piece
+        pieceMoving(targetedPoint);
 
         // coloring the Pieces back at its original colors
         for (byte i = 0; i < 8; i++)
@@ -160,7 +81,74 @@ public partial class MainWindow : Window
         //}
     }
 
-    
+    /// <summary>
+    /// a method to create the chessboard automatically 
+    /// by generating 64 textblocks from a 2D array
+    /// also add the chesspieces too if there are any to fill up
+    /// </summary>
+    private void DrawBoard()
+    {
+        // loop for each element of the 2d Array
+        for (byte i = 0; i < 8; i++)
+        {
+            for (byte j = 0; j < 8; j++)
+            {
+                // create a new textblock each time
+                TextBlock b = new TextBlock();
+                // draw the chessboard
+                b.Width = 72.5;
+                b.Height = 72.5;
+                b.FontSize = 45;
+                // color the textblock
+                b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
+                spielfeld.Children.Add(b);
+                textBlocks[i, j] = b;
+                Canvas.SetLeft(b, 72.5 * i);
+                Canvas.SetBottom(b, 72.5 * j);
+                // mouse button events
+                b.MouseDown += MouseClicked;
+                b.MouseUp += MouseReleased;
+            }
+        }
+
+        // test if the piece can move
+        //pieces[0].MoveTo(new PointStruct(0, 4));
+
+        // Draw Pieces / Update Pieces
+        DrawPieces();
+    }
+
+    /// <summary>
+    /// Method to Draw the Chesspieces 
+    /// by checking if there is a piece 
+    /// at the Same Coordinates of each Textblock
+    /// then Draw the UniCode Symbol for the According ChessPiece
+    /// else draw an empty String to the TextBlock
+    /// </summary>
+    void DrawPieces()
+    {
+        // loop for each element of the 2d Array of textblocks
+        for (byte i = 0; i < 8; i++)
+        {
+            for (byte j = 0; j < 8; j++)
+            {
+                // Write a empty String to the TextBlock
+                textBlocks[i, j].Text = "";
+                //search the List for a piece that fits
+                foreach(var piece in pieces)
+                { 
+                    // Checking if the coodinates match up
+                    if (piece.Position.X == i && piece.Position.Y == j)
+                    {
+                        // Write the Unicode Symbol and escape the for loop
+                        textBlocks[i, j].Text = piece.Look.ToString();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// A method to find the Textblock 
     /// which is clicked 
@@ -187,14 +175,20 @@ public partial class MainWindow : Window
         return new PointStruct(0,0);
     }
 
+    /// <summary>
+    /// a method to help the player by coloring the positions,
+    /// the chesspiece can move to 
+    /// and to highlight the enemys, which could be attacked
+    /// </summary>
     void colorMovement()
     {
-        // coloring
+        // checking if player clicked an empty textblock or not
         if (movedPiece == null)
         {
             return;
         }
-        // color Possible Moves
+
+        // looping for each element of the 2d array of textblocks
         for (byte i = 0; i < 8; i++)
         {
             for (byte j = 0; j < 8; j++)
@@ -210,7 +204,10 @@ public partial class MainWindow : Window
                 // coloring the enemys / opponent pieces
                 foreach (var piece in pieces)
                 {
-                    // if x and y == AND enemy color AND Piece can move to that
+                    // if x and y ==
+                    // AND enemy color
+                    // AND Piece can move to that
+                    //  then:
                     // color background
                     if (piece.Position.X == i
                         && piece.Position.Y == j
@@ -220,6 +217,11 @@ public partial class MainWindow : Window
                         textBlocks[i, j].Background = Brushes.IndianRed;
                     }
 
+                    // checking the x and y is eqal
+                    // AND own color
+                    // AND piece can move to that
+                    // then:
+                    // remove the colored background
                     if (piece.Position.X == i
                         && piece.Position.Y == j
                         && movedPiece.IsWhite == piece.IsWhite
@@ -230,6 +232,46 @@ public partial class MainWindow : Window
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// a method to get overlapping / same coordinates of pieces
+    /// and removing them from the board and redraw them again
+    /// </summary>
+    void pieceMoving(PointStruct targetedPoint)
+    {
+        // Calling and setting up the Capture class
+        Capture capture = new Capture(movedPiece);
+
+        // check if entered TextBlock is empty or not
+        if (movedPiece == null)
+        {
+            return;
+        }
+
+        // move the Piece and draw the Pieces again
+        if (movedPiece.MoveTo(targetedPoint))
+        {
+            // set bool to true that the piece has moved already
+            movedPiece.HasMoved = true;
+
+            // looping for each element in the list
+            foreach (var piece in pieces)
+            {
+                // checking if the position of the moved piece
+                // and a location of another piece is equal
+                if (piece.Position.Equals(movedPiece.Position) && piece.IsWhite != movedPiece.IsWhite)
+                {
+                    // set the killed bool to true and break the loop
+                    piece.IsKilled = true;
+                    break;
+                }
+            }
+            // updating the element list
+            capture.updateList(pieces);
+        }
+        // draw the pieces again
+        DrawPieces();
     }
 }
 
