@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -21,7 +22,10 @@ public class Logic
         this.movedPiece = movedPiece;
     }
 
-
+    /// <summary>
+    /// Logic for the game.
+    /// e.g players turn 
+    /// </summary>
     public void Game()
     {
     }
@@ -114,11 +118,17 @@ public class Logic
     /// </summary>
     public void specialMoves()
     {
+        Capture capture = new Capture();
+
         // En Passant:
         // check if movedPiece is from type Pawn
         // check if on the left or right is another (enemy) pawn
         // check if he has moved two forward
         // throw diagonally
+        if (movedPiece is Pawn)
+        {
+
+        }
 
         // Castling
         // check if movedPiece is from type King
@@ -131,5 +141,13 @@ public class Logic
         // check if pawn has reached end of board
         // ask player to which piece the pawn should be promoted
         // remove pawn -> replace it with players choice
+        if (movedPiece is Pawn && movedPiece.Position.X == 7)
+        {
+            // piece needed to replace either with the user input or a specific piece
+            movedPiece.IsKilled = true;
+            capture.updateList(pieces);
+            pieces.Add(new ...(movedPiece.Position));
+        }
+
     }
 }
