@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -109,6 +110,7 @@ public partial class MainWindow : Window
 
     void MouseReleased(object sender, MouseEventArgs e)
     {
+        Capture capture = new Capture(movedPiece);
         TextBlock s = (TextBlock)sender;
 
         // Get TextBlock where the Mouse was clicked again 
@@ -121,15 +123,27 @@ public partial class MainWindow : Window
         // Title = "let go";
 
         // check if entered TextBlock is empty or not
-        if (movedPiece != null)
+        if (movedPiece == null)
         {
-            // move the Piece and draw the Pieces again
-            if (movedPiece.MoveTo(targetedPoint))
-            {
-                DrawPieces();
-            }
+            return;
         }
-        
+
+        // move the Piece and draw the Pieces again
+        if (movedPiece.MoveTo(targetedPoint))
+        {
+            for(byte i = 0; i < pieces.Count; i++)
+            {
+                if (pieces[i].Position.X == targetedPoint.X 
+                    && pieces[i].Position.Y == targetedPoint.Y)
+                {
+                    pieces[i].IsKilled = true;
+                    capture.updateList(pieces);
+                }
+            }
+
+            DrawPieces();
+        }
+
         // coloring the Pieces back at its original colors
         for (byte i = 0; i < 8; i++)
         {
@@ -212,9 +226,7 @@ public partial class MainWindow : Window
                         && movedPiece.CanMove(new PointStruct(i, j)))
                     {
                         textBlocks[i,j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-
                     }
-
                 }
             }
         }
