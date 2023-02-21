@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Tryout_OOP;
 
@@ -11,13 +12,18 @@ public class Logic
 {
     protected List<Pieces> pieces;
     protected TextBlock[,] textBlocks;
+    protected Player[] player;
     Pieces movedPiece;
-
     public Logic(List<Pieces> pieces, TextBlock[,] textBlocks, Pieces movedPiece)
     {
         this.pieces = pieces;
         this.textBlocks = textBlocks;
         this.movedPiece = movedPiece;
+    }
+
+
+    public void Game()
+    {
     }
 
 

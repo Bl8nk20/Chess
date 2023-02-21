@@ -52,7 +52,7 @@ public partial class MainWindow : Window
 
     void MouseReleased(object sender, MouseEventArgs e)
     {
-        Capture capture = new Capture(movedPiece);
+        Capture capture = new Capture();
         TextBlock s = (TextBlock)sender;
 
         // Get TextBlock where the Mouse was clicked again 
@@ -241,7 +241,7 @@ public partial class MainWindow : Window
     void pieceMoving(PointStruct targetedPoint)
     {
         // Calling and setting up the Capture class
-        Capture capture = new Capture(movedPiece);
+        Capture capture = new Capture();
 
         // check if entered TextBlock is empty or not
         if (movedPiece == null)
