@@ -32,6 +32,7 @@ public partial class MainWindow : Window
         Logic logic = new Logic(pieces, textBlocks, movedPiece);
         pieces = logic.InitialPieces();
         DrawBoard();
+        logic.Game();
     }
 
     void MouseClicked(object sender, MouseEventArgs e)
@@ -258,6 +259,15 @@ public partial class MainWindow : Window
             // looping for each element in the list
             foreach (var piece in pieces)
             {
+                if(movedPiece is Pawn 
+                    && (piece.Position.Equals(movedPiece.Position.X + 1)
+                    || piece.Position.Equals(movedPiece.Position.X - 1))
+                    && piece.IsWhite != movedPiece.IsWhite)
+                {
+                    // set the killed bool to true and break the loop
+                    piece.IsKilled = true;
+                    break;
+                }
                 // checking if the position of the moved piece
                 // and a location of another piece is equal
                 if (piece.Position.Equals(movedPiece.Position) && piece.IsWhite != movedPiece.IsWhite)

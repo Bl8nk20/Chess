@@ -9,12 +9,20 @@ using System.Windows.Media;
 
 namespace Tryout_OOP;
 
-public class Logic
+internal class Logic
 {
     protected List<Pieces> pieces;
     protected TextBlock[,] textBlocks;
     protected Player[] player;
     Pieces movedPiece;
+    // enum for gamestatus checking
+    private GameStatus status;
+    public GameStatus Status
+    {
+        get { return status; }
+        set { status = value; }
+    }
+
     public Logic(List<Pieces> pieces, TextBlock[,] textBlocks, Pieces movedPiece)
     {
         this.pieces = pieces;
@@ -28,14 +36,64 @@ public class Logic
     /// </summary>
     public void Game()
     {
+        Player[] players = new Player[2];
+        players[0] = new Player(true);
+        players[1] = new Player(false);
+
+        // change Playerturns
+        byte playerturns = 1;
+        while (playerturns != byte.MaxValue)
+        {
+            bool turn = (playerturns % 2 != 0) ? players[0].IsWhite : players[1].IsWhite;
+            if (turn)
+            {
+                // moving logic for the players turn
+                if()
+                {
+                    return;
+                }
+
+                checkLists(pieces);
+            }
+            // increase turn counter
+            playerturns++;
+
+            Status = GameStatus.WHITE_WIN;
+
+            // check for endgame
+            isEnd();
+        }
     }
 
+    void checkLists(List<Pieces> pieces)
+    {
+        List<Pieces> tempPieces = pieces;
+
+        // compare the temporary list and update it to the current stand
+        foreach (var piece in tempPieces)
+        {
+            if ()
+            {
+                tempPieces = pieces;
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// checking for end state
+    /// </summary>
+    /// <returns></returns>
+    public bool isEnd()
+    {
+        return this.Status != GameStatus.ACTIVE;
+    }
 
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
     /// </summary>
     /// <returns></returns>
-    public List<Pieces> InitialPieces()
+    internal List<Pieces> InitialPieces()
     {
         List<Pieces> pieces = new List<Pieces>();
 
@@ -98,7 +156,7 @@ public class Logic
     /// </summary>
     /// <param name="p"></param>
     /// <returns>nothing (void)</returns>
-    public Pieces searchPiece(PointStruct p)
+    internal Pieces searchPiece(PointStruct p)
     {
         // Find Piece to move
         foreach(var piece in pieces)
@@ -116,38 +174,44 @@ public class Logic
     /// a method to validate if certain moves are valid
     /// e.g. En passant or Castling or Promoting
     /// </summary>
-    public void specialMoves()
+    internal void specialMoves()
     {
         Capture capture = new Capture();
 
-        // En Passant:
-        // check if movedPiece is from type Pawn
-        // check if on the left or right is another (enemy) pawn
-        // check if he has moved two forward
-        // throw diagonally
-        if (movedPiece is Pawn)
+        foreach (var piece in pieces)
         {
+            // En Passant:
+            // check if movedPiece is from type Pawn
+            // check if on the left or right is another (enemy) pawn
+            // check if he has moved two forward
+            // throw diagonally
+            if (movedPiece is Pawn && piece.Position.Y == movedPiece.Position.Y)
+            {
 
+            }
+
+            // Castling
+            // check if movedPiece is from type King
+            // check if king and one of the Rooks haven´t been moved yet
+            // check if the way is free (no bishop or knight or other piece is on same line)
+            // move king two steps in rooks direction -> place rook on the left or right nearby
+            // set king and rook to moved
+            if(movedPiece is King)
+            {
+
+            }
+
+            // Promotion
+            // check if pawn has reached end of board
+            // ask player to which piece the pawn should be promoted
+            // remove pawn -> replace it with players choice
+            if (movedPiece is Pawn && movedPiece.Position.X == 7)
+            {
+                // piece needed to replace either with the user input or a specific piece
+                movedPiece.IsKilled = true;
+                capture.updateList(pieces);
+                //pieces.Add(new ...(movedPiece.Position));
+            }
         }
-
-        // Castling
-        // check if movedPiece is from type King
-        // check if king and one of the Rooks haven´t been moved yet
-        // check if the way is free (no bishop or knight or other piece is on same line)
-        // move king two steps in rooks direction -> place rook on the left or right nearby
-        // set king and rook to moved
-
-        // Promotion
-        // check if pawn has reached end of board
-        // ask player to which piece the pawn should be promoted
-        // remove pawn -> replace it with players choice
-        if (movedPiece is Pawn && movedPiece.Position.X == 7)
-        {
-            // piece needed to replace either with the user input or a specific piece
-            movedPiece.IsKilled = true;
-            capture.updateList(pieces);
-            pieces.Add(new ...(movedPiece.Position));
-        }
-
     }
 }

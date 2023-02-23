@@ -25,8 +25,13 @@ public class Pawn : Pieces
     /// <returns></returns>
     public override bool CanMove(PointStruct TargetPoint)
     {
-        int x = Math.Abs(this.Point.X - TargetPoint.X);
-        int y = Math.Abs(this.Point.Y - TargetPoint.Y);
+        //int x = Math.Abs(this.Position.X - TargetPoint.X);
+        //int y = Math.Abs(this.Position.Y - TargetPoint.Y);
+
+        if (CanCapturePiece(TargetPoint))
+        {
+            return true;
+        }
 
         if(!this.isWhite && hasMoved)
         {
@@ -42,13 +47,27 @@ public class Pawn : Pieces
             && this.Position.X == TargetPoint.X);
         }
         // white Pawn movement
-        if (hasMoved)
+        if (hasMoved && !CanCapturePiece(TargetPoint))
         {
-            return TargetPoint.Y == this.Position.Y + 1 && this.Position.X == TargetPoint.X;
+            return TargetPoint.X == Position.X && TargetPoint.Y == Position.Y + 1;
         }
-        return (TargetPoint.Y == this.Position.Y + 2 
+        return ((TargetPoint.Y == this.Position.Y + 2 
             && this.Position.X == TargetPoint.X)
             ||(TargetPoint.Y == this.Position.Y + 1 
-            && this.Position.X == TargetPoint.X);
+            && this.Position.X == TargetPoint.X) 
+            && CanCapturePiece(TargetPoint));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="TargetPoint"></param>
+    /// <returns></returns>
+    bool CanCapturePiece(PointStruct TargetPoint)
+    {
+        int x = Math.Abs(this.Position.X - TargetPoint.X);
+        int y = this.Position.Y - TargetPoint.Y;
+
+        return x * y == -1;
     }
 }
