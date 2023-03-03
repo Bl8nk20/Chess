@@ -48,10 +48,10 @@ internal class Logic
             if (turn)
             {
                 // moving logic for the players turn
-                if()
-                {
-                    return;
-                }
+                //if()
+                //{
+                //    return;
+                //}
 
                 checkLists(pieces);
             }
@@ -72,11 +72,11 @@ internal class Logic
         // compare the temporary list and update it to the current stand
         foreach (var piece in tempPieces)
         {
-            if ()
-            {
-                tempPieces = pieces;
-                break;
-            }
+            //if ()
+            //{
+            //    tempPieces = pieces;
+            //    break;
+            //}
         }
     }
 

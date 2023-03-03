@@ -32,7 +32,7 @@ public partial class MainWindow : Window
         Logic logic = new Logic(pieces, textBlocks, movedPiece);
         pieces = logic.InitialPieces();
         DrawBoard();
-        logic.Game();
+        //logic.Game();
     }
 
     void MouseClicked(object sender, MouseEventArgs e)

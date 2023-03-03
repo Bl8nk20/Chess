@@ -28,11 +28,6 @@ public class Pawn : Pieces
         //int x = Math.Abs(this.Position.X - TargetPoint.X);
         //int y = Math.Abs(this.Position.Y - TargetPoint.Y);
 
-        if (CanCapturePiece(TargetPoint))
-        {
-            return true;
-        }
-
         if(!this.isWhite && hasMoved)
         {
             // if pawn is NOT white but has moved already : 1 step "down"
@@ -47,15 +42,14 @@ public class Pawn : Pieces
             && this.Position.X == TargetPoint.X);
         }
         // white Pawn movement
-        if (hasMoved && !CanCapturePiece(TargetPoint))
+        if (hasMoved)
         {
             return TargetPoint.X == Position.X && TargetPoint.Y == Position.Y + 1;
         }
-        return ((TargetPoint.Y == this.Position.Y + 2 
+        return ((TargetPoint.Y == this.Position.Y + 2
             && this.Position.X == TargetPoint.X)
-            ||(TargetPoint.Y == this.Position.Y + 1 
-            && this.Position.X == TargetPoint.X) 
-            && CanCapturePiece(TargetPoint));
+            || (TargetPoint.Y == this.Position.Y + 1
+            && this.Position.X == TargetPoint.X));
     }
 
     /// <summary>
