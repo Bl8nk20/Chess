@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Tryout_OOP;
@@ -23,12 +24,23 @@ public class Pawn : Pieces
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint)
+    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
     {
+        // checking if there is a piece of the same color on the TargetPoint
+        foreach (var piece in pieces)
+        {
+            if (piece.Position.X == TargetPoint.X
+            && piece.Position.Y == TargetPoint.Y
+            && isWhite == piece.IsWhite)
+            {
+                return false;
+            }
+        }
+
         //int x = Math.Abs(this.Position.X - TargetPoint.X);
         //int y = Math.Abs(this.Position.Y - TargetPoint.Y);
 
-        if(!this.isWhite && hasMoved)
+        if (!this.isWhite && hasMoved)
         {
             // if pawn is NOT white but has moved already : 1 step "down"
             return TargetPoint.Y == this.Position.Y - 1 && this.Position.X == TargetPoint.X;

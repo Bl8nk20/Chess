@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Tryout_OOP;
 
@@ -82,14 +84,15 @@ public abstract class Pieces
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns>move is valid</returns>
-    public abstract bool CanMove(PointStruct Target);
-    public bool MoveTo(PointStruct Target)
+    public abstract bool CanMove(PointStruct Target, List<Pieces> pieces);
+    public bool MoveTo(PointStruct Target, List<Pieces> pieces)
     {
         // if the Move if false then returned False
-        if (!CanMove(Target))
+        if (!CanMove(Target, pieces))
         {
             return false;
         }
+
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
         return true;

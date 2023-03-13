@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tryout_OOP;
 
@@ -26,8 +27,19 @@ public class Queen : Pieces
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint)
+    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
     {
+        // checking if there is a piece of the same color on the TargetPoint
+        foreach (var piece in pieces)
+        {
+            if (piece.Position.X == TargetPoint.X
+            && piece.Position.Y == TargetPoint.Y
+            && isWhite == piece.IsWhite)
+            {
+                return false;
+            }
+        }
+
         // we can't move the piece to a spot that has
         // a piece of the same colour
 

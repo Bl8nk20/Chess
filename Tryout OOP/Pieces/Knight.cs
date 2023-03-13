@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tryout_OOP;
 
@@ -25,8 +26,19 @@ public class Knight : Pieces
     /// <param name="xTarget">x - Coordinate</param>
     /// <param name="yTarget">y - Coordinate</param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint)
+    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
     {
+        // checking if there is a piece of the same color on the TargetPoint
+        foreach (var piece in pieces)
+        {
+            if (piece.Position.X == TargetPoint.X
+            && piece.Position.Y == TargetPoint.Y
+            && isWhite == piece.IsWhite)
+            {
+                return false;
+            }
+        }
+
         // the product of x and y must be equal to 2 
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);

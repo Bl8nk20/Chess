@@ -37,6 +37,7 @@ public partial class MainWindow : Window
 
     void MouseClicked(object sender, MouseEventArgs e)
     {
+        Coloring_Movement coloring = new Coloring_Movement(textBlocks, pieces, movedPiece);
         TextBlock s = (TextBlock)sender;
         // finding the TextBlock Coordinates
         PointStruct p = findTexBlockCoordinates(s);
@@ -48,7 +49,7 @@ public partial class MainWindow : Window
         // on an set the according piece
         movedPiece = logic.searchPiece(p);
 
-        colorMovement();
+        coloring.Start();
     }
 
     void MouseReleased(object sender, MouseEventArgs e)
@@ -80,6 +81,8 @@ public partial class MainWindow : Window
         // do stuff
         // playerswitch !
         //}
+
+        
     }
 
     /// <summary>
@@ -175,65 +178,10 @@ public partial class MainWindow : Window
         // when nothing matches -> return Point
         return new PointStruct(0,0);
     }
+     
+    
 
-    /// <summary>
-    /// a method to help the player by coloring the positions,
-    /// the chesspiece can move to 
-    /// and to highlight the enemys, which could be attacked
-    /// </summary>
-    void colorMovement()
-    {
-        // checking if player clicked an empty textblock or not
-        if (movedPiece == null)
-        {
-            return;
-        }
-
-        // looping for each element of the 2d array of textblocks
-        for (byte i = 0; i < 8; i++)
-        {
-            for (byte j = 0; j < 8; j++)
-            {
-                // check if the piece can move legally
-                if (movedPiece.CanMove(new PointStruct(i, j)))
-                {
-                    // helping the Move Decision
-                    // by coloring the Background in Yellow
-                    textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
-                }
-
-                // coloring the enemys / opponent pieces
-                foreach (var piece in pieces)
-                {
-                    // if x and y ==
-                    // AND enemy color
-                    // AND Piece can move to that
-                    //  then:
-                    // color background
-                    if (piece.Position.X == i
-                        && piece.Position.Y == j
-                        && movedPiece.IsWhite != piece.IsWhite
-                        && movedPiece.CanMove(new PointStruct(i, j)))
-                    {
-                        textBlocks[i, j].Background = Brushes.IndianRed;
-                    }
-
-                    // checking the x and y is eqal
-                    // AND own color
-                    // AND piece can move to that
-                    // then:
-                    // remove the colored background
-                    if (piece.Position.X == i
-                        && piece.Position.Y == j
-                        && movedPiece.IsWhite == piece.IsWhite
-                        && movedPiece.CanMove(new PointStruct(i, j)))
-                    {
-                        textBlocks[i,j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                    }
-                }
-            }
-        }
-    }
+    
 
     /// <summary>
     /// a method to get overlapping / same coordinates of pieces
@@ -251,7 +199,7 @@ public partial class MainWindow : Window
         }
 
         // move the Piece and draw the Pieces again
-        if (movedPiece.MoveTo(targetedPoint))
+        if (movedPiece.MoveTo(targetedPoint, pieces))
         {
             // set bool to true that the piece has moved already
             movedPiece.HasMoved = true;

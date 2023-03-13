@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Documents;
 
 namespace Tryout_OOP;
@@ -35,8 +36,19 @@ public class King : Pieces
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint)
+    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
     {
+        // checking if there is a piece of the same color on the TargetPoint
+        foreach (var piece in pieces)
+        {
+            if (piece.Position.X == TargetPoint.X
+            && piece.Position.Y == TargetPoint.Y
+            && isWhite == piece.IsWhite)
+            {
+                return false;
+            }
+        }
+
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);
         return x + y == 1 ||x * y == 1;

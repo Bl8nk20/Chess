@@ -8,20 +8,20 @@ namespace Tryout_OOP;
 
 public struct PointStruct
 {
-    public PointStruct(byte x, byte y)
+    public PointStruct(int x, int y)
     {
         this.x = x;
         this.y = y;
     }
 
-    byte x; // columns 0...7
-    public  byte X
+    int x; // columns 0...7
+    public int X
     {
         get { return x; }
     }
 
-    byte y; // rows 0...7, bottom is 0
-    public byte Y
+    int y; // rows 0...7, bottom is 0
+    public int Y
     {
         get { return y; }
     }

@@ -42,6 +42,7 @@ internal class Logic
 
         // change Playerturns
         byte playerturns = 1;
+        
         while (playerturns != byte.MaxValue)
         {
             bool turn = (playerturns % 2 != 0) ? players[0].IsWhite : players[1].IsWhite;
@@ -57,9 +58,6 @@ internal class Logic
             }
             // increase turn counter
             playerturns++;
-
-            Status = GameStatus.WHITE_WIN;
-
             // check for endgame
             isEnd();
         }
