@@ -8,12 +8,12 @@ C:\Users\ms85866\source\repos\Chess\OOP-Chess\obj\Debug\net6.0-windows\
 OOP_Chess
 none
 false
-TRACE;RELEASE;NET;NET6_0;NETCOREAPP
+TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\ms85866\source\repos\Chess\OOP-Chess\App.xaml
 11407045341
 
-20609528608
-3921226525526
+181377550611
+196613262763
 MainWindow.xaml;
 
 False

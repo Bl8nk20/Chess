@@ -6,119 +6,117 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Tryout_OOP
+namespace Tryout_OOP;
+
+internal class Coloring_Movement
 {
-    internal class Coloring_Movement
+    TextBlock[,] textBlocks { get; set; }
+    List<Pieces> pieces { get; set; }
+    Pieces movedPiece { get; set; }
+
+    public Coloring_Movement(TextBlock[,] textBlocks, List<Pieces> pieces, Pieces movedPiece)
     {
-        TextBlock[,] textBlocks { get; set; }
-        List<Pieces> pieces { get; set; }
-        Pieces movedPiece { get; set; }
+        this.textBlocks = textBlocks;
+        this.pieces = pieces;
+        this.movedPiece = movedPiece;
+    }
 
-        public Coloring_Movement(TextBlock[,] textBlocks, List<Pieces> pieces, Pieces movedPiece)
+    public void Start()
+    {
+        // checking if player clicked an empty textblock or not
+        if (movedPiece == null)
         {
-            this.textBlocks = textBlocks;
-            this.pieces = pieces;
-            this.movedPiece = movedPiece;
+            return;
         }
 
-        public void Start()
-        {
-            // checking if player clicked an empty textblock or not
-            if (movedPiece == null)
-            {
-                return;
-            }
+        colorTopRight();
+        colorBottomRight();
+        colorBottomLeft();
+        colorTopLeft();
+    }
 
-            colorTopRight();
-            colorBottomRight();
-            colorBottomLeft();
-            colorTopLeft();
+    private void Coloring(int i, int j)
+    {
+        // check if the piece can move legally
+        if (movedPiece.CanMove(new PointStruct(i, j), pieces))
+        {
+            // helping the Move Decision
+            // by coloring the Background in Yellow
+            textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
         }
-
-        private void Coloring(int i, int j)
+        // coloring the enemys / opponent pieces
+        foreach (var piece in pieces)
         {
-            // check if the piece can move legally
-            if (movedPiece.CanMove(new PointStruct(i, j), pieces))
+            // if x and y ==
+            // AND enemy color
+            // AND Piece can move to that
+            //  then:
+            // color background
+            if (piece.Position.X == i
+                && piece.Position.Y == j
+                && movedPiece.IsWhite != piece.IsWhite
+                && movedPiece.CanMove(new PointStruct(i, j), pieces))
             {
-                // helping the Move Decision
-                // by coloring the Background in Yellow
-                textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
+                textBlocks[i, j].Background = Brushes.IndianRed;
             }
-            // coloring the enemys / opponent pieces
-            foreach (var piece in pieces)
+
+            /*
+            // checking the x and y is eqal
+            // AND own color
+            // AND piece can move to that
+            // then:
+            // remove the colored background
+            if (piece.Position.X == i
+                && piece.Position.Y == j
+                && movedPiece.IsWhite == piece.IsWhite
+                && movedPiece.CanMove(new PointStruct(i, j), pieces))
             {
-
-                // if x and y ==
-                // AND enemy color
-                // AND Piece can move to that
-                //  then:
-                // color background
-                if (piece.Position.X == i
-                    && piece.Position.Y == j
-                    && movedPiece.IsWhite != piece.IsWhite
-                    && movedPiece.CanMove(new PointStruct(i, j), pieces))
-                {
-                    textBlocks[i, j].Background = Brushes.IndianRed;
-                }
-
-                /*
-                // checking the x and y is eqal
-                // AND own color
-                // AND piece can move to that
-                // then:
-                // remove the colored background
-                if (piece.Position.X == i
-                    && piece.Position.Y == j
-                    && movedPiece.IsWhite == piece.IsWhite
-                    && movedPiece.CanMove(new PointStruct(i, j), pieces))
-                {
-                    textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                }
-                */
+                textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
             }
+            */
         }
+    }
 
-        private void colorTopRight()
+    private void colorTopRight()
+    {
+        for (int i = movedPiece.Position.X; i < 8; i++)
         {
-            for (int i = movedPiece.Position.X; i < 8; i++)
+            for (int j = movedPiece.Position.Y; j < 8; j++)
             {
-                for (int j = movedPiece.Position.Y; j < 8; j++)
-                {
-                    Coloring(i, j);
-                }
+                Coloring(i, j);
             }
         }
+    }
 
-        private void colorBottomRight()
+    private void colorBottomRight()
+    {
+        for (int i = movedPiece.Position.X; i < 8; i++)
         {
-            for (int i = movedPiece.Position.X; i < 8; i++)
+            for (int j = movedPiece.Position.Y; j > -1; j--)
             {
-                for (int j = movedPiece.Position.Y; j > -1; j--)
-                {
-                    Coloring(i, j);
-                }
+                Coloring(i, j);
             }
         }
+    }
 
-        private void colorBottomLeft()
+    private void colorBottomLeft()
+    {
+        for (int i = movedPiece.Position.X; i > -1; i--)
         {
-            for (int i = movedPiece.Position.X; i > -1; i--)
+            for (int j = movedPiece.Position.Y; j > -1; j--)
             {
-                for (int j = movedPiece.Position.Y; j > -1; j--)
-                {
-                    Coloring(i, j);
-                }
+                Coloring(i, j);
             }
         }
+    }
 
-        private void colorTopLeft()
+    private void colorTopLeft()
+    {
+        for (int i = movedPiece.Position.X; i > -1; i--)
         {
-            for (int i = movedPiece.Position.X; i > -1; i--)
+            for (int j = movedPiece.Position.Y; j < 8; j++)
             {
-                for (int j = movedPiece.Position.Y; j < 8; j++)
-                {
-                    Coloring(i, j);
-                }
+                Coloring(i, j);
             }
         }
     }

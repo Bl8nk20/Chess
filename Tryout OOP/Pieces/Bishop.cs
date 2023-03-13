@@ -42,11 +42,6 @@ public class Bishop : Pieces
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);
 
-        if (x == y)
-        {
-            // für jeden punkt x der zwischen position aktuell und target liegt überprüfen
-        }
-
         return x == y;
     }
 }

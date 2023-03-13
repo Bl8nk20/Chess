@@ -39,52 +39,9 @@ internal class Logic
         Player[] players = new Player[2];
         players[0] = new Player(true);
         players[1] = new Player(false);
+        PlayerTurn playerTurn = new PlayerTurn(players, textBlocks, pieces);
 
-        // change Playerturns
-        byte playerturns = 1;
-        
-        while (playerturns != byte.MaxValue)
-        {
-            bool turn = (playerturns % 2 != 0) ? players[0].IsWhite : players[1].IsWhite;
-            if (turn)
-            {
-                // moving logic for the players turn
-                //if()
-                //{
-                //    return;
-                //}
-
-                checkLists(pieces);
-            }
-            // increase turn counter
-            playerturns++;
-            // check for endgame
-            isEnd();
-        }
-    }
-
-    void checkLists(List<Pieces> pieces)
-    {
-        List<Pieces> tempPieces = pieces;
-
-        // compare the temporary list and update it to the current stand
-        foreach (var piece in tempPieces)
-        {
-            //if ()
-            //{
-            //    tempPieces = pieces;
-            //    break;
-            //}
-        }
-    }
-
-    /// <summary>
-    /// checking for end state
-    /// </summary>
-    /// <returns></returns>
-    public bool isEnd()
-    {
-        return this.Status != GameStatus.ACTIVE;
+        playerTurn.Turns();
     }
 
     /// <summary>
