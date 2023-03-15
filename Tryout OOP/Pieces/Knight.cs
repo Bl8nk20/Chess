@@ -11,9 +11,10 @@ public class Knight : Pieces
     /// <param name="x">Current X Coordinate</param>
     /// <param name="y">Current Y Coordinate</param>
     /// <param name="isWhite">Bool value if the Piece is White or not</param>
-    public Knight(PointStruct Point, bool isWhite, bool isKilled)
-        : base( Point, isWhite, isKilled, isWhite ? '\u2658' : '\u265E')
+    public Knight(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite ? '\u2658' : '\u265E')
     {
+        this.PieceValue = 3;
         // unicode: '\u2658' -> white Knight
         // unicode: '\u265E' -> black Knight
         // empty Constructor cause nothing is needed :D

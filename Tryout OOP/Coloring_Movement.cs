@@ -29,10 +29,13 @@ internal class Coloring_Movement
             return;
         }
 
-        colorTopRight();
-        colorBottomRight();
-        colorBottomLeft();
-        colorTopLeft();
+        for(int i = 0; i < textBlocks.GetLength(0); i++)
+        {
+            for(int j = 0; j < textBlocks.GetLength(1); j++)
+            {
+                Coloring(i,j);
+            }
+        }
     }
 
     private void Coloring(int i, int j)
@@ -44,6 +47,7 @@ internal class Coloring_Movement
             // by coloring the Background in Yellow
             textBlocks[i, j].Background = Brushes.LightGoldenrodYellow;
         }
+
         // coloring the enemys / opponent pieces
         foreach (var piece in pieces)
         {
@@ -59,8 +63,7 @@ internal class Coloring_Movement
             {
                 textBlocks[i, j].Background = Brushes.IndianRed;
             }
-
-            /*
+            
             // checking the x and y is eqal
             // AND own color
             // AND piece can move to that
@@ -73,51 +76,8 @@ internal class Coloring_Movement
             {
                 textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
             }
-            */
-        }
-    }
+            
 
-    private void colorTopRight()
-    {
-        for (int i = movedPiece.Position.X; i < 8; i++)
-        {
-            for (int j = movedPiece.Position.Y; j < 8; j++)
-            {
-                Coloring(i, j);
-            }
-        }
-    }
-
-    private void colorBottomRight()
-    {
-        for (int i = movedPiece.Position.X; i < 8; i++)
-        {
-            for (int j = movedPiece.Position.Y; j > -1; j--)
-            {
-                Coloring(i, j);
-            }
-        }
-    }
-
-    private void colorBottomLeft()
-    {
-        for (int i = movedPiece.Position.X; i > -1; i--)
-        {
-            for (int j = movedPiece.Position.Y; j > -1; j--)
-            {
-                Coloring(i, j);
-            }
-        }
-    }
-
-    private void colorTopLeft()
-    {
-        for (int i = movedPiece.Position.X; i > -1; i--)
-        {
-            for (int j = movedPiece.Position.Y; j < 8; j++)
-            {
-                Coloring(i, j);
-            }
         }
     }
 }

@@ -13,9 +13,10 @@ public class Rook : Pieces
     /// <param name="x">Current X Coordinate</param>
     /// <param name="y">Current Y Coordinate</param>
     /// <param name="isWhite">Bool value if the Piece is White or not</param>
-    public Rook(PointStruct Position, bool isWhite, bool isKilled)
-        : base(Position, isWhite, isKilled, isWhite ? '\u2656' : '\u265C')
+    public Rook(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite? '\u2656' : '\u265C')
     {
+        this.PieceValue = 5;
         // unicode: '\u2656' -> white Rook
         // unicode: '\u265C' -> black Rook
         // empty Constructor cause nothing is needed :D

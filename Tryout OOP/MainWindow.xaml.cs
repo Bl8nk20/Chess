@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
@@ -15,8 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Tryout_OOP;
 
+namespace Tryout_OOP;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
@@ -24,15 +25,18 @@ public partial class MainWindow : Window
 {
     TextBlock[,] textBlocks = new TextBlock[8, 8];
     List<Pieces> pieces = new List<Pieces>();
+    Player Player1;
+    Player Player2;
+    PlayerTurn playerTurn;
+    Logic Logic;
     Pieces movedPiece;
+    ushort playerturns;
+
 
     public MainWindow()
     {
         InitializeComponent();
-        Logic logic = new Logic(pieces, textBlocks, movedPiece);
-        pieces = logic.InitialPieces();
-        DrawBoard();
-        //logic.Game();
+        Setup();    
     }
 
     void MouseClicked(object sender, MouseEventArgs e)
@@ -41,27 +45,24 @@ public partial class MainWindow : Window
         TextBlock s = (TextBlock)sender;
         // finding the TextBlock Coordinates
         PointStruct p = findTexBlockCoordinates(s);
-        // Debugging
-        //Title = "clicked";
-        Logic logic = new Logic(pieces, textBlocks, movedPiece);
+
+        // 
+        Logic = new Logic(pieces, textBlocks, movedPiece);
 
         // search for the Piece which is clicked
         // on an set the according piece
-        movedPiece = logic.searchPiece(p);
+        movedPiece = Logic.searchPiece(p);
 
+        //
         coloring.Start();
     }
 
     void MouseReleased(object sender, MouseEventArgs e)
     {
-        Capture capture = new Capture();
         TextBlock s = (TextBlock)sender;
 
         // Get TextBlock where the Mouse was clicked again 
         PointStruct targetedPoint = findTexBlockCoordinates(s);
-
-        // do temp copy of piece array
-        // piecearray.copy;
 
         // method for the Piece Movement
         // -> capturing and moving the piece
@@ -75,14 +76,17 @@ public partial class MainWindow : Window
                 textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
             }
         }
+    }
 
-        // compare both arrays for differences after movement
-        // if(temp != currentpieceArray){
-        // do stuff
-        // playerswitch !
-        //}
-
-        
+    void Setup()
+    {
+        Logic = new Logic(pieces, textBlocks, movedPiece);
+        Player1 = Logic.Player1;
+        Player2 = Logic.Player2;
+        pieces = Logic.InitialPieces();
+        playerturns = 1;
+        playerTurn = new PlayerTurn(textBlocks, pieces);
+        DrawBoard(playerTurn);
     }
 
     /// <summary>
@@ -90,7 +94,7 @@ public partial class MainWindow : Window
     /// by generating 64 textblocks from a 2D array
     /// also add the chesspieces too if there are any to fill up
     /// </summary>
-    private void DrawBoard()
+    private void DrawBoard(PlayerTurn playerTurn)
     {
         // loop for each element of the 2d Array
         for (byte i = 0; i < 8; i++)
@@ -115,11 +119,28 @@ public partial class MainWindow : Window
             }
         }
 
-        // test if the piece can move
-        //pieces[0].MoveTo(new PointStruct(0, 4));
+        if (Player1.IsTurn)
+        {
+            if (!Player1.CanMove(movedPiece))
+            {
+                return;
+            }
+            Logic.ChangePlayer();
+        }
+        else if (Player2.IsTurn)
+        {
+            if (!Player2.CanMove(movedPiece))
+            {
+                return;
+            }
+            // swap players turn
+            Logic.ChangePlayer();
+        }
 
-        // Draw Pieces / Update Pieces
+        // Draw Pieces / update Pieces
         DrawPieces();
+        // increase the playercount
+        playerturns++;
     }
 
     /// <summary>
@@ -178,10 +199,6 @@ public partial class MainWindow : Window
         // when nothing matches -> return Point
         return new PointStruct(0,0);
     }
-     
-    
-
-    
 
     /// <summary>
     /// a method to get overlapping / same coordinates of pieces

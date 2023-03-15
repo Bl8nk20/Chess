@@ -10,9 +10,10 @@ public class Pawn : Pieces
     /// Constructor for the Roock Chesspiece
     /// </summary>
     /// <param name="isWhite"></param>
-    public Pawn(PointStruct Point, bool isWhite, bool isKilled)
-        : base(Point, isWhite, isKilled, isWhite ? '\u2659' : '\u265F')
+    public Pawn(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite ? '\u2659' : '\u265F')
     {
+        this.PieceValue = 1;
         // empty Constructor cause nothing is needed :D
         // and also because everything is handed to the mother class
     }

@@ -13,7 +13,20 @@ internal class Logic
 {
     protected List<Pieces> pieces;
     protected TextBlock[,] textBlocks;
-    protected Player[] player;
+    private Player player1;
+    private Player player2;
+
+    public Player Player1
+    {
+        set { player1 = value; }
+        get {return player1; }
+    }
+    public Player Player2
+    {
+        set { player2 = value; }
+        get { return player2; }
+    }
+
     Pieces movedPiece;
     // enum for gamestatus checking
     private GameStatus status;
@@ -28,21 +41,33 @@ internal class Logic
         this.pieces = pieces;
         this.textBlocks = textBlocks;
         this.movedPiece = movedPiece;
+        this.Player1 = new Player(true);
+        this.Player2 = new Player();
     }
 
-    /// <summary>
-    /// Logic for the game.
-    /// e.g players turn 
-    /// </summary>
-    public void Game()
+    internal Player GetCurrentPlayer()
     {
-        Player[] players = new Player[2];
-        players[0] = new Player(true);
-        players[1] = new Player(false);
-        PlayerTurn playerTurn = new PlayerTurn(players, textBlocks, pieces);
-
-        playerTurn.Turns();
+        if (Player2.IsTurn)
+            return Player2;
+        else
+            return Player1;
     }
+
+    internal void ChangePlayer()
+    {
+        if (Player1.IsTurn)
+        {
+            Player1.IsTurn = false;
+            Player2.IsTurn = true;
+        }
+        else
+        {
+            Player1.IsTurn = true;
+            Player2.IsTurn = false;
+        }
+    }
+
+
 
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
@@ -50,57 +75,16 @@ internal class Logic
     /// <returns></returns>
     internal List<Pieces> InitialPieces()
     {
-        List<Pieces> pieces = new List<Pieces>();
-
-        // add white pieces
-        // add white Pawns
-        for (byte i = 0; i < textBlocks.GetLength(0); i++)
+        // Looping for each player list to one list with both contents
+        var pieces = new List<Pieces>(Player1.Pieces.Count() + Player2.Pieces.Count());
+        foreach(var item in Player1.Pieces)
         {
-            pieces.Add(new Pawn(new PointStruct(i, 1), true, false));
-
+            pieces.Add(item);
         }
-        // add white Knights
-        pieces.Add(new Knight(new PointStruct(1, 0), true, false));
-        pieces.Add(new Knight(new PointStruct(6, 0), true, false));
-
-        // add white Bishops
-        pieces.Add(new Bishop(new PointStruct(2, 0), true, false));
-        pieces.Add(new Bishop(new PointStruct(5, 0), true, false));
-
-        // add white Rooks
-        pieces.Add(new Rook(new PointStruct(0, 0), true, false));
-        pieces.Add(new Rook(new PointStruct(7, 0), true, false));
-
-        // add white Queen
-        pieces.Add(new Queen(new PointStruct(3, 0), true, false));
-
-        // add White King
-        pieces.Add(new King(new PointStruct(4, 0), true, false));
-
-        // add black pieces
-        // add Pawns
-        for (byte i = 0; i < textBlocks.GetLength(0); i++)
+        foreach(var item in Player2.Pieces)
         {
-            pieces.Add(new Pawn(new PointStruct(i, 6), false, false));
+            pieces.Add(item);
         }
-
-        // add Black Knights
-        pieces.Add(new Knight(new PointStruct(1, 7), false, false));
-        pieces.Add(new Knight(new PointStruct(6, 7), false, false));
-
-        // add Black Bishops
-        pieces.Add(new Bishop(new PointStruct(2, 7), false, false));
-        pieces.Add(new Bishop(new PointStruct(5, 7), false, false));
-
-        // add black Rooks
-        pieces.Add(new Rook(new PointStruct(0, 7), false, false));
-        pieces.Add(new Rook(new PointStruct(7, 7), false, false));
-
-        // add Queens
-        pieces.Add(new Queen(new PointStruct(3, 7), false, false));
-
-        // add Kings
-        pieces.Add(new King(new PointStruct(4, 7), false, false));
 
         return pieces;
     }

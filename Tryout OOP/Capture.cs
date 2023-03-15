@@ -12,7 +12,6 @@ public class Capture
 {
     public Capture()
     {
-    
     }
 
     /// <summary>

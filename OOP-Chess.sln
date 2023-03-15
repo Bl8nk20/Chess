@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP-Chess", "OOP-Chess\OOP-Chess.csproj", "{C261B44B-F9A8-4351-940B-1D44C8EF19D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tryout OOP", "Tryout OOP\Tryout OOP.csproj", "{4FB73336-C4C2-4B44-B3C3-B3F35D8DF34A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tryout OOP", "Tryout OOP\Tryout OOP.csproj", "{4FB73336-C4C2-4B44-B3C3-B3F35D8DF34A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

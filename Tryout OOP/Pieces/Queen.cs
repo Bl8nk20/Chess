@@ -14,9 +14,10 @@ public class Queen : Pieces
     /// Constructor for the Roock Chesspiece
     /// </summary>
     /// <param name="isWhite"></param>
-    public Queen(PointStruct Point, bool isWhite, bool isKilled)
-        : base(Point, isWhite, isKilled, isWhite ? '\u2655' : '\u265B')
+    public Queen(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite? '\u2655' : '\u265B')
     {
+        this.PieceValue = 9;
         // empty Constructor cause nothing is needed :D
     }
 
