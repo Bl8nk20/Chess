@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace Tryout_OOP;
 
-internal class Logic
+internal class AdditionalLogic
 {
     protected List<Pieces> pieces;
     protected TextBlock[,] textBlocks;
@@ -36,7 +36,7 @@ internal class Logic
         set { status = value; }
     }
 
-    public Logic(List<Pieces> pieces, TextBlock[,] textBlocks, Pieces movedPiece)
+    public AdditionalLogic(List<Pieces> pieces, TextBlock[,] textBlocks, Pieces movedPiece)
     {
         this.pieces = pieces;
         this.textBlocks = textBlocks;
@@ -44,30 +44,6 @@ internal class Logic
         this.Player1 = new Player(true);
         this.Player2 = new Player();
     }
-
-    internal Player GetCurrentPlayer()
-    {
-        if (Player2.IsTurn)
-            return Player2;
-        else
-            return Player1;
-    }
-
-    internal void ChangePlayer()
-    {
-        if (Player1.IsTurn)
-        {
-            Player1.IsTurn = false;
-            Player2.IsTurn = true;
-        }
-        else
-        {
-            Player1.IsTurn = true;
-            Player2.IsTurn = false;
-        }
-    }
-
-
 
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
@@ -107,6 +83,24 @@ internal class Logic
             }
         }
         return movedPiece;
+    }
+
+    internal bool whiteMoves()
+    {
+        if(movedPiece == null || !movedPiece.IsWhite)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    internal bool blackMoves()
+    {
+        if (movedPiece == null || movedPiece.IsWhite)
+        {
+            return false;
+        }
+        return true;
     }
 
     /// <summary>

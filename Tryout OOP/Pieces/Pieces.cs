@@ -10,6 +10,7 @@ namespace Tryout_OOP;
 /// </summary>
 public abstract class Pieces
 {
+    // not important at that stage of the development
     protected byte piecevalue;
     public byte PieceValue 
     { 
@@ -17,7 +18,7 @@ public abstract class Pieces
         set { piecevalue = value; }
     }
 
-    // custom struct to creat simplicity
+    // custom struct to create simplicity
     // and to store the coordinates / current positions
     protected PointStruct Point; 
     public PointStruct Position
@@ -25,6 +26,7 @@ public abstract class Pieces
         get { return Point; }
         set { Point = value; }
     }
+
     // bool to check if piece is white
     // -> for player control
     protected bool isWhite;
@@ -32,6 +34,7 @@ public abstract class Pieces
     {
         get { return isWhite; }
     }
+
     // bool for checking if the piece has moved
     // and if so restict it to its "basic" movement
     protected bool hasMoved = false;
@@ -47,6 +50,7 @@ public abstract class Pieces
         get { return isKilled; }
         set { isKilled = value; }
     }
+
     // unicode visuals
     protected char look; // unicode design currently
     public char Look
@@ -68,8 +72,6 @@ public abstract class Pieces
         this.isKilled = isKilled | false;
         this.look = look;
     }
-
-    // \u => unicode
     
     /// <summary>
     /// Assumption: xTarget and yTarget always above 0
@@ -80,6 +82,13 @@ public abstract class Pieces
     /// <param name="y"></param>
     /// <returns>move is valid</returns>
     public abstract bool CanMove(PointStruct Target, List<Pieces> pieces);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Target"></param>
+    /// <param name="pieces"></param>
+    /// <returns></returns>
     public bool MoveTo(PointStruct Target, List<Pieces> pieces)
     {
         // if the Move if false then returned False
