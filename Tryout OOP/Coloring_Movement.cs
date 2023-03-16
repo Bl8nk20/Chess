@@ -21,6 +21,9 @@ internal class Coloring_Movement
         this.movedPiece = movedPiece;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Start()
     {
         // checking if player clicked an empty textblock or not
@@ -38,6 +41,11 @@ internal class Coloring_Movement
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="j"></param>
     private void Coloring(int i, int j)
     {
         // check if the piece can move legally
@@ -76,8 +84,6 @@ internal class Coloring_Movement
             {
                 textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
             }
-            
-
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
@@ -12,20 +7,32 @@ internal class PlayerTurn
 {
     protected List<Pieces> pieces;
     protected TextBlock[,] textBlocks;
+    internal ushort playerturns = 1;
+    public Player Player1
+    {
+        get;
+        internal set;
+    }
+    public Player Player2
+    {
+        get;
+        internal set;
+    }
+
     GameStatus status;
 
     public PlayerTurn(TextBlock[,] textBlocks, List<Pieces> pieces)
     {
         this.textBlocks = textBlocks;
         this.pieces = pieces;
+        Player1 = new Player(true);
+        Player2 = new Player();
     }
-
-
 
     /// <summary>
     /// 
     /// </summary>
-    void CheckkingKill()
+    public void CheckKingKill()
     {
         foreach (var piece in pieces)
         {
@@ -39,7 +46,7 @@ internal class PlayerTurn
             }
         }
     }
-    
+
     /// <summary>
     /// checking for end state
     /// </summary>
