@@ -13,12 +13,16 @@ internal class Game
     List<Piece> pieces;
     PlayerTurn PlayerTurn;
     TextBlock[,] textBlocks;
+    TextBox TextBlockTurns, TextBlockPlayer;
 
-    public Game(Player Player1, Player Player2, TextBlock[,] textBlocks)
+
+    public Game(Player Player1, Player Player2, TextBlock[,] textBlocks, TextBox textboxturns, TextBox textboxPlayer)
     {
         this.Player1 = Player1;
         this.Player2 = Player2;
         this.textBlocks = textBlocks;
+        this.TextBlockTurns = textboxturns;
+        this.TextBlockPlayer = textboxPlayer;
 
         // initialize pieces list
         this.pieces = new List<Piece>();
@@ -26,22 +30,18 @@ internal class Game
         this.PlayerTurn = new PlayerTurn(textBlocks, pieces);
     }
 
-    public void Playing()
-    {
-        Player1.IsTurn = true;
-        AdditionalLogic AdditionalLogic = new AdditionalLogic(pieces, textBlocks, movedPiece);
-        pieces = AdditionalLogic.InitialPieces();
-        //
-        Player1.IsTurn = true;
-        playerMovement();
-    }
-
     /// <summary>
     /// 
     /// </summary>
-    void playerMovement()
-    {
-        movedPiece = Player1.SelectedPiece;
+    public void playerMovement()
+    { 
+        //
+        PlayerTurn.CheckKingKill();
+        // check if the Gamestate has changed
+        PlayerTurn.isEnd();
+
+        movedPiece = (PlayerTurn.Counter % 2) == 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
+
         if (Player1.IsTurn)
         {
             if (!Player1.CanMove(movedPiece))
@@ -65,5 +65,4 @@ internal class Game
             Player1.SwitchTurns();
         }
     }
-
 }

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Channels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
@@ -17,6 +19,12 @@ internal class PlayerTurn
     {
         get;
         internal set;
+    }
+    protected ushort counter = 1;
+    public ushort Counter
+    {
+        get { return counter; }
+        set { counter = value; }
     }
 
     GameStatus status;
@@ -53,6 +61,6 @@ internal class PlayerTurn
     /// <returns></returns>
     public bool isEnd()
     {
-        return this.status != GameStatus.ACTIVE;
+        return this.status != GameStatus.ACTIVE;        
     }
 }

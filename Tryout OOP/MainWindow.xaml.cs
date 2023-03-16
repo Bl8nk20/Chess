@@ -36,11 +36,11 @@ namespace Tryout_OOP
             Logic = new AdditionalLogic(pieces, textBlocks, movedPiece);
             pieces = Logic.InitialPieces();
             playerTurn = new PlayerTurn(textBlocks, pieces);
-            Board Board = new Board(playerTurn.playerturns, pieces, textBlocks, spielfeld, textboxturns, textboxPlayer);
+            Board Board = new Board(pieces, textBlocks, spielfeld);
             Board.DrawBoard(spielfeld);
-            Game Game = new Game(Player1, Player2, textBlocks);
-            Player1.IsTurn = true;
-            Game.Playing();
+            Game Game = new Game(Player1, Player2, textBlocks, textboxturns, textboxPlayer);
+            
+            Game.playerMovement();
         }
     }
 

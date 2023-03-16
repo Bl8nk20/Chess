@@ -35,7 +35,7 @@ internal class AdditionalLogic
     {
         this.Player1 = new Player(true);
         this.Player2 = new Player();
-        this.pieces = new List<Piece>();
+        this.pieces = pieces;
         this.textBlocks = textBlocks;
         this.movedPiece = movedPiece;
     }
@@ -78,24 +78,6 @@ internal class AdditionalLogic
             }
         }
         return movedPiece;
-    }
-
-    internal bool whiteMoves()
-    {
-        if (movedPiece == null || !movedPiece.IsWhite)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    internal bool blackMoves()
-    {
-        if (movedPiece == null || movedPiece.IsWhite)
-        {
-            return false;
-        }
-        return true;
     }
 
     /// <summary>

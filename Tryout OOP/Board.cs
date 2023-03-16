@@ -11,19 +11,16 @@ namespace Tryout_OOP
         PlayerTurn PlayerTurn;
         List<Piece>? Pieces;
         TextBlock[,] TextBlock;
-        TextBox TextBlockTurns, TextBlockPlayer;
         public Piece movedPiece;
         internal ushort playerturns;
         Player player;
 
-        public Board(ushort playerturns, List<Piece> pieces, TextBlock[,] TextBlock, Canvas spielfeld, TextBox textboxturns, TextBox textboxPlayer)
+        public Board(List<Piece> pieces, TextBlock[,] TextBlock, Canvas spielfeld)
         {
-            this.playerturns = playerturns;
             this.TextBlock = TextBlock;
-            this.TextBlockTurns = textboxturns;
-            this.TextBlockPlayer = textboxPlayer;
             this.Pieces = pieces;
             this.PlayerTurn = new PlayerTurn(TextBlock, pieces);
+            this.playerturns = PlayerTurn.Counter;
             DrawBoard(spielfeld);
         }
 
