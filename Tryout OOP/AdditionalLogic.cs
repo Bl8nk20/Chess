@@ -11,7 +11,7 @@ namespace Tryout_OOP;
 
 internal class AdditionalLogic
 {
-    protected List<Pieces> pieces;
+    protected List<Pieces> pieces = new List<Pieces>();
     protected TextBlock[,] textBlocks;
     private Player player1;
     private Player player2;
@@ -38,11 +38,11 @@ internal class AdditionalLogic
 
     public AdditionalLogic(List<Pieces> pieces, TextBlock[,] textBlocks, Pieces movedPiece)
     {
-        this.pieces = pieces;
-        this.textBlocks = textBlocks;
-        this.movedPiece = movedPiece;
         this.Player1 = new Player(true);
         this.Player2 = new Player();
+        this.pieces = new List<Pieces>();
+        this.textBlocks = textBlocks;
+        this.movedPiece = movedPiece;
     }
 
     /// <summary>

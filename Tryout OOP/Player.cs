@@ -22,17 +22,25 @@ public class Player
         get { return isTurn; }
     }
 
-    private List<Pieces> pieces;
+    private List<Pieces>? pieces;
     public List<Pieces> Pieces
     {
         get { return pieces; }
         set { pieces = value; }
     }
 
+    private Pieces selectedPiece;
+    public Pieces SelectedPiece
+    {
+        get { return selectedPiece; }
+        set { selectedPiece = value; }
+    }
+
     public Player(bool isWhite = false)
     {
         this.isWhite = isWhite;
-        this.Pieces = CreatePieces();
+        this.isTurn = false;
+        Pieces = CreatePieces();
     }
 
     // \u2654 => white king
@@ -48,6 +56,11 @@ public class Player
     // \u265E => black knight
     // \u265F => black Pawn
 
+    public void SwitchTurns()
+    {
+        isTurn = !isTurn;
+    }
+
     /// <summary>
     /// Method to check if the Player is allowed
     /// to move the piece to that specific postion
@@ -56,8 +69,12 @@ public class Player
     /// <returns></returns>
     public bool CanMove(Pieces piece)
     {
+        if(selectedPiece == null)
+        {
+            return false;
+        }
         // Check if the piece belongs to the player and is allowed to move
-        if (piece.IsWhite != this.IsWhite)
+        if (selectedPiece.IsWhite != this.IsWhite)
         {
             return false;
         }

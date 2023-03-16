@@ -37,38 +37,7 @@ internal class PlayerTurn
     /// <summary>
     /// 
     /// </summary>
-    /// <returns></returns>
-    public Player GetCurrentPlayer()
-    {
-        if (Player2.IsTurn)
-            return Player2;
-        else
-            return Player1;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    internal void ChangePlayer()
-    {
-        if (Player1.IsTurn)
-        {
-            Player1.IsTurn = false;
-            Player2.IsTurn = true;
-        }
-        else
-        {
-            Player1.IsTurn = true;
-            Player2.IsTurn = false;
-        }
-        // increase the playercount
-        playerturns++;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    void CheckKingKill()
+    public void CheckKingKill()
     {
         foreach (var piece in pieces)
         {
