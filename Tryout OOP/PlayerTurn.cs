@@ -5,7 +5,7 @@ namespace Tryout_OOP;
 
 internal class PlayerTurn
 {
-    protected List<Pieces> pieces;
+    protected List<Piece> pieces;
     protected TextBlock[,] textBlocks;
     internal ushort playerturns = 1;
     public Player Player1
@@ -21,7 +21,7 @@ internal class PlayerTurn
 
     GameStatus status;
 
-    public PlayerTurn(TextBlock[,] textBlocks, List<Pieces> pieces)
+    public PlayerTurn(TextBlock[,] textBlocks, List<Piece> pieces)
     {
         this.textBlocks = textBlocks;
         this.pieces = pieces;

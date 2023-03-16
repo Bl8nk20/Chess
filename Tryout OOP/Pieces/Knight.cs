@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tryout_OOP;
 
-public class Knight : Pieces
+public class Knight : Piece
 {
     /// <summary>
     /// Constructor for the Rook Chesspiece
@@ -27,7 +27,7 @@ public class Knight : Pieces
     /// <param name="xTarget">x - Coordinate</param>
     /// <param name="yTarget">y - Coordinate</param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
+    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
     {
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)

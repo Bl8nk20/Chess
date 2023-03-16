@@ -11,10 +11,10 @@ namespace Tryout_OOP;
 internal class Coloring_Movement
 {
     TextBlock[,] textBlocks { get; set; }
-    List<Pieces> pieces { get; set; }
-    Pieces movedPiece { get; set; }
+    List<Piece> pieces { get; set; }
+    Piece movedPiece { get; set; }
 
-    public Coloring_Movement(TextBlock[,] textBlocks, List<Pieces> pieces, Pieces movedPiece)
+    public Coloring_Movement(TextBlock[,] textBlocks, List<Piece> pieces, Piece movedPiece)
     {
         this.textBlocks = textBlocks;
         this.pieces = pieces;

@@ -21,7 +21,7 @@ public class Capture
     /// , if the bool "IsKilled" is equal to true
     /// </summary>
     /// <param name="pieces">list with every pieces / current pieces in the game</param>
-    public void updateList(List<Pieces> pieces)
+    public void updateList(List<Piece> pieces)
     {
         // looping and checking if any piece is lately updated
         foreach (var piece in pieces)

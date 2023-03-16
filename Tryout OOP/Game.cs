@@ -9,8 +9,8 @@ internal class Game
     GameMode mode;
     Player Player1;
     Player Player2;
-    Pieces movedPiece;
-    List<Pieces> pieces;
+    Piece movedPiece;
+    List<Piece> pieces;
     PlayerTurn PlayerTurn;
     TextBlock[,] textBlocks;
 
@@ -21,7 +21,7 @@ internal class Game
         this.textBlocks = textBlocks;
 
         // initialize pieces list
-        this.pieces = new List<Pieces>();
+        this.pieces = new List<Piece>();
 
         this.PlayerTurn = new PlayerTurn(textBlocks, pieces);
     }
@@ -48,6 +48,7 @@ internal class Game
             {
                 return;
             }
+            movedPiece = Player1.SelectedPiece;
             // swap players turn
             Player1.SwitchTurns();
             Player2.SwitchTurns();
@@ -58,6 +59,7 @@ internal class Game
             {
                 return;
             }
+            movedPiece = Player2.SelectedPiece;
             // swap players turn
             Player2.SwitchTurns();
             Player1.SwitchTurns();

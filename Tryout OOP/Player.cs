@@ -16,15 +16,15 @@ public class Player
         get { return isTurn; }
     }
 
-    private List<Pieces>? pieces;
-    public List<Pieces> Pieces
+    private List<Piece>? pieces;
+    public List<Piece> Pieces
     {
         get { return pieces; }
         set { pieces = value; }
     }
 
-    private Pieces selectedPiece;
-    public Pieces SelectedPiece
+    private Piece selectedPiece;
+    public Piece SelectedPiece
     {
         get { return selectedPiece; }
         set { selectedPiece = value; }
@@ -61,7 +61,7 @@ public class Player
     /// </summary>
     /// <param name="piece"></param>
     /// <returns></returns>
-    public bool CanMove(Pieces piece)
+    public bool CanMove(Piece piece)
     {
         if (selectedPiece == null)
         {
@@ -84,9 +84,9 @@ public class Player
     /// Initial Setup to set the Pieces to their official start positions
     /// </summary>
     /// <returns></returns>
-    public List<Pieces> CreatePieces()
+    public List<Piece> CreatePieces()
     {
-        List<Pieces> pieces = new List<Pieces>();
+        List<Piece> pieces = new List<Piece>();
 
         // Create pawns
         for (int i = 0; i < 8; i++)

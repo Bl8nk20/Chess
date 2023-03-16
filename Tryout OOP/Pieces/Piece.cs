@@ -8,7 +8,7 @@ namespace Tryout_OOP;
 /// <summary>
 /// an abstract class to set a blueprint for each chesspiece
 /// </summary>
-public abstract class Pieces
+public abstract class Piece
 {
     // not important at that stage of the development
     protected byte piecevalue;
@@ -65,7 +65,7 @@ public abstract class Pieces
     /// <param name="y">Current Y Position</param>
     /// <param name="isWhite">bool if piece is black or white</param>
     /// <param name="look">char for the Unicode Image</param>
-    public Pieces(PointStruct p, bool isWhite, char look)
+    public Piece(PointStruct p, bool isWhite, char look)
     {
         this.Point = p;
         this.isWhite = isWhite;
@@ -81,7 +81,7 @@ public abstract class Pieces
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns>move is valid</returns>
-    public abstract bool CanMove(PointStruct Target, List<Pieces> pieces);
+    public abstract bool CanMove(PointStruct Target, List<Piece> pieces);
     
     /// <summary>
     /// 
@@ -89,7 +89,7 @@ public abstract class Pieces
     /// <param name="Target"></param>
     /// <param name="pieces"></param>
     /// <returns></returns>
-    public bool MoveTo(PointStruct Target, List<Pieces> pieces)
+    public bool MoveTo(PointStruct Target, List<Piece> pieces)
     {
         // if the Move if false then returned False
         if (!CanMove(Target, pieces))

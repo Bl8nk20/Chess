@@ -9,19 +9,19 @@ namespace Tryout_OOP
     internal class Board
     {
         PlayerTurn PlayerTurn;
-        List<Pieces>? Pieces;
+        List<Piece>? Pieces;
         TextBlock[,] TextBlock;
-        TextBox textboxturns, textboxPlayer;
-        Pieces movedPiece;
+        TextBox TextBlockTurns, TextBlockPlayer;
+        public Piece movedPiece;
         internal ushort playerturns;
         Player player;
 
-        public Board(ushort playerturns, List<Pieces> pieces, TextBlock[,] TextBlock, Canvas spielfeld, TextBox textboxturns, TextBox textboxPlayer)
+        public Board(ushort playerturns, List<Piece> pieces, TextBlock[,] TextBlock, Canvas spielfeld, TextBox textboxturns, TextBox textboxPlayer)
         {
             this.playerturns = playerturns;
             this.TextBlock = TextBlock;
-            this.textboxturns = textboxturns;
-            this.textboxPlayer = textboxPlayer;
+            this.TextBlockTurns = textboxturns;
+            this.TextBlockPlayer = textboxPlayer;
             this.Pieces = pieces;
             this.PlayerTurn = new PlayerTurn(TextBlock, pieces);
             DrawBoard(spielfeld);
@@ -140,7 +140,7 @@ namespace Tryout_OOP
                 }
 
                 // Show the Current turn !
-                //textboxturns.Text = ToString();
+                //TextBlockTurns.Text = ToString();
                 // updating the element list
                 capture.updateList(Pieces);
             }

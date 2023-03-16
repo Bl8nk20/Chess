@@ -6,7 +6,7 @@ namespace Tryout_OOP;
 
 internal class AdditionalLogic
 {
-    protected List<Pieces> pieces = new List<Pieces>();
+    protected List<Piece> pieces = new List<Piece>();
     protected TextBlock[,] textBlocks;
     private Player player1;
     private Player player2;
@@ -22,7 +22,7 @@ internal class AdditionalLogic
         get { return player2; }
     }
 
-    Pieces movedPiece;
+    Piece movedPiece;
     // enum for gamestatus checking
     private GameStatus status;
     public GameStatus Status
@@ -31,11 +31,11 @@ internal class AdditionalLogic
         set { status = value; }
     }
 
-    public AdditionalLogic(List<Pieces> pieces, TextBlock[,] textBlocks, Pieces movedPiece)
+    public AdditionalLogic(List<Piece> pieces, TextBlock[,] textBlocks, Piece movedPiece)
     {
         this.Player1 = new Player(true);
         this.Player2 = new Player();
-        this.pieces = new List<Pieces>();
+        this.pieces = new List<Piece>();
         this.textBlocks = textBlocks;
         this.movedPiece = movedPiece;
     }
@@ -44,10 +44,10 @@ internal class AdditionalLogic
     /// Initial Setup to set the Pieces to their official start positions
     /// </summary>
     /// <returns></returns>
-    internal List<Pieces> InitialPieces()
+    internal List<Piece> InitialPieces()
     {
         // Looping for each player list to one list with both contents
-        var pieces = new List<Pieces>(Player1.Pieces.Count() + Player2.Pieces.Count());
+        var pieces = new List<Piece>(Player1.Pieces.Count() + Player2.Pieces.Count());
         foreach (var item in Player1.Pieces)
         {
             pieces.Add(item);
@@ -66,7 +66,7 @@ internal class AdditionalLogic
     /// </summary>
     /// <param name="p"></param>
     /// <returns>nothing (void)</returns>
-    internal Pieces searchPiece(PointStruct p)
+    internal Piece searchPiece(PointStruct p)
     {
         // Find Piece to move
         foreach (var piece in pieces)
