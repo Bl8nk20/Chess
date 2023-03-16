@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Collections.Generic;
 
 namespace Tryout_OOP;
 
@@ -69,7 +63,7 @@ public class Player
     /// <returns></returns>
     public bool CanMove(Pieces piece)
     {
-        if(selectedPiece == null)
+        if (selectedPiece == null)
         {
             return false;
         }
@@ -93,7 +87,7 @@ public class Player
     public List<Pieces> CreatePieces()
     {
         List<Pieces> pieces = new List<Pieces>();
-        
+
         // Create pawns
         for (int i = 0; i < 8; i++)
         {
@@ -117,7 +111,7 @@ public class Player
 
         // Create King
         pieces.Add(new King(new PointStruct(4, this.isWhite ? 0 : 7), this.isWhite));
- 
+
         return pieces;
     }
 }

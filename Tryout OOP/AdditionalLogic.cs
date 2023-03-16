@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Tryout_OOP;
 
@@ -19,7 +14,7 @@ internal class AdditionalLogic
     public Player Player1
     {
         set { player1 = value; }
-        get {return player1; }
+        get { return player1; }
     }
     public Player Player2
     {
@@ -53,11 +48,11 @@ internal class AdditionalLogic
     {
         // Looping for each player list to one list with both contents
         var pieces = new List<Pieces>(Player1.Pieces.Count() + Player2.Pieces.Count());
-        foreach(var item in Player1.Pieces)
+        foreach (var item in Player1.Pieces)
         {
             pieces.Add(item);
         }
-        foreach(var item in Player2.Pieces)
+        foreach (var item in Player2.Pieces)
         {
             pieces.Add(item);
         }
@@ -74,7 +69,7 @@ internal class AdditionalLogic
     internal Pieces searchPiece(PointStruct p)
     {
         // Find Piece to move
-        foreach(var piece in pieces)
+        foreach (var piece in pieces)
         {
             // if it matches set the movedPiece to the piece at the corresponding index
             if (piece.Position.X == p.X && piece.Position.Y == p.Y)
@@ -87,7 +82,7 @@ internal class AdditionalLogic
 
     internal bool whiteMoves()
     {
-        if(movedPiece == null || !movedPiece.IsWhite)
+        if (movedPiece == null || !movedPiece.IsWhite)
         {
             return false;
         }
@@ -129,7 +124,7 @@ internal class AdditionalLogic
             // check if the way is free (no bishop or knight or other piece is on same line)
             // move king two steps in rooks direction -> place rook on the left or right nearby
             // set king and rook to moved
-            if(movedPiece is King)
+            if (movedPiece is King)
             {
 
             }

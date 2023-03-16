@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -73,7 +69,7 @@ namespace Tryout_OOP
         /// </summary>
         internal void DrawPieces()
         {
-            if(Pieces == null)
+            if (Pieces == null)
             {
                 return;
             }

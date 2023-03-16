@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
@@ -51,7 +46,7 @@ internal class PlayerTurn
             }
         }
     }
-    
+
     /// <summary>
     /// checking for end state
     /// </summary>
