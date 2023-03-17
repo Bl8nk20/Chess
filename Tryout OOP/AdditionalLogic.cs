@@ -80,48 +80,5 @@ internal class AdditionalLogic
         return movedPiece;
     }
 
-    /// <summary>
-    /// a method to validate if certain moves are valid
-    /// e.g. En passant or Castling or Promoting
-    /// </summary>
-    internal void specialMoves()
-    {
-        Capture capture = new Capture();
-
-        foreach (var piece in pieces)
-        {
-            // En Passant:
-            // check if movedPiece is from type Pawn
-            // check if on the left or right is another (enemy) pawn
-            // check if he has moved two forward
-            // throw diagonally
-            if (movedPiece is Pawn && piece.Position.Y == movedPiece.Position.Y)
-            {
-
-            }
-
-            // Castling
-            // check if movedPiece is from type King
-            // check if king and one of the Rooks haven´t been moved yet
-            // check if the way is free (no bishop or knight or other piece is on same line)
-            // move king two steps in rooks direction -> place rook on the left or right nearby
-            // set king and rook to moved
-            if (movedPiece is King)
-            {
-
-            }
-
-            // Promotion
-            // check if pawn has reached end of board
-            // ask player to which piece the pawn should be promoted
-            // remove pawn -> replace it with players choice
-            if (movedPiece is Pawn && movedPiece.Position.X == 7)
-            {
-                // piece needed to replace either with the user input or a specific piece
-                movedPiece.IsKilled = true;
-                capture.updateList(pieces);
-                //pieces.Add(new ...(movedPiece.Position));
-            }
-        }
-    }
+    
 }

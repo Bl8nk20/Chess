@@ -25,4 +25,17 @@ public struct PointStruct
     {
         get { return y; }
     }
+
+    /// <summary>
+    /// Compares two Points on the GUI,
+    /// true -> if points are identical,
+    /// false -> points differ from eachother
+    /// </summary>
+    /// <param name="PointA">First Point to compare</param>
+    /// <param name="PointB">Second Point to compare</param>
+    /// <returns>a bool</returns>
+    public static bool ComparePoints(PointStruct PointA, PointStruct PointB)
+    {
+        return PointA.X != PointB.X || PointA.Y != PointB.Y;
+    }
 }

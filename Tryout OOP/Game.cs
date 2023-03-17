@@ -5,64 +5,72 @@ namespace Tryout_OOP;
 
 internal class Game
 {
-    GameStatus status;
-    GameMode mode;
+    GameStatus GAMESTATUS;
+    GameMode GAMEMODE;
+    ushort currentTurn = 1;
     Player Player1;
     Player Player2;
-    Piece movedPiece;
-    List<Piece> pieces;
-    PlayerTurn PlayerTurn;
-    TextBlock[,] textBlocks;
-    TextBox TextBlockTurns, TextBlockPlayer;
 
-
-    public Game(Player Player1, Player Player2, TextBlock[,] textBlocks, TextBox textboxturns, TextBox textboxPlayer)
+    public Game()
     {
-        this.Player1 = Player1;
-        this.Player2 = Player2;
-        this.textBlocks = textBlocks;
-        this.TextBlockTurns = textboxturns;
-        this.TextBlockPlayer = textboxPlayer;
-
-        // initialize pieces list
-        this.pieces = new List<Piece>();
-
-        this.PlayerTurn = new PlayerTurn(textBlocks, pieces);
+        Player Player1 = new Player(true);
+        Player Player2 = new Player();
     }
 
     /// <summary>
     /// 
     /// </summary>
     public void playerMovement()
-    { 
+    {
+        Player currentPlayer = (currentTurn % 2!= 0) ? Player1 : Player2;
         //
-        PlayerTurn.CheckKingKill();
-        // check if the Gamestate has changed
-        PlayerTurn.isEnd();
+        CheckKingKill(currentPlayer);
 
-        movedPiece = (PlayerTurn.Counter % 2) == 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
+        // check if the Gamestate has changed
+        isEnd();
+
+        // visuals for debug
+        // TextBlockPlayer.Text = (PlayerTurn.Counter % 2) != 0 ? Player1.IsWhite.ToString() : Player2.IsWhite.ToString();
+        // TextBlockTurns.Text = PlayerTurn.Counter.ToString();
 
         if (Player1.IsTurn)
         {
+            // movedPiece = (PlayerTurn.Counter % 2) != 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
+
             if (!Player1.CanMove(movedPiece))
             {
                 return;
             }
-            movedPiece = Player1.SelectedPiece;
-            // swap players turn
-            Player1.SwitchTurns();
-            Player2.SwitchTurns();
         }
         else if (Player2.IsTurn)
         {
-            if (!Player2.CanMove(movedPiece))
+            if (Player2.CanMove(movedPiece))
             {
                 return;
             }
-            movedPiece = Player2.SelectedPiece;
-            // swap players turn
-            Player2.SwitchTurns();
-            Player1.SwitchTurns();
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void CheckKingKill(Player currentPlayer)
+    {
+        foreach (var piece in currentPlayer.Pieces)
+        {
+            if (piece.IsKilled && piece is King)
+            {
+                GAMESTATUS = currentPlayer.IsWhite ? GAMESTATUS = GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
+            }
+        }
+    }
+
+    /// <summary>
+    /// checking for end state
+    /// </summary>
+    /// <returns></returns>
+    public bool isEnd()
+    {
+        return this.GAMESTATUS != GameStatus.ACTIVE;
     }
 }

@@ -15,12 +15,12 @@ namespace Tryout_OOP
         AdditionalLogic? Logic;
         Player? Player1;
         Player? Player2;
-        PlayerTurn? playerTurn;
         Piece? movedPiece;
 
         public MainWindow()
         {
             InitializeComponent();
+
             //
             Setup();
         }
@@ -31,15 +31,18 @@ namespace Tryout_OOP
         void Setup()
         {
             Player1 = new Player(true);
+            Player1.IsTurn = true;
+
             Player2 = new Player();
+            
             pieces = new List<Piece>(); // initialize the pieces list
+            
             Logic = new AdditionalLogic(pieces, textBlocks, movedPiece);
             pieces = Logic.InitialPieces();
-            playerTurn = new PlayerTurn(textBlocks, pieces);
             Board Board = new Board(pieces, textBlocks, spielfeld);
             Board.DrawBoard(spielfeld);
-            Game Game = new Game(Player1, Player2, textBlocks, textboxturns, textboxPlayer);
             
+            Game Game = new Game(Player1, Player2);
             Game.playerMovement();
         }
     }

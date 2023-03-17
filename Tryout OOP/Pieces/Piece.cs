@@ -10,6 +10,7 @@ namespace Tryout_OOP;
 /// </summary>
 public abstract class Piece
 {
+    #region Properties
     // not important at that stage of the development
     protected byte piecevalue;
     public byte PieceValue 
@@ -57,7 +58,9 @@ public abstract class Piece
     {
         get { return look; }
     }
+    #endregion
 
+    #region Constructor
     /// <summary>
     /// Constructor for the Pieces.
     /// </summary>
@@ -72,7 +75,9 @@ public abstract class Piece
         this.isKilled = isKilled | false;
         this.look = look;
     }
-    
+    #endregion
+
+    #region Methods
     /// <summary>
     /// Assumption: xTarget and yTarget always above 0
     /// Assumption: Targeted Point != StartingPoint
@@ -99,6 +104,10 @@ public abstract class Piece
 
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
+        // Try to implement
+        // PlayerTurn.Counter++;
         return true;
     }
+
+    #endregion
 }
