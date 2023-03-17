@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-03-17T11:10:43.214Z" agent="5.0 (Windows)" etag="kkQOG5vZbsDTcwKMTt5e" version="21.0.6" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-17T11:44:29.535Z" agent="5.0 (Windows)" etag="PFurapvPtH-spg4uJjrX" version="21.0.6" type="github">
   <diagram name="Seite-1" id="8dhn65Cj3MbclAA8dtAb">
-    <mxGraphModel dx="7306" dy="1430" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="8181" dy="1907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -159,6 +159,9 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="Fth_bfI_0uVG91sUmCG6-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=10;" edge="1" parent="1" source="38B4btSkLqxtYz1ykes1-39" target="Fth_bfI_0uVG91sUmCG6-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="38B4btSkLqxtYz1ykes1-39" value="Game" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=62;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=10;fontSize=30;" parent="1" vertex="1">
           <mxGeometry x="-3330" y="1620" width="480" height="366" as="geometry" />
         </mxCell>
@@ -184,6 +187,18 @@
         </mxCell>
         <mxCell id="38B4btSkLqxtYz1ykes1-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeWidth=10;fontSize=30;" parent="1" source="38B4btSkLqxtYz1ykes1-9" target="38B4btSkLqxtYz1ykes1-17" edge="1">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Fth_bfI_0uVG91sUmCG6-1" value="MovesDict" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=70;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=10;fontSize=30;" vertex="1" parent="1">
+          <mxGeometry x="-3660" y="2100" width="850" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Fth_bfI_0uVG91sUmCG6-2" value="&lt;div&gt;+ PieceList : List&amp;lt;Piece&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ currentTurn : ushort&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=30;strokeWidth=10;" vertex="1" parent="Fth_bfI_0uVG91sUmCG6-1">
+          <mxGeometry y="70" width="850" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Fth_bfI_0uVG91sUmCG6-3" value="" style="line;strokeWidth=10;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=30;" vertex="1" parent="Fth_bfI_0uVG91sUmCG6-1">
+          <mxGeometry y="160" width="850" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Fth_bfI_0uVG91sUmCG6-4" value="&lt;div&gt;+ AddTurn(currentTurn: ushort, PieceList) : void&lt;/div&gt;&lt;div&gt;// Use FEN Notation to generate the String of the current turn&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ WriteFENtoFile() : void&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=30;strokeWidth=10;" vertex="1" parent="Fth_bfI_0uVG91sUmCG6-1">
+          <mxGeometry y="168" width="850" height="132" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
