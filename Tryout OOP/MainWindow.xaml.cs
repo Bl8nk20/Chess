@@ -11,16 +11,14 @@ namespace Tryout_OOP
     public partial class MainWindow : Window
     {
         TextBlock[,] textBlocks = new TextBlock[8, 8];
-        List<Pieces> pieces = new List<Pieces>();
-        AdditionalLogic? Logic;
         Player? Player1;
         Player? Player2;
-        PlayerTurn? playerTurn;
-        Pieces? movedPiece;
+        Piece? movedPiece;
 
         public MainWindow()
         {
             InitializeComponent();
+
             //
             Setup();
         }
@@ -31,16 +29,18 @@ namespace Tryout_OOP
         void Setup()
         {
             Player1 = new Player(true);
-            Player2 = new Player();
-            pieces = new List<Pieces>(); // initialize the pieces list
-            Logic = new AdditionalLogic(pieces, textBlocks, movedPiece);
-            pieces = Logic.InitialPieces();
-            playerTurn = new PlayerTurn(textBlocks, pieces);
-            Board Board = new Board(playerTurn.playerturns, pieces, textBlocks, spielfeld, textboxturns, textboxPlayer);
-            Board.DrawBoard(spielfeld);
-            Game Game = new Game(Player1, Player2, textBlocks);
             Player1.IsTurn = true;
-            Game.Playing();
+
+            Player2 = new Player();
+            
+            List<Piece> pieces = new List<Piece>(); // initialize the pieces list
+            
+            Board Board = new Board();
+            Board.DrawBoard(textBlocks);
+            
+            Game Game = new Game();
+            pieces = Game.InitialPieces();
+            Game.playerMovement();
         }
     }
 

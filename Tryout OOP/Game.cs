@@ -1,67 +1,104 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
 
 internal class Game
 {
-    GameStatus status;
-    GameMode mode;
+    #region Properties
+    GameStatus GAMESTATUS;
+    GameMode GAMEMODE;
+    ushort currentTurn = 1;
     Player Player1;
     Player Player2;
-    Pieces movedPiece;
-    List<Pieces> pieces;
-    PlayerTurn PlayerTurn;
-    TextBlock[,] textBlocks;
+    #endregion
 
-    public Game(Player Player1, Player Player2, TextBlock[,] textBlocks)
+    #region Constructor
+    public Game()
     {
-        this.Player1 = Player1;
-        this.Player2 = Player2;
-        this.textBlocks = textBlocks;
+        Player Player1 = new Player(true);
+        Player Player2 = new Player();
+    }
+    #endregion
 
-        // initialize pieces list
-        this.pieces = new List<Pieces>();
+    #region Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    public void playerMovement()
+    {
+        Player currentPlayer = (currentTurn % 2!= 0) ? Player1 : Player2;
+        //
+        CheckKingKill(currentPlayer);
 
-        this.PlayerTurn = new PlayerTurn(textBlocks, pieces);
+        // check if the Gamestate has changed
+        isEnd();
+
+        // visuals for debug
+        // TextBlockPlayer.Text = (PlayerTurn.Counter % 2) != 0 ? Player1.IsWhite.ToString() : Player2.IsWhite.ToString();
+        // TextBlockTurns.Text = PlayerTurn.Counter.ToString();
+
+        //if (Player1.IsTurn)
+        //{
+        //    // movedPiece = (PlayerTurn.Counter % 2) != 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
+
+        //    if (!Player1.CanMove(movedPiece))
+        //    {
+        //        return;
+        //    }
+        //}
+        //else if (Player2.IsTurn)
+        //{
+        //    if (Player2.CanMove(movedPiece))
+        //    {
+        //        return;
+        //    }
+        //}
     }
 
-    public void Playing()
+    /// <summary>
+    /// Initial Setup to set the Pieces to their official start positions
+    /// </summary>
+    /// <returns></returns>
+    internal List<Piece> InitialPieces()
     {
-        Player1.IsTurn = true;
-        AdditionalLogic AdditionalLogic = new AdditionalLogic(pieces, textBlocks, movedPiece);
-        pieces = AdditionalLogic.InitialPieces();
-        //
-        Player1.IsTurn = true;
-        playerMovement();
+        // Looping for each player list to one list with both contents
+        var pieces = new List<Piece>(Player1.Pieces.Count() + Player2.Pieces.Count());
+        foreach (var item in Player1.Pieces)
+        {
+            pieces.Add(item);
+        }
+        foreach (var item in Player2.Pieces)
+        {
+            pieces.Add(item);
+        }
+
+        return pieces;
     }
 
     /// <summary>
     /// 
     /// </summary>
-    void playerMovement()
+    public void CheckKingKill(Player currentPlayer)
     {
-        movedPiece = Player1.SelectedPiece;
-        if (Player1.IsTurn)
+        foreach (var piece in currentPlayer.Pieces)
         {
-            if (!Player1.CanMove(movedPiece))
+            if (piece.IsKilled && piece is King)
             {
-                return;
+                GAMESTATUS = currentPlayer.IsWhite ? GAMESTATUS = GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
             }
-            // swap players turn
-            Player1.SwitchTurns();
-            Player2.SwitchTurns();
-        }
-        else if (Player2.IsTurn)
-        {
-            if (!Player2.CanMove(movedPiece))
-            {
-                return;
-            }
-            // swap players turn
-            Player2.SwitchTurns();
-            Player1.SwitchTurns();
         }
     }
 
+    /// <summary>
+    /// checking for end state
+    /// </summary>
+    /// <returns></returns>
+    public bool isEnd()
+    {
+        return this.GAMESTATUS != GameStatus.ACTIVE;
+    }
+
+    #endregion
 }

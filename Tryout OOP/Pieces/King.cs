@@ -4,7 +4,7 @@ using System.Windows.Documents;
 
 namespace Tryout_OOP;
 
-public class King : Pieces
+public class King : Piece
 {
     // bool for the Castling movement if done
     private bool isCastlingDone = false;
@@ -37,7 +37,7 @@ public class King : Pieces
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
+    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
     {
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)

@@ -8,23 +8,9 @@ namespace Tryout_OOP
 
     internal class Board
     {
-        PlayerTurn PlayerTurn;
-        List<Pieces>? Pieces;
-        TextBlock[,] TextBlock;
-        TextBox textboxturns, textboxPlayer;
-        Pieces movedPiece;
-        internal ushort playerturns;
-        Player player;
 
-        public Board(ushort playerturns, List<Pieces> pieces, TextBlock[,] TextBlock, Canvas spielfeld, TextBox textboxturns, TextBox textboxPlayer)
+        public Board()
         {
-            this.playerturns = playerturns;
-            this.TextBlock = TextBlock;
-            this.textboxturns = textboxturns;
-            this.textboxPlayer = textboxPlayer;
-            this.Pieces = pieces;
-            this.PlayerTurn = new PlayerTurn(TextBlock, pieces);
-            DrawBoard(spielfeld);
         }
 
         /// <summary>
@@ -32,8 +18,9 @@ namespace Tryout_OOP
         /// by generating 64 textblocks from a 2D array
         /// also add the chesspieces too if there are any to fill up
         /// </summary>
-        internal void DrawBoard(Canvas spielfeld)
+        internal void DrawBoard(TextBlock[,] TextBlock)
         {
+            Canvas spielfeld;
             // loop for each element of the 2d Array
             for (byte i = 0; i < 8; i++)
             {
@@ -47,17 +34,14 @@ namespace Tryout_OOP
                     b.FontSize = 45;
                     // color the textblock
                     b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                    spielfeld.Children.Add(b);
                     TextBlock[i, j] = b;
                     Canvas.SetLeft(b, 72.5 * i);
                     Canvas.SetBottom(b, 72.5 * j);
                     // mouse button events
-                    b.MouseDown += MouseClicked;
-                    b.MouseUp += MouseReleased;
+                    //b.MouseDown += MouseClicked;
+                    //b.MouseUp += MouseReleased;
                 }
             }
-            // Draw Pieces / update Pieces
-            DrawPieces();
         }
 
         /// <summary>
@@ -67,7 +51,7 @@ namespace Tryout_OOP
         /// then Draw the UniCode Symbol for the According ChessPiece
         /// else draw an empty String to the TextBlock
         /// </summary>
-        internal void DrawPieces()
+        internal void DrawPieces(TextBlock[,] TextBlock, List<Piece> Pieces)
         {
             if (Pieces == null)
             {
@@ -97,10 +81,39 @@ namespace Tryout_OOP
         }
 
         /// <summary>
+        /// A method to find the Textblock 
+        /// which is clicked 
+        /// and where the mouse was released afterwards
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns>the custom Struct "Pointstruct" with both the X and Y Coordinate</returns>
+        internal PointStruct findTexBlockCoordinates(TextBlock targetBlock, TextBlock[,] textBlock)
+        {
+            // looping for each element of the 2D-Array
+            for (byte i = 0; i < 8; i++)
+            {
+                for (byte j = 0; j < 8; j++)
+                {
+                    // if the TextBlock matches,
+                    // then return the X and Y Coordinate
+                    if (textBlock[i, j] == targetBlock)
+                    {
+                        return new PointStruct(i, j);
+                    }
+                }
+            }
+            // when nothing matches -> return Point
+            return new PointStruct(0, 0);
+        }
+
+        /*
+        
+        
+        /// <summary>
         /// a method to get overlapping / same coordinates of pieces
         /// and removing them from the board and redraw them again
         /// </summary>
-        public void pieceMoving(PointStruct targetedPoint, ushort playerturns)
+        public void pieceMoving(PointStruct targetedPoint)
         {
             // Calling and setting up the Capture class
             Capture capture = new Capture();
@@ -140,38 +153,12 @@ namespace Tryout_OOP
                 }
 
                 // Show the Current turn !
-                //textboxturns.Text = ToString();
+                //TextBlockTurns.Text = ToString();
                 // updating the element list
                 capture.updateList(Pieces);
             }
             // draw the pieces again
             DrawPieces();
-        }
-
-        /// <summary>
-        /// A method to find the Textblock 
-        /// which is clicked 
-        /// and where the mouse was released afterwards
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns>the custom Struct "Pointstruct" with both the X and Y Coordinate</returns>
-        internal PointStruct findTexBlockCoordinates(TextBlock s)
-        {
-            // looping for each element of the 2D-Array
-            for (byte i = 0; i < 8; i++)
-            {
-                for (byte j = 0; j < 8; j++)
-                {
-                    // if the TextBlock matches,
-                    // then return the X and Y Coordinate
-                    if (TextBlock[i, j] == s)
-                    {
-                        return new PointStruct(i, j);
-                    }
-                }
-            }
-            // when nothing matches -> return Point
-            return new PointStruct(0, 0);
         }
 
         /// <summary>
@@ -211,7 +198,7 @@ namespace Tryout_OOP
 
             // method for the Piece Movement
             // -> capturing and moving the piece
-            pieceMoving(targetedPoint, playerturns);
+            pieceMoving(targetedPoint);
 
             // coloring the Pieces back at its original colors
             for (byte i = 0; i < 8; i++)
@@ -222,5 +209,6 @@ namespace Tryout_OOP
                 }
             }
         }
+        */
     }
 }

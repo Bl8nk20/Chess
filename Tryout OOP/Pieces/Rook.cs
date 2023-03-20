@@ -4,7 +4,7 @@ using Tryout_OOP;
 
 namespace Tryout_OOP;
 
-public class Rook : Pieces
+public class Rook : Piece
 {
 
     /// <summary>
@@ -29,7 +29,7 @@ public class Rook : Pieces
     /// <param name="xTarget">x - Coordinate</param>
     /// <param name="yTarget">y - Coordinate</param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces)
+    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
     {
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)
