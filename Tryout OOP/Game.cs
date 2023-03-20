@@ -1,22 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
 
 internal class Game
 {
+    #region Properties
     GameStatus GAMESTATUS;
     GameMode GAMEMODE;
     ushort currentTurn = 1;
     Player Player1;
     Player Player2;
+    #endregion
 
+    #region Constructor
     public Game()
     {
         Player Player1 = new Player(true);
         Player Player2 = new Player();
     }
+    #endregion
 
+    #region Methods
     /// <summary>
     /// 
     /// </summary>
@@ -52,6 +58,26 @@ internal class Game
     }
 
     /// <summary>
+    /// Initial Setup to set the Pieces to their official start positions
+    /// </summary>
+    /// <returns></returns>
+    internal List<Piece> InitialPieces()
+    {
+        // Looping for each player list to one list with both contents
+        var pieces = new List<Piece>(Player1.Pieces.Count() + Player2.Pieces.Count());
+        foreach (var item in Player1.Pieces)
+        {
+            pieces.Add(item);
+        }
+        foreach (var item in Player2.Pieces)
+        {
+            pieces.Add(item);
+        }
+
+        return pieces;
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     public void CheckKingKill(Player currentPlayer)
@@ -73,4 +99,6 @@ internal class Game
     {
         return this.GAMESTATUS != GameStatus.ACTIVE;
     }
+
+    #endregion
 }

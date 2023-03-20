@@ -5,6 +5,7 @@ namespace Tryout_OOP;
 
 public class Player
 {
+    #region Properties
     private bool isWhite;
     public bool IsWhite
     {
@@ -16,7 +17,8 @@ public class Player
         set { isTurn = value; }
         get { return isTurn; }
     }
-
+    private FEN_Startup FEN_Startup;
+    
     private List<Piece> pieces;
     public List<Piece> Pieces
     {
@@ -30,9 +32,12 @@ public class Player
         get { return selectedPiece; }
         set { selectedPiece = value; }
     }
+    #endregion
 
+    #region Constructor
     public Player(bool isWhite = false)
     {
+        FEN_Startup = new FEN_Startup("FENStrings.json");
         this.isWhite = isWhite;
         this.isTurn = false;
         Pieces = CreatePieces();
@@ -51,6 +56,9 @@ public class Player
     // \u265E => black knight
     // \u265F => black Pawn
 
+    #endregion
+
+    #region Methods
     public void SwitchTurns()
     {
         isTurn = !isTurn;
@@ -89,6 +97,8 @@ public class Player
     public List<Piece> CreatePieces()
     {
         List<Piece> pieces = new List<Piece>();
+
+        FEN_Startup.startupLocations();
 
         // Create pawns
         for (int i = 0; i < 8; i++)
@@ -171,13 +181,33 @@ public class Player
             // check if pawn has reached end of board
             // ask player to which piece the pawn should be promoted
             // remove pawn -> replace it with players choice
-            if (movedPiece is Pawn && movedPiece.Position.X == 7)
+            if (selectedPiece is Pawn && selectedPiece.Position.X == 7)
             {
                 // piece needed to replace either with the user input or a specific piece
-                movedPiece.IsKilled = true;
-                capture.updateList(pieces);
+                selectedPiece.IsKilled = true;
                 //pieces.Add(new ...(movedPiece.Position));
             }
         }
     }
+
+    /// <summary>
+    /// A Method to search The ChessPieces 
+    /// in the List, which should be moved
+    /// </summary>
+    /// <param name="p"></param>
+    /// <returns>nothing (void)</returns>
+    internal Piece searchPiece(PointStruct p)
+    {
+        // Find Piece to move
+        foreach (var piece in pieces)
+        {
+            // if it matches set the movedPiece to the piece at the corresponding index
+            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
+            {
+                selectedPiece = piece;
+            }
+        }
+        return selectedPiece;
+    }
+    #endregion
 }

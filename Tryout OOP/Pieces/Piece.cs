@@ -108,6 +108,5 @@ public abstract class Piece
         // PlayerTurn.Counter++;
         return true;
     }
-
     #endregion
 }

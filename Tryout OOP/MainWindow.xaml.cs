@@ -12,7 +12,6 @@ namespace Tryout_OOP
     {
         TextBlock[,] textBlocks = new TextBlock[8, 8];
         List<Piece> pieces = new List<Piece>();
-        AdditionalLogic? Logic;
         Player? Player1;
         Player? Player2;
         Piece? movedPiece;
@@ -37,12 +36,11 @@ namespace Tryout_OOP
             
             pieces = new List<Piece>(); // initialize the pieces list
             
-            Logic = new AdditionalLogic(pieces, textBlocks, movedPiece);
-            pieces = Logic.InitialPieces();
-            Board Board = new Board(pieces, textBlocks, spielfeld);
-            Board.DrawBoard(spielfeld);
+            Board Board = new Board();
+            Board.DrawBoard(textBlocks);
             
-            Game Game = new Game(Player1, Player2);
+            Game Game = new Game();
+            pieces = Game.InitialPieces();
             Game.playerMovement();
         }
     }

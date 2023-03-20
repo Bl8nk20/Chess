@@ -16,21 +16,21 @@ internal class FEN_Startup
         internal set { filename = value; }
         get { return filename; }
     }
+    private string Regex = @"(\d|[kqbnrpKQBNRP])";
     #endregion
 
     #region Constructor
     public FEN_Startup(string filename)
     {
-        string Regex = @"(\d|[kqbnrpKQBNRP])";
         this.filename = filename;
-
     }
     #endregion
 
     #region Methods
-    void startupLocations()
+    public List<Piece> startupLocations()
     {
-        
+        List<Piece> Pieces = new List<Piece>();
+        return Pieces;
     }
 
     #endregion
