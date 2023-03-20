@@ -67,6 +67,16 @@ internal class FEN_Startup
 
         return Pieces;
     }
+    public string ConvertListToString(List<Piece> pieces)
+    {
+        string List = "";
+        return List;
+    }
+
+    public void OverWriteFile(List<string> MovesDictList)
+    {
+
+    }
     // 1. List -> String (List<Piece>)
     // 2. String in List (stringListPiece)
     // 3. Overwrite Dictionary (filename, List(i)<string>) // i == Last index of list
