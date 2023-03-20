@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Text.RegularExpressions;
 
 namespace Tryout_OOP;
 
@@ -55,17 +56,29 @@ internal class FEN_Startup
     /// <returns></returns>
     public List<Piece> ConvertStringToList(string filename = "Default.txt")
     {
-        using (StreamReader sr = new StreamReader(filename))
+        if (File.Exists(filename))
         {
-            string startpos = sr.ReadToEnd();
+            using (StreamReader sr = new StreamReader(@"C:\" + filename))
+            { 
+                string startpos = sr.ReadToEnd();
+            }
         }
+        
         List<Piece> Pieces = new List<Piece>();
 
-        string[] sectors = startpos.Split(" ");
+        //string[] sectors = startpos.Split(" ");
 
+        // create a new match dataatype
+        Match m = Regex.Match(user_eingabe, Regex);
 
+        // initialize an array with the lenght of the first exponent + 1
+        string[] Coeff = new string[Convert.ToInt32(m.NextMatch().Value) + 1];
 
-        return Pieces;
+        // checking for every match of the regex
+        foreach (Match match in new Regex(regex_expression).Matches(user_eingabe))
+        {
+
+            return Pieces;
     }
     // 1. List -> String (List<Piece>)
     // 2. String in List (stringListPiece)
