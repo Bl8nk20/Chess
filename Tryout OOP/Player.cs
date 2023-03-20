@@ -37,7 +37,7 @@ public class Player
     #region Constructor
     public Player(bool isWhite = false)
     {
-        FEN_Startup = new FEN_Startup("FENStrings.json");
+        FEN_Startup = new FEN_Startup();
         this.isWhite = isWhite;
         this.isTurn = false;
         Pieces = CreatePieces();
@@ -70,25 +70,22 @@ public class Player
     /// </summary>
     /// <param name="piece"></param>
     /// <returns></returns>
-    public bool CanMove(Piece piece)
-    {
-        if (selectedPiece == null)
-        {
-            return false;
-        }
-        // Check if the piece belongs to the player and is allowed to move
-        if (selectedPiece.IsWhite != this.IsWhite)
-        {
-            return false;
-        }
-        if (!this.IsTurn)
-        {
-            return false;
-        }
+    //public bool CanMove(Piece piece)
+    //{
+    //    // Check if the piece belongs to the player and is allowed to move
+    //    if (selectedPiece == null || selectedPiece.IsWhite != this.IsWhite)
+    //    {
+    //        return false;
+    //    }
+        
+    //    if (!this.IsTurn)
+    //    {
+    //        return false;
+    //    }
 
-        // If all checks pass, the player can move the piece
-        return true;
-    }
+    //    // If all checks pass, the player can move the piece
+    //    return true;
+    //}
 
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
@@ -96,35 +93,31 @@ public class Player
     /// <returns></returns>
     public List<Piece> CreatePieces()
     {
-        List<Piece> pieces = new List<Piece>();
+        return FEN_Startup.ConvertStringToList();
 
-        FEN_Startup.startupLocations();
+        //// Create pawns
+        //for (int i = 0; i < 8; i++)
+        //{
+        //    pieces.Add(new Pawn(new PointStruct(i, this.isWhite ? 1 : 6), this.isWhite));
+        //}
 
-        // Create pawns
-        for (int i = 0; i < 8; i++)
-        {
-            pieces.Add(new Pawn(new PointStruct(i, this.isWhite ? 1 : 6), this.isWhite));
-        }
+        //// Create knights
+        //pieces.Add(new Knight(new PointStruct(1, this.isWhite ? 0 : 7), this.isWhite));
+        //pieces.Add(new Knight(new PointStruct(6, this.isWhite ? 0 : 7), this.isWhite));
 
-        // Create knights
-        pieces.Add(new Knight(new PointStruct(1, this.isWhite ? 0 : 7), this.isWhite));
-        pieces.Add(new Knight(new PointStruct(6, this.isWhite ? 0 : 7), this.isWhite));
+        //// Create bishops
+        //pieces.Add(new Bishop(new PointStruct(2, this.isWhite ? 0 : 7), this.isWhite));
+        //pieces.Add(new Bishop(new PointStruct(5, this.isWhite ? 0 : 7), this.isWhite));
 
-        // Create bishops
-        pieces.Add(new Bishop(new PointStruct(2, this.isWhite ? 0 : 7), this.isWhite));
-        pieces.Add(new Bishop(new PointStruct(5, this.isWhite ? 0 : 7), this.isWhite));
+        //// Create rooks
+        //pieces.Add(new Rook(new PointStruct(0, this.isWhite ? 0 : 7), this.isWhite));
+        //pieces.Add(new Rook(new PointStruct(7, this.isWhite ? 0 : 7), this.isWhite));
 
-        // Create rooks
-        pieces.Add(new Rook(new PointStruct(0, this.isWhite ? 0 : 7), this.isWhite));
-        pieces.Add(new Rook(new PointStruct(7, this.isWhite ? 0 : 7), this.isWhite));
+        //// Create Queen
+        //pieces.Add(new Queen(new PointStruct(3, this.isWhite ? 0 : 7), this.isWhite));
 
-        // Create Queen
-        pieces.Add(new Queen(new PointStruct(3, this.isWhite ? 0 : 7), this.isWhite));
-
-        // Create King
-        pieces.Add(new King(new PointStruct(4, this.isWhite ? 0 : 7), this.isWhite));
-
-        return pieces;
+        //// Create King
+        //pieces.Add(new King(new PointStruct(4, this.isWhite ? 0 : 7), this.isWhite));
     }
 
     /// <summary>
@@ -152,43 +145,43 @@ public class Player
     /// a method to validate if certain moves are valid
     /// e.g. En passant or Castling or Promoting
     /// </summary>
-    internal void specialMoves()
-    {
-        foreach (var piece in pieces)
-        {
-            // En Passant:
-            // check if movedPiece is from type Pawn
-            // check if on the left or right is another (enemy) pawn
-            // check if he has moved two forward
-            // throw diagonally
-            if (movedPiece is Pawn && piece.Position.Y == movedPiece.Position.Y)
-            {
+    //internal void specialMoves()
+    //{
+    //    foreach (var piece in pieces)
+    //    {
+    //        // En Passant:
+    //        // check if movedPiece is from type Pawn
+    //        // check if on the left or right is another (enemy) pawn
+    //        // check if he has moved two forward
+    //        // throw diagonally
+    //        if (movedPiece is Pawn && piece.Position.Y == movedPiece.Position.Y)
+    //        {
 
-            }
+    //        }
 
-            // Castling
-            // check if movedPiece is from type King
-            // check if king and one of the Rooks haven´t been moved yet
-            // check if the way is free (no bishop or knight or other piece is on same line)
-            // move king two steps in rooks direction -> place rook on the left or right nearby
-            // set king and rook to moved
-            if (movedPiece is King)
-            {
+    //        // Castling
+    //        // check if movedPiece is from type King
+    //        // check if king and one of the Rooks haven´t been moved yet
+    //        // check if the way is free (no bishop or knight or other piece is on same line)
+    //        // move king two steps in rooks direction -> place rook on the left or right nearby
+    //        // set king and rook to moved
+    //        if (movedPiece is King)
+    //        {
 
-            }
+    //        }
 
-            // Promotion
-            // check if pawn has reached end of board
-            // ask player to which piece the pawn should be promoted
-            // remove pawn -> replace it with players choice
-            if (selectedPiece is Pawn && selectedPiece.Position.X == 7)
-            {
-                // piece needed to replace either with the user input or a specific piece
-                selectedPiece.IsKilled = true;
-                //pieces.Add(new ...(movedPiece.Position));
-            }
-        }
-    }
+    //        // Promotion
+    //        // check if pawn has reached end of board
+    //        // ask player to which piece the pawn should be promoted
+    //        // remove pawn -> replace it with players choice
+    //        if (selectedPiece is Pawn && selectedPiece.Position.X == 7)
+    //        {
+    //            // piece needed to replace either with the user input or a specific piece
+    //            selectedPiece.IsKilled = true;
+    //            //pieces.Add(new ...(movedPiece.Position));
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// A Method to search The ChessPieces 

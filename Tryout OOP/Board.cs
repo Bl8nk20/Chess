@@ -20,6 +20,7 @@ namespace Tryout_OOP
         /// </summary>
         internal void DrawBoard(TextBlock[,] TextBlock)
         {
+            Canvas spielfeld;
             // loop for each element of the 2d Array
             for (byte i = 0; i < 8; i++)
             {
@@ -33,13 +34,12 @@ namespace Tryout_OOP
                     b.FontSize = 45;
                     // color the textblock
                     b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                    spielfeld.Children.Add(b);
                     TextBlock[i, j] = b;
                     Canvas.SetLeft(b, 72.5 * i);
                     Canvas.SetBottom(b, 72.5 * j);
                     // mouse button events
-                    b.MouseDown += MouseClicked;
-                    b.MouseUp += MouseReleased;
+                    //b.MouseDown += MouseClicked;
+                    //b.MouseUp += MouseReleased;
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace Tryout_OOP
         /// </summary>
         /// <param name="s"></param>
         /// <returns>the custom Struct "Pointstruct" with both the X and Y Coordinate</returns>
-        internal PointStruct findTexBlockCoordinates(TextBlock targetBlock)
+        internal PointStruct findTexBlockCoordinates(TextBlock targetBlock, TextBlock[,] textBlock)
         {
             // looping for each element of the 2D-Array
             for (byte i = 0; i < 8; i++)
@@ -96,7 +96,7 @@ namespace Tryout_OOP
                 {
                     // if the TextBlock matches,
                     // then return the X and Y Coordinate
-                    if (TextBlock[i, j] == targetBlock)
+                    if (textBlock[i, j] == targetBlock)
                     {
                         return new PointStruct(i, j);
                     }

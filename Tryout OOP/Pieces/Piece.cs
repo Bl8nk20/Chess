@@ -108,5 +108,14 @@ public abstract class Piece
         // PlayerTurn.Counter++;
         return true;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    byte setRelativePieceValue()
+    {
+        return byte.MaxValue;
+    }
     #endregion
 }

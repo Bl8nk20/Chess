@@ -11,7 +11,6 @@ namespace Tryout_OOP
     public partial class MainWindow : Window
     {
         TextBlock[,] textBlocks = new TextBlock[8, 8];
-        List<Piece> pieces = new List<Piece>();
         Player? Player1;
         Player? Player2;
         Piece? movedPiece;
@@ -34,7 +33,7 @@ namespace Tryout_OOP
 
             Player2 = new Player();
             
-            pieces = new List<Piece>(); // initialize the pieces list
+            List<Piece> pieces = new List<Piece>(); // initialize the pieces list
             
             Board Board = new Board();
             Board.DrawBoard(textBlocks);

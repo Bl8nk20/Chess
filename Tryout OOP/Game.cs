@@ -39,22 +39,22 @@ internal class Game
         // TextBlockPlayer.Text = (PlayerTurn.Counter % 2) != 0 ? Player1.IsWhite.ToString() : Player2.IsWhite.ToString();
         // TextBlockTurns.Text = PlayerTurn.Counter.ToString();
 
-        if (Player1.IsTurn)
-        {
-            // movedPiece = (PlayerTurn.Counter % 2) != 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
+        //if (Player1.IsTurn)
+        //{
+        //    // movedPiece = (PlayerTurn.Counter % 2) != 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
 
-            if (!Player1.CanMove(movedPiece))
-            {
-                return;
-            }
-        }
-        else if (Player2.IsTurn)
-        {
-            if (Player2.CanMove(movedPiece))
-            {
-                return;
-            }
-        }
+        //    if (!Player1.CanMove(movedPiece))
+        //    {
+        //        return;
+        //    }
+        //}
+        //else if (Player2.IsTurn)
+        //{
+        //    if (Player2.CanMove(movedPiece))
+        //    {
+        //        return;
+        //    }
+        //}
     }
 
     /// <summary>
