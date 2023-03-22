@@ -51,7 +51,13 @@ public abstract class Piece
         get { return isKilled; }
         set { isKilled = value; }
     }
-
+    // bool for updating the list and removing any captured piece
+    protected bool isUnderAttack = false;
+    public bool IsUnderAttack
+    {
+        get { return isUnderAttack; }
+        set { isUnderAttack = value; }
+    }
     // unicode visuals
     protected char look; // unicode design currently
     public char Look

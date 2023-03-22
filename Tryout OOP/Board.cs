@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -8,9 +10,14 @@ namespace Tryout_OOP
 
     internal class Board
     {
+        Canvas Spielfeld;
+        List<TextBlock> TextBlocks;
 
-        public Board()
+        public Board(Canvas spielfeld, List<TextBlock> textBlocks)
         {
+            this.Spielfeld = spielfeld;
+            this.TextBlocks = textBlocks;
+            //DrawBoard();
         }
 
         /// <summary>
@@ -18,9 +25,8 @@ namespace Tryout_OOP
         /// by generating 64 textblocks from a 2D array
         /// also add the chesspieces too if there are any to fill up
         /// </summary>
-        internal void DrawBoard(TextBlock[,] TextBlock)
+        internal void DrawBoard()
         {
-            Canvas spielfeld;
             // loop for each element of the 2d Array
             for (byte i = 0; i < 8; i++)
             {
@@ -28,18 +34,20 @@ namespace Tryout_OOP
                 {
                     // create a new textblock each time
                     TextBlock b = new TextBlock();
-                    // draw the chessboard
+
                     b.Width = 72.5;
                     b.Height = 72.5;
                     b.FontSize = 45;
+                    b.Text = "*";
+                    b.TextAlignment = TextAlignment.Center;
                     // color the textblock
                     b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                    TextBlock[i, j] = b;
+                    Spielfeld.Children.Add(b);
                     Canvas.SetLeft(b, 72.5 * i);
                     Canvas.SetBottom(b, 72.5 * j);
-                    // mouse button events
-                    //b.MouseDown += MouseClicked;
-                    //b.MouseUp += MouseReleased;
+
+                    // add the textblocks to a list
+                    TextBlocks.Add(b);
                 }
             }
         }
@@ -51,34 +59,38 @@ namespace Tryout_OOP
         /// then Draw the UniCode Symbol for the According ChessPiece
         /// else draw an empty String to the TextBlock
         /// </summary>
-        internal void DrawPieces(TextBlock[,] TextBlock, List<Piece> Pieces)
-        {
-            if (Pieces == null)
-            {
-                return;
-            }
+        /// <param name="Pieces">List with the pieces</param>
+        /// <param name="TextBlocks">List with the TextBlock Elements </param>
+        //internal void DrawPieces(List<TextBlock> TextBlocks, List<Piece> Pieces)
+        //{
+        //    // Draw the Board
+        //    DrawBoard();
 
-            // loop for each element of the 2d Array of textblocks
-            for (byte i = 0; i < 8; i++)
-            {
-                for (byte j = 0; j < 8; j++)
-                {
-                    // Write a empty String to the TextBlock
-                    TextBlock[i, j].Text = "";
-                    //search the List for a piece that fits
-                    foreach (var piece in Pieces)
-                    {
-                        // Checking if the coodinates match up
-                        if (piece.Position.X == i && piece.Position.Y == j)
-                        {
-                            // Write the Unicode Symbol and escape the for loop
-                            TextBlock[i, j].Text = piece.Look.ToString();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        //    // if the piece list is zero return nothing
+        //    if (Pieces == null)
+        //    {
+        //        return;
+        //    }
+
+        //    for(int i = 0; i < Pieces.Count / 8; i++)
+        //    {
+        //        for(int j = 0; j < Pieces.Count / 8; j++)
+        //        {
+        //            // Write an empty String to the TextBlock
+        //            TextBlocks[i, j].Text = "";
+        //            foreach(var piece in Pieces)
+        //            {
+        //                // Checking if the Coordinates match up
+        //                if(Equals(piece.Position, new PointStruct(i, j)))
+        //                {
+        //                    // Write the Unicode Symbol and escape the for loop
+        //                    TextBlocks[i, j].Text = piece.Look.ToString();
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// A method to find the Textblock 

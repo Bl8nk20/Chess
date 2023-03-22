@@ -17,8 +17,9 @@ internal class Game
     #region Constructor
     public Game()
     {
-        Player Player1 = new Player(true);
-        Player Player2 = new Player();
+        List<TextBlock> TextBlockList = new List<TextBlock>(64);
+        this.Player1 = new Player(TextBlockList, true); // WHite Player
+        this.Player2 = new Player(TextBlockList); // Black Player
     }
     #endregion
 
@@ -38,23 +39,6 @@ internal class Game
         // visuals for debug
         // TextBlockPlayer.Text = (PlayerTurn.Counter % 2) != 0 ? Player1.IsWhite.ToString() : Player2.IsWhite.ToString();
         // TextBlockTurns.Text = PlayerTurn.Counter.ToString();
-
-        //if (Player1.IsTurn)
-        //{
-        //    // movedPiece = (PlayerTurn.Counter % 2) != 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
-
-        //    if (!Player1.CanMove(movedPiece))
-        //    {
-        //        return;
-        //    }
-        //}
-        //else if (Player2.IsTurn)
-        //{
-        //    if (Player2.CanMove(movedPiece))
-        //    {
-        //        return;
-        //    }
-        //}
     }
 
     /// <summary>

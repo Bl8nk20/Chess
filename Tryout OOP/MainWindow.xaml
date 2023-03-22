@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800">
     <Canvas x:Name="spielfeld">
-        <TextBox Canvas.Left="670" TextWrapping="Wrap" Text="" Canvas.Top="21" Width="120" x:Name="textboxturns"/>
-        <TextBox Canvas.Left="670" TextWrapping="Wrap" Text="" Canvas.Top="57" Width="120" x:Name="textboxPlayer" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    
     </Canvas>
 
 </Window>
