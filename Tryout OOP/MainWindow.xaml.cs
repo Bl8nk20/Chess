@@ -32,7 +32,8 @@ namespace Tryout_OOP
         {
             Game Game = new Game();
             Board Board = new Board(spielfeld, TextBlocks);
-            Board.DrawBoard();
+            //Board.DrawBoard();
+            Board.DrawPieces(TextBlocks, Game.InitialPieces());
         }
     }
 

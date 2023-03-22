@@ -17,7 +17,7 @@ namespace Tryout_OOP
         {
             this.Spielfeld = spielfeld;
             this.TextBlocks = textBlocks;
-            //DrawBoard();
+            DrawBoard();
         }
 
         /// <summary>
@@ -45,7 +45,8 @@ namespace Tryout_OOP
                     Spielfeld.Children.Add(b);
                     Canvas.SetLeft(b, 72.5 * i);
                     Canvas.SetBottom(b, 72.5 * j);
-
+                    b.MouseDown += MouseClicked;
+                    b.MouseUp += MouseReleased;
                     // add the textblocks to a list
                     TextBlocks.Add(b);
                 }
@@ -61,36 +62,32 @@ namespace Tryout_OOP
         /// </summary>
         /// <param name="Pieces">List with the pieces</param>
         /// <param name="TextBlocks">List with the TextBlock Elements </param>
-        //internal void DrawPieces(List<TextBlock> TextBlocks, List<Piece> Pieces)
-        //{
-        //    // Draw the Board
-        //    DrawBoard();
+        internal void DrawPieces(List<TextBlock> TextBlocks, List<Piece> Pieces)
+        {
+            // if the piece list is zero return nothing
+            if (Pieces == null)
+            {
+                return;
+            }
 
-        //    // if the piece list is zero return nothing
-        //    if (Pieces == null)
-        //    {
-        //        return;
-        //    }
 
-        //    for(int i = 0; i < Pieces.Count / 8; i++)
-        //    {
-        //        for(int j = 0; j < Pieces.Count / 8; j++)
-        //        {
-        //            // Write an empty String to the TextBlock
-        //            TextBlocks[i, j].Text = "";
-        //            foreach(var piece in Pieces)
-        //            {
-        //                // Checking if the Coordinates match up
-        //                if(Equals(piece.Position, new PointStruct(i, j)))
-        //                {
-        //                    // Write the Unicode Symbol and escape the for loop
-        //                    TextBlocks[i, j].Text = piece.Look.ToString();
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    foreach (var piece in Pieces)
+                    {
+                        TextBlocks[i * 8 + j].Text = "";
+                        if (piece.Position.Equals(new PointStruct(i, j)))
+                        {
+                            // Write the Unicode Symbol and escape the for loop
+                            TextBlocks[i * 8 + j].Text = piece.Look.ToString();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// A method to find the Textblock 
@@ -117,10 +114,7 @@ namespace Tryout_OOP
             // when nothing matches -> return Point
             return new PointStruct(0, 0);
         }
-
         /*
-        
-        
         /// <summary>
         /// a method to get overlapping / same coordinates of pieces
         /// and removing them from the board and redraw them again
@@ -172,6 +166,7 @@ namespace Tryout_OOP
             // draw the pieces again
             DrawPieces();
         }
+        */
 
         /// <summary>
         /// 
@@ -180,20 +175,6 @@ namespace Tryout_OOP
         /// <param name="e"></param>
         void MouseClicked(object sender, MouseEventArgs e)
         {
-            Coloring_Movement coloring = new Coloring_Movement(TextBlock, Pieces, movedPiece);
-            TextBlock s = (TextBlock)sender;
-            // finding the TextBlock Coordinates
-            PointStruct p = findTexBlockCoordinates(s);
-
-            // 
-            AdditionalLogic Logic = new AdditionalLogic(Pieces, TextBlock, movedPiece);
-
-            // search for the Piece which is clicked
-            // on an set the according piece
-            movedPiece = Logic.searchPiece(p);
-
-            //
-            coloring.Start();
         }
 
         /// <summary>
@@ -203,24 +184,8 @@ namespace Tryout_OOP
         /// <param name="e"></param>
         void MouseReleased(object sender, MouseEventArgs e)
         {
-            TextBlock s = (TextBlock)sender;
-
-            // Get TextBlock where the Mouse was clicked again 
-            PointStruct targetedPoint = findTexBlockCoordinates(s);
-
-            // method for the Piece Movement
-            // -> capturing and moving the piece
-            pieceMoving(targetedPoint);
-
-            // coloring the Pieces back at its original colors
-            for (byte i = 0; i < 8; i++)
-            {
-                for (byte j = 0; j < 8; j++)
-                {
-                    TextBlock[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                }
-            }
+            
         }
-        */
+        
     }
 }
