@@ -71,9 +71,8 @@ internal class FEN_Startup
     #endregion
 
     #region Constructor
-    public FEN_Startup(List<TextBlock> TextBlockList)
+    public FEN_Startup()
     {
-        this.TextBlockList = TextBlockList;
         _filename = "Default.txt";
         this._fileStream = new FileStream(_filename, FileMode.OpenOrCreate);
         this._streamReader = new StreamReader(_fileStream);
@@ -161,7 +160,7 @@ internal class FEN_Startup
     /// </summary>
     /// <param name="pieces"></param>
     /// <returns></returns>
-    string ConvertListToString(List<Piece> pieces)
+    string ConvertListToString(List<TextBlock> TextBlockList, List<Piece> pieces)
     {
         string FinalFEN;
         string[] FENParts = new string[6];

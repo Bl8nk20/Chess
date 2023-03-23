@@ -12,9 +12,12 @@ namespace Tryout_OOP
     {
         Canvas Spielfeld;
         List<TextBlock> TextBlocks;
+        TextBlock TargetBlock;
+        Game Game;
 
         public Board(Canvas spielfeld, List<TextBlock> textBlocks)
         {
+            this.Game = new Game(); 
             this.Spielfeld = spielfeld;
             this.TextBlocks = textBlocks;
             DrawBoard();
@@ -96,7 +99,7 @@ namespace Tryout_OOP
         /// </summary>
         /// <param name="s"></param>
         /// <returns>the custom Struct "Pointstruct" with both the X and Y Coordinate</returns>
-        internal PointStruct findTexBlockCoordinates(TextBlock targetBlock, TextBlock[,] textBlock)
+        public PointStruct findTexBlockCoordinates(TextBlock targetBlock, List<TextBlock> textBlock)
         {
             // looping for each element of the 2D-Array
             for (byte i = 0; i < 8; i++)
@@ -105,7 +108,7 @@ namespace Tryout_OOP
                 {
                     // if the TextBlock matches,
                     // then return the X and Y Coordinate
-                    if (textBlock[i, j] == targetBlock)
+                    if (textBlock[i* 8 +j] == targetBlock)
                     {
                         return new PointStruct(i, j);
                     }
@@ -175,6 +178,16 @@ namespace Tryout_OOP
         /// <param name="e"></param>
         void MouseClicked(object sender, MouseEventArgs e)
         {
+            // Clicked TextBlock
+            TextBlock s = (TextBlock)sender;
+
+            // finding the TextBlock Coordinates
+            PointStruct p = findTexBlockCoordinates(s, TextBlocks);
+
+            if (s != null)
+            {
+                Game.SetSelectedPiece(p);
+            }
         }
 
         /// <summary>
@@ -184,8 +197,13 @@ namespace Tryout_OOP
         /// <param name="e"></param>
         void MouseReleased(object sender, MouseEventArgs e)
         {
-            
+            // Clicked TextBlock
+            TextBlock s = (TextBlock)sender;
+
+            // finding the TextBlock Coordinates
+            PointStruct p = findTexBlockCoordinates(s, TextBlocks);
+            Game.playerMovement(p);
+            DrawPieces(TextBlocks, Game.Pieces);
         }
-        
     }
 }

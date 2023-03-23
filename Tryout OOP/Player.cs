@@ -38,9 +38,9 @@ public class Player
     #endregion
 
     #region Constructor
-    public Player(List<TextBlock> TextBlockList, bool isWhite = false)
+    public Player(bool isWhite = false)
     {
-        FEN_Startup = new FEN_Startup(TextBlockList);
+        FEN_Startup = new FEN_Startup();
         this.isWhite = isWhite;
         this.isTurn = false;
         Pieces = CreatePieces();
@@ -73,22 +73,17 @@ public class Player
     /// </summary>
     /// <param name="piece"></param>
     /// <returns></returns>
-    //public bool CanMove(Piece piece)
-    //{
-    //    // Check if the piece belongs to the player and is allowed to move
-    //    if (selectedPiece == null || selectedPiece.IsWhite != this.IsWhite)
-    //    {
-    //        return false;
-    //    }
-        
-    //    if (!this.IsTurn)
-    //    {
-    //        return false;
-    //    }
+    public bool CanMove(Piece piece)
+    {
+        // Check if the piece belongs to the player and is allowed to move
+        if (selectedPiece == null || selectedPiece.IsWhite != this.IsWhite || !this.IsTurn)
+        {
+            return false;
+        }
 
-    //    // If all checks pass, the player can move the piece
-    //    return true;
-    //}
+        // If all checks pass, the player can move the piece
+        return true;
+    }
 
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
@@ -107,7 +102,6 @@ public class Player
                 Pieces.Add(piece);
             }
         }
-
         return Pieces;
     }
 
@@ -173,25 +167,5 @@ public class Player
     //        }
     //    }
     //}
-
-    /// <summary>
-    /// A Method to search The ChessPieces 
-    /// in the List, which should be moved
-    /// </summary>
-    /// <param name="p"></param>
-    /// <returns>nothing (void)</returns>
-    internal Piece searchPiece(PointStruct p)
-    {
-        // Find Piece to move
-        foreach (var piece in pieces)
-        {
-            // if it matches set the movedPiece to the piece at the corresponding index
-            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
-            {
-                selectedPiece = piece;
-            }
-        }
-        return selectedPiece;
-    }
     #endregion
 }

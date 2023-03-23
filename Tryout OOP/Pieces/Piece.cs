@@ -111,7 +111,7 @@ public abstract class Piece
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
         // Try to implement
-        // PlayerTurn.Counter++;
+        this.hasMoved = true;
         return true;
     }
 
