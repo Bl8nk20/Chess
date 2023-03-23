@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -8,9 +10,17 @@ namespace Tryout_OOP
 
     internal class Board
     {
+        Canvas Spielfeld;
+        List<TextBlock> TextBlocks;
+        TextBlock TargetBlock;
+        Game Game;
 
-        public Board()
+        public Board(Canvas spielfeld, List<TextBlock> textBlocks)
         {
+            this.Game = new Game(); 
+            this.Spielfeld = spielfeld;
+            this.TextBlocks = textBlocks;
+            DrawBoard();
         }
 
         /// <summary>
@@ -18,9 +28,8 @@ namespace Tryout_OOP
         /// by generating 64 textblocks from a 2D array
         /// also add the chesspieces too if there are any to fill up
         /// </summary>
-        internal void DrawBoard(TextBlock[,] TextBlock)
+        internal void DrawBoard()
         {
-            Canvas spielfeld;
             // loop for each element of the 2d Array
             for (byte i = 0; i < 8; i++)
             {
@@ -28,18 +37,21 @@ namespace Tryout_OOP
                 {
                     // create a new textblock each time
                     TextBlock b = new TextBlock();
-                    // draw the chessboard
+
                     b.Width = 72.5;
                     b.Height = 72.5;
                     b.FontSize = 45;
+                    b.Text = "*";
+                    b.TextAlignment = TextAlignment.Center;
                     // color the textblock
                     b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                    TextBlock[i, j] = b;
+                    Spielfeld.Children.Add(b);
                     Canvas.SetLeft(b, 72.5 * i);
                     Canvas.SetBottom(b, 72.5 * j);
-                    // mouse button events
-                    //b.MouseDown += MouseClicked;
-                    //b.MouseUp += MouseReleased;
+                    b.MouseDown += MouseClicked;
+                    b.MouseUp += MouseReleased;
+                    // add the textblocks to a list
+                    TextBlocks.Add(b);
                 }
             }
         }
@@ -51,28 +63,28 @@ namespace Tryout_OOP
         /// then Draw the UniCode Symbol for the According ChessPiece
         /// else draw an empty String to the TextBlock
         /// </summary>
-        internal void DrawPieces(TextBlock[,] TextBlock, List<Piece> Pieces)
+        /// <param name="Pieces">List with the pieces</param>
+        /// <param name="TextBlocks">List with the TextBlock Elements </param>
+        internal void DrawPieces(List<TextBlock> TextBlocks, List<Piece> Pieces)
         {
+            // if the piece list is zero return nothing
             if (Pieces == null)
             {
                 return;
             }
 
-            // loop for each element of the 2d Array of textblocks
-            for (byte i = 0; i < 8; i++)
+
+            for (int i = 0; i < 8; i++)
             {
-                for (byte j = 0; j < 8; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    // Write a empty String to the TextBlock
-                    TextBlock[i, j].Text = "";
-                    //search the List for a piece that fits
                     foreach (var piece in Pieces)
                     {
-                        // Checking if the coodinates match up
-                        if (piece.Position.X == i && piece.Position.Y == j)
+                        TextBlocks[i * 8 + j].Text = "";
+                        if (piece.Position.Equals(new PointStruct(i, j)))
                         {
                             // Write the Unicode Symbol and escape the for loop
-                            TextBlock[i, j].Text = piece.Look.ToString();
+                            TextBlocks[i * 8 + j].Text = piece.Look.ToString();
                             break;
                         }
                     }
@@ -87,7 +99,7 @@ namespace Tryout_OOP
         /// </summary>
         /// <param name="s"></param>
         /// <returns>the custom Struct "Pointstruct" with both the X and Y Coordinate</returns>
-        internal PointStruct findTexBlockCoordinates(TextBlock targetBlock, TextBlock[,] textBlock)
+        public PointStruct findTexBlockCoordinates(TextBlock targetBlock, List<TextBlock> textBlock)
         {
             // looping for each element of the 2D-Array
             for (byte i = 0; i < 8; i++)
@@ -96,7 +108,7 @@ namespace Tryout_OOP
                 {
                     // if the TextBlock matches,
                     // then return the X and Y Coordinate
-                    if (textBlock[i, j] == targetBlock)
+                    if (textBlock[i* 8 +j] == targetBlock)
                     {
                         return new PointStruct(i, j);
                     }
@@ -105,10 +117,7 @@ namespace Tryout_OOP
             // when nothing matches -> return Point
             return new PointStruct(0, 0);
         }
-
         /*
-        
-        
         /// <summary>
         /// a method to get overlapping / same coordinates of pieces
         /// and removing them from the board and redraw them again
@@ -160,6 +169,7 @@ namespace Tryout_OOP
             // draw the pieces again
             DrawPieces();
         }
+        */
 
         /// <summary>
         /// 
@@ -168,20 +178,16 @@ namespace Tryout_OOP
         /// <param name="e"></param>
         void MouseClicked(object sender, MouseEventArgs e)
         {
-            Coloring_Movement coloring = new Coloring_Movement(TextBlock, Pieces, movedPiece);
+            // Clicked TextBlock
             TextBlock s = (TextBlock)sender;
+
             // finding the TextBlock Coordinates
-            PointStruct p = findTexBlockCoordinates(s);
+            PointStruct p = findTexBlockCoordinates(s, TextBlocks);
 
-            // 
-            AdditionalLogic Logic = new AdditionalLogic(Pieces, TextBlock, movedPiece);
-
-            // search for the Piece which is clicked
-            // on an set the according piece
-            movedPiece = Logic.searchPiece(p);
-
-            //
-            coloring.Start();
+            if (s != null)
+            {
+                Game.SetSelectedPiece(p);
+            }
         }
 
         /// <summary>
@@ -191,24 +197,13 @@ namespace Tryout_OOP
         /// <param name="e"></param>
         void MouseReleased(object sender, MouseEventArgs e)
         {
+            // Clicked TextBlock
             TextBlock s = (TextBlock)sender;
 
-            // Get TextBlock where the Mouse was clicked again 
-            PointStruct targetedPoint = findTexBlockCoordinates(s);
-
-            // method for the Piece Movement
-            // -> capturing and moving the piece
-            pieceMoving(targetedPoint);
-
-            // coloring the Pieces back at its original colors
-            for (byte i = 0; i < 8; i++)
-            {
-                for (byte j = 0; j < 8; j++)
-                {
-                    TextBlock[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                }
-            }
+            // finding the TextBlock Coordinates
+            PointStruct p = findTexBlockCoordinates(s, TextBlocks);
+            Game.playerMovement(p);
+            DrawPieces(TextBlocks, Game.Pieces);
         }
-        */
     }
 }

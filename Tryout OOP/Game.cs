@@ -9,52 +9,75 @@ internal class Game
     #region Properties
     GameStatus GAMESTATUS;
     GameMode GAMEMODE;
-    ushort currentTurn = 1;
     Player Player1;
     Player Player2;
+    public List<Piece> Pieces;
     #endregion
 
     #region Constructor
     public Game()
     {
-        Player Player1 = new Player(true);
-        Player Player2 = new Player();
+
+        this.Player1 = new Player(true); // WHite Player
+        Player1.IsTurn = true;
+        this.Player2 = new Player(); // Black Player
+        Player2.IsTurn = false;
+        this.Pieces = InitialPieces();
     }
     #endregion
 
     #region Methods
-    /// <summary>
-    /// 
-    /// </summary>
-    public void playerMovement()
+
+    public void SetSelectedPiece(PointStruct SelectedPoint)
     {
-        Player currentPlayer = (currentTurn % 2!= 0) ? Player1 : Player2;
+
+        if (Player1.IsTurn)
+        {
+            Player1.SelectedPiece = searchPiece(SelectedPoint);
+
+        }
+        else if ( Player2.IsTurn)
+        {
+            Player2.SelectedPiece = searchPiece(SelectedPoint);
+        }
+    }
+    /// <summary>
+    /// Method to check for the playerturn
+    /// to check for the current player
+    /// and from that get the turn
+    /// </summary>
+    public void playerMovement(PointStruct TargetPoint)
+    {
         //
-        CheckKingKill(currentPlayer);
-
         // check if the Gamestate has changed
-        isEnd();
-
-        // visuals for debug
-        // TextBlockPlayer.Text = (PlayerTurn.Counter % 2) != 0 ? Player1.IsWhite.ToString() : Player2.IsWhite.ToString();
-        // TextBlockTurns.Text = PlayerTurn.Counter.ToString();
-
-        //if (Player1.IsTurn)
-        //{
-        //    // movedPiece = (PlayerTurn.Counter % 2) != 0 ? Player1.SelectedPiece : Player2.SelectedPiece;
-
-        //    if (!Player1.CanMove(movedPiece))
-        //    {
-        //        return;
-        //    }
-        //}
-        //else if (Player2.IsTurn)
-        //{
-        //    if (Player2.CanMove(movedPiece))
-        //    {
-        //        return;
-        //    }
-        //}
+        if (Player1.IsTurn)
+        {
+            CheckKingKill(Player1);
+            // get movement call from player1
+            if (Player1.CanMove(Player1.SelectedPiece))
+            {
+                // move piece to targeted point
+                Player1.SelectedPiece.MoveTo(TargetPoint, Pieces);
+                Player1.updateList(Pieces);
+                // if everything is done switch turn sides
+                Player1.SwitchTurns();
+                Player2.SwitchTurns();
+            }
+        }
+        else if(Player2.IsTurn)
+        {
+            CheckKingKill(Player2);
+            // get movement call from player1
+            if (Player2.CanMove(Player2.SelectedPiece))
+            {
+                // PointStruct Target = Board.findTexBlockCoordinates();
+                Player2.SelectedPiece.MoveTo(TargetPoint, Pieces);
+                Player2.updateList(Pieces);
+                // if everything is done switch turn sides
+                Player1.SwitchTurns();
+                Player2.SwitchTurns();
+            }
+        }
     }
 
     /// <summary>
@@ -75,6 +98,27 @@ internal class Game
         }
 
         return pieces;
+    }
+
+    /// <summary>
+    /// A Method to search The ChessPieces 
+    /// in the List, which should be moved
+    /// </summary>
+    /// <param name="p"></param>
+    /// <returns>nothing (void)</returns>
+    internal Piece searchPiece(PointStruct p)
+    {
+
+        // Find Piece to move
+        foreach (var piece in Pieces)
+        {
+            // if it matches set the movedPiece to the piece at the corresponding index
+            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
+            {
+                return piece;
+            }
+        }
+        return null;
     }
 
     /// <summary>
