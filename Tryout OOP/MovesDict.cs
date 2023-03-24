@@ -24,13 +24,19 @@ internal class MovesDict
      *  1. Call ExpandMovesList()
      *  2. Call FEN_Startup.OverWriteFile(List<string> MovesDictList)
      */
+    private FEN_Startup Fen;
+
+    public MovesDict()
+    {
+        FEN_Startup Fen = new FEN_Startup();
+    }
 
     /// <summary>
     /// Returns a string according to the last played move
     /// </summary>
     string SaveBoard()
     {
-        string Fen = "";
-        return Fen;
+        string CurrentBoard = "";
+        return CurrentBoard;
     }
 }

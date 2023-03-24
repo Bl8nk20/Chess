@@ -160,7 +160,7 @@ internal class FEN_Startup
     /// </summary>
     /// <param name="pieces"></param>
     /// <returns></returns>
-    string ConvertListToString(List<TextBlock> TextBlockList, List<Piece> pieces)
+    public string ConvertListToString(List<TextBlock> TextBlockList, List<Piece> pieces)
     {
         string FinalFEN;
         string[] FENParts = new string[6];

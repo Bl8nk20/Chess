@@ -34,6 +34,10 @@ namespace Tryout_OOP
             Board Board = new Board(spielfeld, TextBlocks);
             //Board.DrawBoard();
             Board.DrawPieces(TextBlocks, Game.InitialPieces());
+            if (Game.isEnd())
+            {
+                Close();
+            }
         }
     }
 
