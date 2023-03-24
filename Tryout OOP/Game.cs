@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
@@ -56,9 +57,15 @@ internal class Game
             // get movement call from player1
             if (Player1.CanMove(Player1.SelectedPiece))
             {
+                // capture logic to remove one piece from the list
+                capture(TargetPoint);
+
                 // move piece to targeted point
                 Player1.SelectedPiece.MoveTo(TargetPoint, Pieces);
+
+
                 Player1.updateList(Pieces);
+
                 // if everything is done switch turn sides
                 Player1.SwitchTurns();
                 Player2.SwitchTurns();
@@ -70,7 +77,7 @@ internal class Game
             // get movement call from player1
             if (Player2.CanMove(Player2.SelectedPiece))
             {
-                // PointStruct Target = Board.findTexBlockCoordinates();
+                capture(TargetPoint);
                 Player2.SelectedPiece.MoveTo(TargetPoint, Pieces);
                 Player2.updateList(Pieces);
                 // if everything is done switch turn sides
@@ -108,7 +115,6 @@ internal class Game
     /// <returns>nothing (void)</returns>
     internal Piece searchPiece(PointStruct p)
     {
-
         // Find Piece to move
         foreach (var piece in Pieces)
         {
@@ -119,6 +125,17 @@ internal class Game
             }
         }
         return null;
+    }
+
+    internal void capture(PointStruct TargetPoint)
+    {
+        foreach(var piece in Pieces)
+        {
+            if(PointStruct.ComparePoints(piece.Position, TargetPoint))
+            {
+                piece.IsKilled = true;
+            }
+        }
     }
 
     /// <summary>
