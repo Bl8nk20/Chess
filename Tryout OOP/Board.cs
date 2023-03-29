@@ -7,7 +7,6 @@ using System.Windows.Media;
 
 namespace Tryout_OOP
 {
-
     internal class Board
     {
         Canvas Spielfeld;
