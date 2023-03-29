@@ -35,7 +35,6 @@ internal class Game
     /// <param name="SelectedPoint"></param>
     public void SetSelectedPiece(PointStruct SelectedPoint)
     {
-
         if (Player1.IsTurn)
         {
             Player1.SelectedPiece = searchPiece(SelectedPoint);
@@ -54,7 +53,6 @@ internal class Game
     /// </summary>
     public void playerMovement(PointStruct TargetPoint)
     {
-        //
         // check if the Gamestate has changed
         if (Player1.IsTurn)
         {
@@ -166,7 +164,7 @@ internal class Game
         {
             if (piece.IsKilled && piece is King)
             {
-                GAMESTATUS = currentPlayer.IsWhite ? GAMESTATUS = GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
+                GAMESTATUS = currentPlayer.IsWhite ? GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
             }
         }
     }

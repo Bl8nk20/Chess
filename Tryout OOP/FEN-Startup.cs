@@ -241,11 +241,13 @@ internal class FEN_Startup
         FileStream fileStream = new FileStream(filename, FileMode.OpenOrCreate);
         StreamWriter _streamWriter = new StreamWriter(fileStream);
 
+        // write each move to the file in fen format
         foreach (string line in MovesDictList)
         {
             _streamWriter.WriteLine(line);
         }
 
+        // close the streams
         _streamWriter.Dispose();
         fileStream.Dispose();
 
