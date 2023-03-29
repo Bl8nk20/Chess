@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace Tryout_OOP;
 
@@ -70,22 +73,17 @@ public class Player
     /// </summary>
     /// <param name="piece"></param>
     /// <returns></returns>
-    //public bool CanMove(Piece piece)
-    //{
-    //    // Check if the piece belongs to the player and is allowed to move
-    //    if (selectedPiece == null || selectedPiece.IsWhite != this.IsWhite)
-    //    {
-    //        return false;
-    //    }
-        
-    //    if (!this.IsTurn)
-    //    {
-    //        return false;
-    //    }
+    public bool CanMove(Piece piece)
+    {
+        // Check if the piece belongs to the player and is allowed to move
+        if (selectedPiece == null || selectedPiece.IsWhite != this.IsWhite || !this.IsTurn)
+        {
+            return false;
+        }
 
-    //    // If all checks pass, the player can move the piece
-    //    return true;
-    //}
+        // If all checks pass, the player can move the piece
+        return true;
+    }
 
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
@@ -93,31 +91,18 @@ public class Player
     /// <returns></returns>
     public List<Piece> CreatePieces()
     {
-        return FEN_Startup.ConvertStringToList();
-
-        //// Create pawns
-        //for (int i = 0; i < 8; i++)
-        //{
-        //    pieces.Add(new Pawn(new PointStruct(i, this.isWhite ? 1 : 6), this.isWhite));
-        //}
-
-        //// Create knights
-        //pieces.Add(new Knight(new PointStruct(1, this.isWhite ? 0 : 7), this.isWhite));
-        //pieces.Add(new Knight(new PointStruct(6, this.isWhite ? 0 : 7), this.isWhite));
-
-        //// Create bishops
-        //pieces.Add(new Bishop(new PointStruct(2, this.isWhite ? 0 : 7), this.isWhite));
-        //pieces.Add(new Bishop(new PointStruct(5, this.isWhite ? 0 : 7), this.isWhite));
-
-        //// Create rooks
-        //pieces.Add(new Rook(new PointStruct(0, this.isWhite ? 0 : 7), this.isWhite));
-        //pieces.Add(new Rook(new PointStruct(7, this.isWhite ? 0 : 7), this.isWhite));
-
-        //// Create Queen
-        //pieces.Add(new Queen(new PointStruct(3, this.isWhite ? 0 : 7), this.isWhite));
-
-        //// Create King
-        //pieces.Add(new King(new PointStruct(4, this.isWhite ? 0 : 7), this.isWhite));
+        // call fen class to convert a string in a list with the pieces
+        List <Piece> CompleteFENList = FEN_Startup.ConvertStringToList();
+        Pieces = new List<Piece>();
+        // Looping for the complete list and search for own colored pieces
+        foreach (Piece piece in CompleteFENList)
+        {
+            if(this.isWhite == piece.IsWhite)
+            {
+                Pieces.Add(piece);
+            }
+        }
+        return Pieces;
     }
 
     /// <summary>
@@ -182,25 +167,5 @@ public class Player
     //        }
     //    }
     //}
-
-    /// <summary>
-    /// A Method to search The ChessPieces 
-    /// in the List, which should be moved
-    /// </summary>
-    /// <param name="p"></param>
-    /// <returns>nothing (void)</returns>
-    internal Piece searchPiece(PointStruct p)
-    {
-        // Find Piece to move
-        foreach (var piece in pieces)
-        {
-            // if it matches set the movedPiece to the piece at the corresponding index
-            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
-            {
-                selectedPiece = piece;
-            }
-        }
-        return selectedPiece;
-    }
     #endregion
 }

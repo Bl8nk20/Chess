@@ -9,6 +9,9 @@ namespace Tryout_OOP;
 internal class MovesDict
 {
     /*
+     * 
+     * ! TASK for Jonas !
+     * 
      * Constructor : 
      *  FEN_StartUp FEN_StartUp = new FEN_StartUp()
      *  
@@ -24,13 +27,20 @@ internal class MovesDict
      *  1. Call ExpandMovesList()
      *  2. Call FEN_Startup.OverWriteFile(List<string> MovesDictList)
      */
+    private FEN_Startup Fen;
+
+    public MovesDict()
+    {
+        FEN_Startup Fen = new FEN_Startup();
+    }
 
     /// <summary>
     /// Returns a string according to the last played move
     /// </summary>
     string SaveBoard()
     {
-        string Fen = "";
-        return Fen;
+        // needs to be implemented
+        string CurrentBoard = "";
+        return CurrentBoard;
     }
 }

@@ -51,7 +51,13 @@ public abstract class Piece
         get { return isKilled; }
         set { isKilled = value; }
     }
-
+    // bool for updating the list and removing any captured piece
+    protected bool isUnderAttack = false;
+    public bool IsUnderAttack
+    {
+        get { return isUnderAttack; }
+        set { isUnderAttack = value; }
+    }
     // unicode visuals
     protected char look; // unicode design currently
     public char Look
@@ -82,6 +88,7 @@ public abstract class Piece
     /// Assumption: xTarget and yTarget always above 0
     /// Assumption: Targeted Point != StartingPoint
     /// Assumption: Nobody nearby/ in the way
+    /// Logic for each piece individual -> needs to implement in child class
     /// </summary>
     /// <param name="x"></param>
     /// <param name="y"></param>
@@ -89,7 +96,8 @@ public abstract class Piece
     public abstract bool CanMove(PointStruct Target, List<Piece> pieces);
     
     /// <summary>
-    /// 
+    /// Logic to move a Piece to a specific Location 
+    /// and checking before if the Piece can move to it
     /// </summary>
     /// <param name="Target"></param>
     /// <param name="pieces"></param>
@@ -104,13 +112,15 @@ public abstract class Piece
 
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
+        
         // Try to implement
-        // PlayerTurn.Counter++;
+        this.hasMoved = true;
         return true;
     }
 
     /// <summary>
-    /// 
+    /// NOT IMPLEMENTED YET ! 
+    /// IMPORTANT for the chessbot
     /// </summary>
     /// <returns></returns>
     byte setRelativePieceValue()

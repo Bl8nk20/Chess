@@ -36,6 +36,6 @@ public struct PointStruct
     /// <returns>a bool</returns>
     public static bool ComparePoints(PointStruct PointA, PointStruct PointB)
     {
-        return PointA.X != PointB.X || PointA.Y != PointB.Y;
+        return PointA.X == PointB.X || PointA.Y == PointB.Y;
     }
 }
