@@ -363,7 +363,7 @@
 
         <!-- ____________________________________________________  -->
         <Border BorderThickness="10" BorderBrush="#FF474545" Width="570" Height="570">
-            <Canvas x:Name="spielfeld" Width="600" Height="600">
+            <Canvas x:Name="spielfeld" Width="550" Height="550">
 
             </Canvas>
         </Border>
@@ -381,7 +381,7 @@
         <ListBox HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="16" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" SelectedIndex="-1" Height="324"/>
 
         <!-- Graveyard divider -->
-        <Rectangle HorizontalAlignment="Left" Height="5" Margin="725,317,0,0" VerticalAlignment="Top" Width="175" Fill="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="5" Margin="751,317,0,0" VerticalAlignment="Top" Width="149" Fill="White"/>
 
         <!-- Placeholder for the Images of the Pieces in the Graveyard-->
         <!-- Black pieces -->

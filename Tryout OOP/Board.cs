@@ -11,8 +11,7 @@ namespace Tryout_OOP
     internal class Board
     {
         Canvas Spielfeld;
-        List<TextBlock> TextBlocks;
-        TextBlock TargetBlock;
+        public List<TextBlock> TextBlocks;
         Game Game;
 
         public Board(Canvas spielfeld, List<TextBlock> textBlocks)
@@ -30,6 +29,7 @@ namespace Tryout_OOP
         /// </summary>
         internal void DrawBoard()
         {
+            float size = 68.75F;
             // loop for each element of the 2d Array
             for (byte i = 0; i < 8; i++)
             {
@@ -38,16 +38,17 @@ namespace Tryout_OOP
                     // create a new textblock each time
                     TextBlock b = new TextBlock();
 
-                    b.Width = 72.5;
-                    b.Height = 72.5;
+                    b.Width = size;
+                    b.Height = size;
                     b.FontSize = 45;
                     b.Text = "*";
                     b.TextAlignment = TextAlignment.Center;
                     // color the textblock
+                    b.Foreground = Brushes.Black; // why is this? // DEFINITLY IMPORTANT
                     b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
                     Spielfeld.Children.Add(b);
-                    Canvas.SetLeft(b, 72.5 * i);
-                    Canvas.SetBottom(b, 72.5 * j);
+                    Canvas.SetLeft(b, size * i);
+                    Canvas.SetBottom(b, size * j);
                     b.MouseDown += MouseClicked;
                     b.MouseUp += MouseReleased;
                     // add the textblocks to a list
@@ -73,15 +74,15 @@ namespace Tryout_OOP
                 return;
             }
 
-
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
+                    // write an empty text inside
+                    TextBlocks[i * 8 + j].Text = "";
                     foreach (var piece in Pieces)
                     {
-                        TextBlocks[i * 8 + j].Text = "";
-                        if (piece.Position.Equals(new PointStruct(i, j)))
+                        if (piece.Position.Equals(new PointStruct(i,j)))
                         {
                             // Write the Unicode Symbol and escape the for loop
                             TextBlocks[i * 8 + j].Text = piece.Look.ToString();
@@ -117,62 +118,9 @@ namespace Tryout_OOP
             // when nothing matches -> return Point
             return new PointStruct(0, 0);
         }
-        /*
-        /// <summary>
-        /// a method to get overlapping / same coordinates of pieces
-        /// and removing them from the board and redraw them again
-        /// </summary>
-        public void pieceMoving(PointStruct targetedPoint)
-        {
-            // Calling and setting up the Capture class
-            Capture capture = new Capture();
-
-            // check if entered TextBlock is empty or not
-            if (movedPiece == null)
-            {
-                return;
-            }
-
-            // move the Piece and draw the Pieces again
-            if (movedPiece.MoveTo(targetedPoint, Pieces))
-            {
-                // set bool to true that the piece has moved already
-                movedPiece.HasMoved = true;
-
-                // looping for each element in the list
-                foreach (var piece in Pieces)
-                {
-                    if (movedPiece is Pawn
-                        && (piece.Position.Equals(movedPiece.Position.X + 1)
-                        || piece.Position.Equals(movedPiece.Position.X - 1))
-                        && piece.IsWhite != movedPiece.IsWhite)
-                    {
-                        // set the killed bool to true and break the loop
-                        piece.IsKilled = true;
-                        break;
-                    }
-                    // checking if the position of the moved piece
-                    // and a location of another piece is equal
-                    if (piece.Position.Equals(movedPiece.Position) && piece.IsWhite != movedPiece.IsWhite)
-                    {
-                        // set the killed bool to true and break the loop
-                        piece.IsKilled = true;
-                        break;
-                    }
-                }
-
-                // Show the Current turn !
-                //TextBlockTurns.Text = ToString();
-                // updating the element list
-                capture.updateList(Pieces);
-            }
-            // draw the pieces again
-            DrawPieces();
-        }
-        */
 
         /// <summary>
-        /// 
+        /// Mouse clicked event
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -191,7 +139,7 @@ namespace Tryout_OOP
         }
 
         /// <summary>
-        /// 
+        /// Mouse released event
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -202,6 +150,7 @@ namespace Tryout_OOP
 
             // finding the TextBlock Coordinates
             PointStruct p = findTexBlockCoordinates(s, TextBlocks);
+            // move the piece and after that draw it
             Game.playerMovement(p);
             DrawPieces(TextBlocks, Game.Pieces);
         }

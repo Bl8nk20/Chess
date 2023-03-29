@@ -16,9 +16,6 @@ namespace Tryout_OOP
     public partial class MainWindow : Window
     {
         List<TextBlock> TextBlocks = new List<TextBlock>();
-        Player? Player1;
-        Player? Player2;
-        Piece? movedPiece;
 
         // duration for how long the items are highlighted
         private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
@@ -49,8 +46,11 @@ namespace Tryout_OOP
             Game Game = new Game();
             Board Board = new Board(spielfeld, TextBlocks);
             Board.DrawPieces(TextBlocks, Game.InitialPieces());
+            // check if game has ended
             if (Game.isEnd())
             {
+                FEN_Startup fEN_Startup = new FEN_Startup();
+                fEN_Startup.OverWriteFile(Board.TextBlocks, Game.Pieces);
                 Close();
             }
         }
@@ -80,29 +80,6 @@ namespace Tryout_OOP
             smallMenuContent.BeginAnimation(HeightProperty, heightAnimation);
         }
         #endregion
-
-
-        #region Playerturn
-        /*
-        /// <summary>
-        /// changes the label that intecates which players turn is 
-        /// </summary>
-        private void Playerturn()
-        {
-            int i = 2;
-            //if i is divisible by 2 then is whites trun and if not its blacks turn 
-            if (i : 2 )
-            {
-                label.playerturn.Text = "White";
-            }
-            else
-            {
-                label.playerturn.Text = "Black";
-            }
-        }
-        */
-        #endregion
-
 
         #region Windows
         /// <summary>
@@ -157,7 +134,7 @@ namespace Tryout_OOP
         private void PromotionDropdownOpenB(object sender, RoutedEventArgs e)
         {
             promationInnerContentB.Measure(new Size(promationContentB.MaxWidth, promationContentB.MaxHeight));
-            DoubleAnimation promotionAnimationB = new DoubleAnimation(0, promationInnerContentB.DesiredSize.Height, _openCloseDuration);
+            DoubleAnimation promotionAnimationB = new(0, promationInnerContentB.DesiredSize.Height, _openCloseDuration);
             promationContentB.BeginAnimation(HeightProperty, promotionAnimationB);
         }
 
@@ -245,7 +222,6 @@ namespace Tryout_OOP
         */
         #endregion
 
-
         #region NotImplementedYet
         /// <summary>
         /// makes the NotImplementedOverlay Hidden
@@ -268,8 +244,6 @@ namespace Tryout_OOP
             timer.Start();
         }
         #endregion
-
-
 
     }
 }

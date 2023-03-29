@@ -29,6 +29,10 @@ internal class Game
 
     #region Methods
 
+    /// <summary>
+    /// A method to set the selected piece according, which players turn is
+    /// </summary>
+    /// <param name="SelectedPoint"></param>
     public void SetSelectedPiece(PointStruct SelectedPoint)
     {
 
@@ -42,6 +46,7 @@ internal class Game
             Player2.SelectedPiece = searchPiece(SelectedPoint);
         }
     }
+
     /// <summary>
     /// Method to check for the playerturn
     /// to check for the current player
@@ -57,13 +62,11 @@ internal class Game
             // get movement call from player1
             if (Player1.CanMove(Player1.SelectedPiece))
             {
-                // capture logic to remove one piece from the list
-                capture(TargetPoint);
-
                 // move piece to targeted point
                 Player1.SelectedPiece.MoveTo(TargetPoint, Pieces);
+                Capture(Player1.SelectedPiece);
 
-
+                // update list if needed
                 Player1.updateList(Pieces);
 
                 // if everything is done switch turn sides
@@ -75,11 +78,14 @@ internal class Game
         {
             CheckKingKill(Player2);
             // get movement call from player1
-            if (Player2.CanMove(Player2.SelectedPiece))
+            if (Player2.CanMove(Player1.SelectedPiece))
             {
-                capture(TargetPoint);
                 Player2.SelectedPiece.MoveTo(TargetPoint, Pieces);
+                Capture(Player2.SelectedPiece);
+
+                // update list if needed
                 Player2.updateList(Pieces);
+
                 // if everything is done switch turn sides
                 Player1.SwitchTurns();
                 Player2.SwitchTurns();
@@ -119,7 +125,7 @@ internal class Game
         foreach (var piece in Pieces)
         {
             // if it matches set the movedPiece to the piece at the corresponding index
-            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
+            if (piece.Position.Equals(p))
             {
                 return piece;
             }
@@ -127,19 +133,32 @@ internal class Game
         return null;
     }
 
-    internal void capture(PointStruct TargetPoint)
+    /// <summary>
+    /// Method for the capute logic
+    /// needed: List of All Pieces
+    ///         Locations of the Pieces
+    ///         
+    ///         Current Selected Piece
+    ///         Location of Selected Piece
+    ///         
+    ///         Color of piece
+    /// </summary>
+    /// <param></param>
+    internal void Capture(Piece SelectedPiece)
     {
-        foreach(var piece in Pieces)
+        foreach (Piece piece in Pieces)
         {
-            if(PointStruct.ComparePoints(piece.Position, TargetPoint))
+            if(SelectedPiece.Position.Equals(piece.Position) && SelectedPiece.IsWhite != piece.IsWhite)
             {
                 piece.IsKilled = true;
+                break;
             }
         }
     }
 
     /// <summary>
-    /// 
+    /// Checks if any King has been killed by looping over the List of pieces 
+    /// and search for a piece of the type king and for the boolean value isKilled
     /// </summary>
     public void CheckKingKill(Player currentPlayer)
     {
