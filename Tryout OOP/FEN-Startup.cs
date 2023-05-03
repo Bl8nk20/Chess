@@ -208,7 +208,7 @@ internal class FEN_Startup
 
         // Implement enPassant Field string[3]
         FENParts[3] = " -";
-        // Implement 50 MoveCounter string[4]
+        // Implement 50 MoveCounter string[4]^x
         FENParts[4] = " 0";
 
         // Implement Full MoveCounter should be one at start and +=1 each time black´s turn has ended
