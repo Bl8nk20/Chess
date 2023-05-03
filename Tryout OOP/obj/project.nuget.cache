@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "IEZy5RH/F0tG13EHFgD+GFarG4EST/mq6iDipW/b25lPfIEBgBLXJgMNMirBmj+9QStvplSwX3YJZn7Qk5FCRQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ms85866\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ms85866\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\ms85866\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
