@@ -9,6 +9,9 @@ namespace Tryout_OOP;
 internal class MovesDict
 {
     /*
+     * 
+     * ! TASK for Jonas !
+     * 
      * Constructor : 
      *  FEN_StartUp FEN_StartUp = new FEN_StartUp()
      *  
@@ -36,6 +39,7 @@ internal class MovesDict
     /// </summary>
     string SaveBoard()
     {
+        // needs to be implemented
         string CurrentBoard = "";
         return CurrentBoard;
     }

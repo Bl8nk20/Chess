@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:Tryout_OOP"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <!-- Colors for the Main Window -->
+            <SolidColorBrush x:Key="BoardOutLine" Color="#313131" />
+            <SolidColorBrush x:Key="BlackTile" Color="#769656" />
+            <SolidColorBrush x:Key="WhiteTile" Color="#eeeed2" />
+            <SolidColorBrush x:Key="BackgroundM" Color="#FF2D2A2A" />
+            <SolidColorBrush x:Key="Divider" Color="#eeeed2" />
+            <!-- Colors for the Start Window -->
+            <SolidColorBrush x:Key="BackgroundS" Color="#313131" Opacity="1"/>
+            <SolidColorBrush x:Key="ButtonM" Color="#313131" />
+            <!-- Colors foe the Win Window -->
+            <SolidColorBrush x:Key="BackgroundW" Color="#313131" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ButtonW" Color="#313131" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

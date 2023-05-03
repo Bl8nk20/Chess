@@ -29,9 +29,12 @@ internal class Game
 
     #region Methods
 
+    /// <summary>
+    /// A method to set the selected piece according, which players turn is
+    /// </summary>
+    /// <param name="SelectedPoint"></param>
     public void SetSelectedPiece(PointStruct SelectedPoint)
     {
-
         if (Player1.IsTurn)
         {
             Player1.SelectedPiece = searchPiece(SelectedPoint);
@@ -42,6 +45,7 @@ internal class Game
             Player2.SelectedPiece = searchPiece(SelectedPoint);
         }
     }
+
     /// <summary>
     /// Method to check for the playerturn
     /// to check for the current player
@@ -49,42 +53,45 @@ internal class Game
     /// </summary>
     public void playerMovement(PointStruct TargetPoint)
     {
-        //
-        // check if the Gamestate has changed
         if (Player1.IsTurn)
         {
-            CheckKingKill(Player1);
-            // get movement call from player1
-            if (Player1.CanMove(Player1.SelectedPiece))
-            {
-                // capture logic to remove one piece from the list
-                capture(TargetPoint);
-
-                // move piece to targeted point
-                Player1.SelectedPiece.MoveTo(TargetPoint, Pieces);
-
-
-                Player1.updateList(Pieces);
-
-                // if everything is done switch turn sides
-                Player1.SwitchTurns();
-                Player2.SwitchTurns();
-            }
+            turn(Player1, TargetPoint);    
         }
         else if(Player2.IsTurn)
         {
-            CheckKingKill(Player2);
-            // get movement call from player1
-            if (Player2.CanMove(Player2.SelectedPiece))
-            {
-                capture(TargetPoint);
-                Player2.SelectedPiece.MoveTo(TargetPoint, Pieces);
-                Player2.updateList(Pieces);
-                // if everything is done switch turn sides
-                Player1.SwitchTurns();
-                Player2.SwitchTurns();
-            }
+            turn(Player2, TargetPoint);
         }
+
+        // if everything is done switch turn sides
+        Player1.SwitchTurns();
+        Player2.SwitchTurns();
+    }
+
+    internal void turn(Player currentplayer, PointStruct TargetPoint)
+    {
+
+        if (!currentplayer.IsTurn)
+        {
+            return;
+        }
+
+        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint))
+        {
+            return;
+        }
+
+        if (currentplayer.CanMove(Player1.SelectedPiece))
+        {
+            // move piece to targeted point
+            currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces);
+            Capture(currentplayer.SelectedPiece);
+
+            // update list if needed
+            currentplayer.updateList(Pieces);
+
+        }
+        // check if the game has ended
+        isEnd();
     }
 
     /// <summary>
@@ -95,6 +102,8 @@ internal class Game
     {
         // Looping for each player list to one list with both contents
         var pieces = new List<Piece>(Player1.Pieces.Count() + Player2.Pieces.Count());
+
+        // loop through the pieces of each player to add them in a bigger list
         foreach (var item in Player1.Pieces)
         {
             pieces.Add(item);
@@ -119,7 +128,7 @@ internal class Game
         foreach (var piece in Pieces)
         {
             // if it matches set the movedPiece to the piece at the corresponding index
-            if (piece.Position.X == p.X && piece.Position.Y == p.Y)
+            if (piece.Position.Equals(p))
             {
                 return piece;
             }
@@ -127,37 +136,42 @@ internal class Game
         return null;
     }
 
-    internal void capture(PointStruct TargetPoint)
-    {
-        foreach(var piece in Pieces)
-        {
-            if(PointStruct.ComparePoints(piece.Position, TargetPoint))
-            {
-                piece.IsKilled = true;
-            }
-        }
-    }
-
     /// <summary>
-    /// 
+    /// Method for the capute logic
+    /// needed: List of All Pieces
+    ///         Locations of the Pieces
+    ///         
+    ///         Current Selected Piece
+    ///         Location of Selected Piece
+    ///         
+    ///         Color of piece
     /// </summary>
-    public void CheckKingKill(Player currentPlayer)
+    /// <param></param>
+    internal void Capture(Piece SelectedPiece)
     {
-        foreach (var piece in currentPlayer.Pieces)
+        // looping through the list of pieces
+        foreach (Piece piece in Pieces)
         {
-            if (piece.IsKilled && piece is King)
+            // check if the pieces collapsed and set they´re status to killed
+            if(SelectedPiece.Position.Equals(piece.Position) && SelectedPiece.IsWhite != piece.IsWhite)
             {
-                GAMESTATUS = currentPlayer.IsWhite ? GAMESTATUS = GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
+                // check if the piece is a king piece
+                if(piece is King)
+                {
+                    this.GAMESTATUS = GameStatus.WHITE_WIN;
+                }
+                piece.IsKilled = true;
+                break;
             }
         }
     }
-
     /// <summary>
     /// checking for end state
     /// </summary>
     /// <returns></returns>
     public bool isEnd()
     {
+        // return ether true or false
         return this.GAMESTATUS != GameStatus.ACTIVE;
     }
 

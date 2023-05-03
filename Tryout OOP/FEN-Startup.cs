@@ -45,14 +45,7 @@ internal class FEN_Startup
     private readonly string _filename = "Default.txt";
     private readonly Stream _fileStream;
     private readonly StreamReader _streamReader;
-    private readonly StreamWriter streamWriter;
-
-    private List<TextBlock> textBlockList;
-    public List<TextBlock> TextBlockList
-    {
-        get { return textBlockList; }
-        set { textBlockList = value; }
-    }
+    private readonly StreamWriter _streamWriter;
 
     private string startpos;
     public string Startpos
@@ -91,7 +84,7 @@ internal class FEN_Startup
         // read the file to get the fen string
         startpos = _streamReader.ReadToEnd();
         // create a new Empty list
-        List<Piece> Pieces = new List<Piece>();
+        List<Piece> Pieces = new();
 
         // split the string in an array,
         // where each index describes another
@@ -148,6 +141,7 @@ internal class FEN_Startup
             }
 
         }
+        // Close the Streams
         _streamReader.Dispose();
         _fileStream.Dispose();
 
@@ -155,18 +149,22 @@ internal class FEN_Startup
     }
 
     /// <summary>
-    /// 1. Loop through every Textblock in List<TextBlock> TextBlocks
+    /// Loop through every Textblock in List<TextBlock> TextBlocks
     /// Check 
     /// </summary>
+    /// <param name="TextBlockList"></param>
     /// <param name="pieces"></param>
     /// <returns></returns>
-    public string ConvertListToString(List<TextBlock> TextBlockList, List<Piece> pieces)
+    internal string ConvertListToString(List<TextBlock> TextBlockList, List<Piece> pieces)
     {
         string FinalFEN;
         string[] FENParts = new string[6];
+        // Columns
         for (int rank = 7; rank >= 0; rank--)
         {
+            // Int to remember how many empty spaces are between pieces
             int numEmptyFiles = 0;
+            // Rows
             for (int file = 0; file < 8; file++)
             {
                 int i = rank * 8 + file;
@@ -210,7 +208,7 @@ internal class FEN_Startup
 
         // Implement enPassant Field string[3]
         FENParts[3] = " -";
-        // Implement 50 MoveCounter string[4]
+        // Implement 50 MoveCounter string[4]^x
         FENParts[4] = " 0";
 
         // Implement Full MoveCounter should be one at start and +=1 each time black´s turn has ended
@@ -223,12 +221,35 @@ internal class FEN_Startup
     }
 
     /// <summary>
+    /// Adds a FEN-String to a List to Save them Later
+    /// </summary>
+    internal List<string> AddToList(List<TextBlock> TextBlockList, List<Piece> pieces)
+    {
+        List<string> TempList = new List<string>();
+        TempList.Add(ConvertListToString(TextBlockList, pieces));
+        return TempList;
+    }
+
+    /// <summary>
     /// A Method to write / Overwrite a File so that you can load it later again if you like to
     /// </summary>
     /// <param name="MovesDictList">a List with the generated String per move</param>
     /// <param name="filename">Default Value is "LastGame.txt"</param>
-    void OverWriteFile(List<string> MovesDictList, string filename="LastGame.txt")
+    public void OverWriteFile(List<TextBlock> TextBlockList, List<Piece> pieces, string filename="LastGame.txt")
     {
+        List<string> MovesDictList = AddToList(TextBlockList, pieces);
+        FileStream fileStream = new FileStream(filename, FileMode.OpenOrCreate);
+        StreamWriter _streamWriter = new StreamWriter(fileStream);
+
+        // write each move to the file in fen format
+        foreach (string line in MovesDictList)
+        {
+            _streamWriter.WriteLine(line);
+        }
+
+        // close the streams
+        _streamWriter.Dispose();
+        fileStream.Dispose();
 
     }
 
