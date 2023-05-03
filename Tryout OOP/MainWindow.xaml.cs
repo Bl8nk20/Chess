@@ -15,7 +15,7 @@ namespace Tryout_OOP
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<TextBlock> TextBlocks = new List<TextBlock>();
+        public readonly List<TextBlock> TextBlocks = new List<TextBlock>();
 
         // duration for how long the items are highlighted
         private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));

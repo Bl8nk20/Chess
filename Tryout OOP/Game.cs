@@ -53,42 +53,45 @@ internal class Game
     /// </summary>
     public void playerMovement(PointStruct TargetPoint)
     {
-        // check if the Gamestate has changed
         if (Player1.IsTurn)
         {
-            CheckKingKill(Player1);
-            // get movement call from player1
-            if (Player1.CanMove(Player1.SelectedPiece))
-            {
-                // move piece to targeted point
-                Player1.SelectedPiece.MoveTo(TargetPoint, Pieces);
-                Capture(Player1.SelectedPiece);
-
-                // update list if needed
-                Player1.updateList(Pieces);
-
-                // if everything is done switch turn sides
-                Player1.SwitchTurns();
-                Player2.SwitchTurns();
-            }
+            turn(Player1, TargetPoint);    
         }
         else if(Player2.IsTurn)
         {
-            CheckKingKill(Player2);
-            // get movement call from player1
-            if (Player2.CanMove(Player1.SelectedPiece))
-            {
-                Player2.SelectedPiece.MoveTo(TargetPoint, Pieces);
-                Capture(Player2.SelectedPiece);
-
-                // update list if needed
-                Player2.updateList(Pieces);
-
-                // if everything is done switch turn sides
-                Player1.SwitchTurns();
-                Player2.SwitchTurns();
-            }
+            turn(Player2, TargetPoint);
         }
+
+        // if everything is done switch turn sides
+        Player1.SwitchTurns();
+        Player2.SwitchTurns();
+    }
+
+    internal void turn(Player currentplayer, PointStruct TargetPoint)
+    {
+
+        if (!currentplayer.IsTurn)
+        {
+            return;
+        }
+
+        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint))
+        {
+            return;
+        }
+
+        if (currentplayer.CanMove(Player1.SelectedPiece))
+        {
+            // move piece to targeted point
+            currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces);
+            Capture(currentplayer.SelectedPiece);
+
+            // update list if needed
+            currentplayer.updateList(Pieces);
+
+        }
+        // check if the game has ended
+        isEnd();
     }
 
     /// <summary>
@@ -99,6 +102,8 @@ internal class Game
     {
         // Looping for each player list to one list with both contents
         var pieces = new List<Piece>(Player1.Pieces.Count() + Player2.Pieces.Count());
+
+        // loop through the pieces of each player to add them in a bigger list
         foreach (var item in Player1.Pieces)
         {
             pieces.Add(item);
@@ -144,37 +149,29 @@ internal class Game
     /// <param></param>
     internal void Capture(Piece SelectedPiece)
     {
+        // looping through the list of pieces
         foreach (Piece piece in Pieces)
         {
+            // check if the pieces collapsed and set they´re status to killed
             if(SelectedPiece.Position.Equals(piece.Position) && SelectedPiece.IsWhite != piece.IsWhite)
             {
+                // check if the piece is a king piece
+                if(piece is King)
+                {
+                    this.GAMESTATUS = GameStatus.WHITE_WIN;
+                }
                 piece.IsKilled = true;
                 break;
             }
         }
     }
-
-    /// <summary>
-    /// Checks if any King has been killed by looping over the List of pieces 
-    /// and search for a piece of the type king and for the boolean value isKilled
-    /// </summary>
-    public void CheckKingKill(Player currentPlayer)
-    {
-        foreach (var piece in currentPlayer.Pieces)
-        {
-            if (piece.IsKilled && piece is King)
-            {
-                GAMESTATUS = currentPlayer.IsWhite ? GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
-            }
-        }
-    }
-
     /// <summary>
     /// checking for end state
     /// </summary>
     /// <returns></returns>
     public bool isEnd()
     {
+        // return ether true or false
         return this.GAMESTATUS != GameStatus.ACTIVE;
     }
 
