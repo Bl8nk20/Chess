@@ -9,10 +9,13 @@ namespace Tryout_OOP;
 
 internal class Board
 {
+    #region Fields
     Canvas Spielfeld;
     public List<TextBlock> TextBlocks;
     Game Game;
+    #endregion
 
+    #region Constructors
     public Board(Canvas spielfeld, List<TextBlock> textBlocks)
     {
         this.Game = new Game(); 
@@ -20,7 +23,9 @@ internal class Board
         this.TextBlocks = textBlocks;
         DrawBoard();
     }
+    #endregion
 
+    #region Methods
     /// <summary>
     /// a method to create the chessboard automatically 
     /// by generating 64 textblocks from a 2D array
@@ -50,6 +55,11 @@ internal class Board
                 Canvas.SetBottom(b, size * j);
                 b.MouseDown += MouseClicked;
                 b.MouseUp += MouseReleased;
+
+                // Include highlighting of pieces with hovering over the pieces
+                //b.MouseEnter += ;
+                //b.MouseLeave += ;
+
                 // add the textblocks to a list
                 TextBlocks.Add(b);
             }
@@ -81,12 +91,13 @@ internal class Board
                 TextBlocks[i * 8 + j].Text = "";
                 foreach (var piece in Pieces)
                 {
-                    if (piece.Position.Equals(new PointStruct(i,j)))
+                    if (!piece.Position.Equals(new PointStruct(i,j)))
                     {
-                        // Write the Unicode Symbol and escape the for loop
-                        TextBlocks[i * 8 + j].Text = piece.Look.ToString();
-                        break;
+                        continue;
                     }
+                    // Write the Unicode Symbol and escape the for loop
+                    TextBlocks[i * 8 + j].Text = piece.Look.ToString();
+                    break;
                 }
             }
         }
@@ -108,16 +119,19 @@ internal class Board
             {
                 // if the TextBlock matches,
                 // then return the X and Y Coordinate
-                if (textBlock[i* 8 +j] == targetBlock)
+                if (textBlock[i* 8 +j] != targetBlock)
                 {
-                    return new PointStruct(i, j);
+                    continue;
                 }
+                return new PointStruct(i, j);
+
             }
         }
         // when nothing matches -> return Point
         return new PointStruct(0, 0);
     }
 
+    #region MouseEvents
     /// <summary>
     /// Mouse clicked event
     /// </summary>
@@ -153,4 +167,6 @@ internal class Board
         Game.playerMovement(p);
         DrawPieces(TextBlocks, Game.Pieces);
     }
+    #endregion
+#endregion
 }

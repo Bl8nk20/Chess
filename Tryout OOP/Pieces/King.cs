@@ -6,6 +6,7 @@ namespace Tryout_OOP;
 
 public class King : Piece
 {
+    #region Properties
     // bool for the Castling movement if done
     private bool isCastlingDone = false;
     public bool IsCastlingDone
@@ -13,7 +14,9 @@ public class King : Piece
         get { return isCastlingDone; }
         set { isCastlingDone = value; }
     }
+    #endregion
 
+    #region Constructor
     /// <summary>
     /// Constructor for the King Chesspiece
     /// </summary>
@@ -28,7 +31,9 @@ public class King : Piece
         // unicode: '\u265A' -> black King
         // empty Constructor cause nothing is needed :D
     }
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Overridden method for the King movement
     /// King Movement: 1 forward around the King
@@ -42,9 +47,7 @@ public class King : Piece
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)
         {
-            if (piece.Position.X == TargetPoint.X
-            && piece.Position.Y == TargetPoint.Y
-            && isWhite == piece.IsWhite)
+            if (base.checkCondition(TargetPoint, piece))
             {
                 return false;
             }
@@ -55,42 +58,45 @@ public class King : Piece
         return x + y == 1 ||x * y == 1;
     }
 
+    #region Castling Methods (WIP)
+    /// <summary>
+    /// check if the castlingmoevemnt is valid
+    /// castling: rook not moved!
+    ///           king not moved
+    ///           knight and bishop out of the way
+    /// </summary>
+    /// <param name="board"></param>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    //private bool isValidCastling(Board board,
+    //                                Spot start, Spot end)
+    //{
+    //    // check if it has been done before
+    //    if (this.isCastlingDone)
+    //    {
+    //        return false;
+    //    }
 
-        /// <summary>
-        /// check if the castlingmoevemnt is valid
-        /// castling: rook not moved!
-        ///           king not moved
-        ///           knight and bishop out of the way
-        /// </summary>
-        /// <param name="board"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns></returns>
-        //private bool isValidCastling(Board board,
-        //                                Spot start, Spot end)
-        //{
-        //    // check if it has been done before
-        //    if (this.isCastlingDone)
-        //    {
-        //        return false;
-        //    }
+    //    // Logic for returning true or false
+    //    // implement it
+    //    return false;
+    //}
 
-        //    // Logic for returning true or false
-        //    // implement it
-        //    return false;
-        //}
+    /// <summary>
+    /// execute the castling moevement !
+    /// IMPLEMENTION NEEDED !!!
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    //public bool isCastlingMove(Spot start, Spot end)
+    //{
+    //    // check if the starting and
+    //    // ending position are correct
+    //    return false;
+    //}
+    #endregion
 
-        /// <summary>
-        /// execute the castling moevement !
-        /// IMPLEMENTION NEEDED !!!
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns></returns>
-        //public bool isCastlingMove(Spot start, Spot end)
-        //{
-        //    // check if the starting and
-        //    // ending position are correct
-        //    return false;
-        //}
-    }
+    #endregion
+}

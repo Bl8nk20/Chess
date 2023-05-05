@@ -5,6 +5,7 @@ namespace Tryout_OOP;
 
 public class Bishop : Piece
 {
+    #region Constructor
     /// <summary>
     /// Constructor for the Bishop Chesspiece
     /// </summary>
@@ -19,7 +20,9 @@ public class Bishop : Piece
         // unicode: '\u265D' -> black Bishop
         // empty Constructor cause nothing is needed :D
     }
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Overwriting the Method to check if the Piece can Move according to the Rules
     /// Bishop Movement : Diagonal
@@ -32,9 +35,7 @@ public class Bishop : Piece
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)
         {
-            if (piece.Position.X == TargetPoint.X
-            && piece.Position.Y == TargetPoint.Y
-            && isWhite == piece.IsWhite)
+            if (checkCondition(piece, TargetPoint))
             {
                 return false;
             }
@@ -45,4 +46,13 @@ public class Bishop : Piece
 
         return x == y;
     }
+
+    #region Check Condition
+    bool checkCondition(Piece piece, PointStruct TargetPoint)
+    {
+        return piece.Position.Equals(TargetPoint) && isWhite == piece.IsWhite;
+    }
+    #endregion
+
+    #endregion
 }

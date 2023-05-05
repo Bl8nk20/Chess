@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -127,5 +128,13 @@ public abstract class Piece
     {
         return byte.MaxValue;
     }
+
+    #region Check Condition
+    protected bool checkCondition(PointStruct TargetPoint, Piece enemyPiece)
+    {
+        return this.Position.Equals(TargetPoint) && isWhite == enemyPiece.IsWhite;
+    }
+    #endregion
+
     #endregion
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
@@ -28,7 +29,7 @@ internal class Game
     #endregion
 
     #region Methods
-
+    #region PlayerTurnStuff
     /// <summary>
     /// A method to set the selected piece according, which players turn is
     /// </summary>
@@ -69,17 +70,18 @@ internal class Game
 
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
-
+        // check if its the turn of the player
         if (!currentplayer.IsTurn)
         {
             return;
         }
-
+        // check if piece has not moved
+        // maybe need to use goto?
         if (currentplayer.SelectedPiece.Position.Equals(TargetPoint))
         {
             return;
         }
-
+        // check if player can move piece to his target
         if (currentplayer.CanMove(Player1.SelectedPiece))
         {
             // move piece to targeted point
@@ -88,12 +90,14 @@ internal class Game
 
             // update list if needed
             currentplayer.updateList(Pieces);
-
         }
         // check if the game has ended
         isEnd();
     }
 
+    #endregion
+
+    #region InitialPieces
     /// <summary>
     /// Initial Setup to set the Pieces to their official start positions
     /// </summary>
@@ -115,6 +119,7 @@ internal class Game
 
         return pieces;
     }
+    #endregion
 
     /// <summary>
     /// A Method to search The ChessPieces 
@@ -155,12 +160,19 @@ internal class Game
             // check if the pieces collapsed and set they´re status to killed
             if(SelectedPiece.Position.Equals(piece.Position) && SelectedPiece.IsWhite != piece.IsWhite)
             {
-                // check if the piece is a king piece
-                if(piece is King)
-                {
-                    this.GAMESTATUS = GameStatus.WHITE_WIN;
-                }
+                // set the piece to killed
                 piece.IsKilled = true;
+
+                if(piece is King && piece.IsKilled)
+                {
+                    // set the gamestatuws to everything except active
+                    GAMESTATUS = (piece.IsWhite) ? GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
+                    // close window / show victory screen 
+                    // MainWindow.Won();
+                    // Show a messagebox to visualize victory
+                    MessageBox.Show(GAMESTATUS.ToString());
+                }
+                // break to remove it later from the list
                 break;
             }
         }

@@ -15,13 +15,16 @@ namespace Tryout_OOP
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Fields
         public readonly List<TextBlock> TextBlocks = new List<TextBlock>();
 
         // duration for how long the items are highlighted
         private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
         // creates a new timer
         DispatcherTimer timer = new DispatcherTimer();
+        #endregion
 
+        #region Constructor
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +40,9 @@ namespace Tryout_OOP
 
             //
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -245,6 +250,7 @@ namespace Tryout_OOP
         }
         #endregion
 
+        #endregion
     }
 }
 
