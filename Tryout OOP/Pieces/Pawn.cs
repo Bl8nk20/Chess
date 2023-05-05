@@ -30,9 +30,7 @@ public class Pawn : Piece
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)
         {
-            if (piece.Position.X == TargetPoint.X
-            && piece.Position.Y == TargetPoint.Y
-            && isWhite == piece.IsWhite)
+            if (base.checkCondition(TargetPoint, piece))
             {
                 return false;
             }

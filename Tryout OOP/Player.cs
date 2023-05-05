@@ -126,6 +126,7 @@ public class Player
         }
     }
 
+    #region Special Moves
     /// <summary>
     /// a method to validate if certain moves are valid
     /// e.g. En passant or Castling or Promoting
@@ -167,5 +168,7 @@ public class Player
     //        }
     //    }
     //}
+    #endregion
+
     #endregion
 }

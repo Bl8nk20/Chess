@@ -7,6 +7,7 @@ namespace Tryout_OOP;
 public class Rook : Piece
 {
 
+    #region Constructor
     /// <summary>
     /// Constructor for the Rook Chesspiece
     /// </summary>
@@ -21,7 +22,9 @@ public class Rook : Piece
         // unicode: '\u265C' -> black Rook
         // empty Constructor cause nothing is needed :D
     }
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Overwriting the Method to check if the Piece can Move according to the Rules
     /// Rook Movement : Horizontal or Vertical
@@ -34,9 +37,7 @@ public class Rook : Piece
         // checking if there is a piece of the same color on the TargetPoint
         foreach (var piece in pieces)
         {
-            if (piece.Position.X == TargetPoint.X
-            && piece.Position.Y == TargetPoint.Y
-            && isWhite == piece.IsWhite)
+            if (base.checkCondition(TargetPoint, piece))
             {
                 return false;
             }
@@ -44,4 +45,6 @@ public class Rook : Piece
 
         return TargetPoint.X == Position.X || TargetPoint.Y == Position.Y;
     }
+
+    #endregion
 }

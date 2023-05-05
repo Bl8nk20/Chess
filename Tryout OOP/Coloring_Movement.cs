@@ -10,17 +10,22 @@ namespace Tryout_OOP;
 
 internal class Coloring_Movement
 {
+    #region Properties
     TextBlock[,] textBlocks { get; set; }
     List<Piece> pieces { get; set; }
     Piece movedPiece { get; set; }
+    #endregion
 
+    #region Constructor
     public Coloring_Movement(TextBlock[,] textBlocks, List<Piece> pieces, Piece movedPiece)
     {
         this.textBlocks = textBlocks;
         this.pieces = pieces;
         this.movedPiece = movedPiece;
     }
+#endregion
 
+    #region Methods
     /// <summary>
     /// 
     /// </summary>
@@ -59,31 +64,51 @@ internal class Coloring_Movement
         // coloring the enemys / opponent pieces
         foreach (var piece in pieces)
         {
-            // if x and y ==
-            // AND enemy color
-            // AND Piece can move to that
-            //  then:
-            // color background
-            if (piece.Position.X == i
-                && piece.Position.Y == j
-                && movedPiece.IsWhite != piece.IsWhite
-                && movedPiece.CanMove(new PointStruct(i, j), pieces))
+            // colors the textblocks on which a piece an move and when there is a enemy piece on it
+            if (checkConditionEnemyInWay(piece, i, j))
             {
                 textBlocks[i, j].Background = Brushes.IndianRed;
             }
             
-            // checking the x and y is eqal
-            // AND own color
-            // AND piece can move to that
-            // then:
-            // remove the colored background
-            if (piece.Position.X == i
-                && piece.Position.Y == j
-                && movedPiece.IsWhite == piece.IsWhite
-                && movedPiece.CanMove(new PointStruct(i, j), pieces))
+            // removes the coloring if the piece cant move to htat point
+            if (checkConditionRemoveColor(piece, i, j))
             {
                 textBlocks[i, j].Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
             }
         }
     }
+
+    #region Check Conditions
+    /// <summary>
+    /// A method to check if all conditions to simplify the methods : 
+    /// checking the x and y is eqal
+    /// AND own color
+    /// AND piece can move to that
+    /// </summary>
+    /// <param name="piece">current piece from List of pieces</param>
+    /// <param name="i">index i</param>
+    /// <param name="j">index j</param>
+    /// <returns></returns>
+    bool checkConditionRemoveColor(Piece piece, int i, int j)
+    {
+        return piece.Position.X == i && piece.Position.Y == j && movedPiece.IsWhite == piece.IsWhite && movedPiece.CanMove(new PointStruct(i, j), pieces);
+    }
+
+    /// <summary>
+    /// A method to check if all conditions to simplify the methods : 
+    /// if x and y ==
+    /// AND enemy color
+    /// AND Piece can move to that
+    /// </summary>
+    /// <param name="piece"></param>
+    /// <param name="i"></param>
+    /// <param name="j"></param>
+    /// <returns></returns>
+    bool checkConditionEnemyInWay(Piece piece, int i, int j)
+    {
+        return piece.Position.X == i && piece.Position.Y == j && movedPiece.IsWhite != piece.IsWhite && movedPiece.CanMove(new PointStruct(i, j), pieces);
+    }
+    #endregion
+
+    #endregion
 }

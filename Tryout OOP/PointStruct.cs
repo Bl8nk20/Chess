@@ -8,12 +8,15 @@ namespace Tryout_OOP;
 
 public struct PointStruct
 {
+    #region Constructor for Struct
     public PointStruct(int x, int y)
     {
         this.x = x;
         this.y = y;
     }
+    #endregion
 
+    #region Properties
     int x; // columns 0...7
     public int X
     {
@@ -25,7 +28,9 @@ public struct PointStruct
     {
         get { return y; }
     }
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Compares two Points on the GUI,
     /// true -> if points are identical,
@@ -38,4 +43,5 @@ public struct PointStruct
     {
         return PointA.X == PointB.X || PointA.Y == PointB.Y;
     }
+    #endregion
 }
