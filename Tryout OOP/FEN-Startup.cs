@@ -43,8 +43,8 @@ internal class FEN_Startup
 
     // prerequirements
     private readonly string _filename = "Default.txt";
-    private readonly Stream _fileStream;
-    private readonly StreamReader _streamReader;
+    private Stream _fileStream;
+    private StreamReader _streamReader;
     private readonly StreamWriter _streamWriter;
 
     private string startpos;
@@ -67,19 +67,49 @@ internal class FEN_Startup
     public FEN_Startup()
     {
         _filename = "Default.txt";
-        this._fileStream = new FileStream(_filename, FileMode.OpenOrCreate);
-        this._streamReader = new StreamReader(_fileStream);
+        checkForFile(_filename);
     }
 
     #endregion
 
     #region Methods
+
+    /// <summary>
+    /// Method to check if the file Exists or not.
+    /// </summary>
+    void checkForFile(string _filename)
+    {
+        if (File.Exists(_filename))
+        {
+            this._fileStream = new FileStream(_filename, FileMode.OpenOrCreate);
+            this._streamReader = new StreamReader(_fileStream);
+        }
+        else
+        {
+            createNewFile();
+        }
+    }
+
+    /// <summary>
+    /// Method to create a new Default Fen File
+    /// Needed:
+    /// Streamwriter
+    /// Filestream
+    /// Filename
+    /// FenString
+    /// </summary>
+    void createNewFile(string FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+    {
+        File.Open(_filename, FileMode.OpenOrCreate);
+        _streamWriter.WriteLine(FEN);
+    }
+
     /// <summary>
     /// Read string from file and convert the result to a list
     /// </summary>
     /// <param name="filename"></param>
     /// <returns></returns>
-    public List<Piece> ConvertStringToList(string filename = "Default.txt")
+    public List<Piece> ConvertStringToList(string _filename = "Default.txt")
     {
         // read the file to get the fen string
         startpos = _streamReader.ReadToEnd();
