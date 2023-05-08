@@ -42,21 +42,54 @@ public class King : Piece
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // checking if there is a piece of the same color on the TargetPoint
+        int x = Math.Abs(this.Point.X - TargetPoint.X);
+        int y = Math.Abs(this.Point.Y - TargetPoint.Y);
+        return x + y == 1 || x * y == 1;
+    }
+
+
+    /*public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces, Pieces movedPiece)
+    {
+        // check the target location if there is a piece of same color
         foreach (var piece in pieces)
         {
-            if (base.checkCondition(TargetPoint, piece))
+            if (piece.Position.X == TargetPoint.X
+                && piece.Position.Y == TargetPoint.Y
+                && piece.IsWhite == isWhite)
             {
                 return false;
             }
         }
 
-        int x = Math.Abs(this.Point.X - TargetPoint.X);
-        int y = Math.Abs(this.Point.Y - TargetPoint.Y);
-        return x + y == 1 ||x * y == 1;
-    }
+        foreach (var piece in pieces)
+        {
+            if (piece.IsWhite != isWhite)
+            {
+                if (!(piece is King)
+                    && !(piece is Pawn)
+                    && piece.CanMove(TargetPoint, pieces, piece))
+                {
+                    return false;
+                }
+
+                if (piece is Pawn
+                    && piece.CapturePiece(TargetPoint))
+                {
+                    return false;
+                }
+
+                if (piece is King
+                    && piece.Movement(TargetPoint))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return Movement(TargetPoint);
+    }*/
 
     #region Castling Methods (WIP)
     /// <summary>

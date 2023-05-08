@@ -85,7 +85,7 @@ internal class Game
         if (currentplayer.CanMove(Player1.SelectedPiece))
         {
             // move piece to targeted point
-            currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces);
+            currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces, currentplayer.SelectedPiece);
             Capture(currentplayer.SelectedPiece);
 
             // update list if needed

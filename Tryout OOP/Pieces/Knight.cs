@@ -27,17 +27,8 @@ public class Knight : Piece
     /// <param name="xTarget">x - Coordinate</param>
     /// <param name="yTarget">y - Coordinate</param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // checking if there is a piece of the same color on the TargetPoint
-        foreach (var piece in pieces)
-        {
-            if (base.checkCondition(TargetPoint, piece))
-            {
-                return false;
-            }
-        }
-
         // the product of x and y must be equal to 2 
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);

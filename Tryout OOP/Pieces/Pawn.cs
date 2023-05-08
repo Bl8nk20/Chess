@@ -25,17 +25,8 @@ public class Pawn : Piece
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // checking if there is a piece of the same color on the TargetPoint
-        foreach (var piece in pieces)
-        {
-            if (base.checkCondition(TargetPoint, piece))
-            {
-                return false;
-            }
-        }
-
         //int x = Math.Abs(this.Position.X - TargetPoint.X);
         //int y = Math.Abs(this.Position.Y - TargetPoint.Y);
 
@@ -44,13 +35,13 @@ public class Pawn : Piece
             // if pawn is NOT white but has moved already : 1 step "down"
             return TargetPoint.Y == this.Position.Y - 1 && this.Position.X == TargetPoint.X;
         }
-        else if(!this.isWhite && !hasMoved)
+        else if (!this.isWhite && !hasMoved)
         {
             // if pawn is NOT white and have NOT moved already : 2 step OR 1 step "down"
             return (TargetPoint.Y == this.Position.Y - 2
-            && this.Position.X == TargetPoint.X)
-            || (TargetPoint.Y == this.Position.Y - 1
-            && this.Position.X == TargetPoint.X);
+                && this.Position.X == TargetPoint.X)
+                || (TargetPoint.Y == this.Position.Y - 1
+                && this.Position.X == TargetPoint.X);
         }
         // white Pawn movement
         if (hasMoved)
@@ -63,16 +54,87 @@ public class Pawn : Piece
             && this.Position.X == TargetPoint.X));
     }
 
+    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces, Piece movedPiece)
+    {
+        // check the target location if there is a piece of same color
+        foreach (var piece in pieces)
+        {
+            if (piece.Position.X == TargetPoint.X
+                && piece.Position.Y == TargetPoint.Y
+                && piece.IsWhite == isWhite)
+            {
+                return false;
+            }
+        }
+
+        if (movedPiece.IsWhite == true)
+        {
+            {
+                foreach (var piece in pieces)
+                {
+                    if (CapturePiece(TargetPoint)
+                        && piece.Position.X == TargetPoint.X
+                        && piece.Position.Y == TargetPoint.Y)
+                    {
+                        return true;
+                    }
+
+                    if (movedPiece.Movement(TargetPoint)
+                        && piece.Position.X == this.Point.X
+                        && piece.Position.Y == this.Point.Y + 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        if (movedPiece.IsWhite == false)
+        {
+            foreach (var piece in pieces)
+            {
+                if (CapturePiece(TargetPoint)
+                        && piece.Position.X == TargetPoint.X
+                        && piece.Position.Y == TargetPoint.Y)
+                {
+                    return true;
+                }
+
+                if (movedPiece.Movement(TargetPoint)
+                    && piece.Position.X == this.Point.X
+                    && piece.Position.Y == this.Point.Y - 1)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return Movement(TargetPoint);
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="TargetPoint"></param>
     /// <returns></returns>
-    bool CanCapturePiece(PointStruct TargetPoint)
+    public override bool CapturePiece(PointStruct TargetPoint)
     {
-        int x = Math.Abs(this.Position.X - TargetPoint.X);
-        int y = this.Position.Y - TargetPoint.Y;
+        if (this.isWhite
+            && TargetPoint.Y == this.Position.Y + 1
+            && (TargetPoint.X == this.Point.X + 1
+            || TargetPoint.X == this.Point.X - 1))
+        {
+            return true;
+        }
 
-        return x * y == -1;
+        if (!this.IsWhite
+            && TargetPoint.Y == this.Point.Y - 1
+            && (TargetPoint.X == this.Point.X + 1
+            || TargetPoint.X == this.Point.X - 1))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
