@@ -68,3 +68,4 @@ C:\Meins\Übungen\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.pdb
 C:\Meins\Übungen\Chess\Tryout OOP\obj\Debug\net6.0-windows\Tryout OOP.genruntimeconfig.cache
 C:\Meins\Übungen\Chess\Tryout OOP\obj\Debug\net6.0-windows\ref\Tryout OOP.dll
 C:\Users\ms85866\source\repos\Chess\Tryout OOP\obj\Debug\net6.0-windows\App.baml
+C:\Meins\Übungen\Chess\Tryout OOP\obj\Debug\net6.0-windows\App.baml

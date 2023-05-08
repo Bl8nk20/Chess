@@ -30,21 +30,12 @@ public class Bishop : Piece
     /// <param name="xTarget">x - Coordinate</param>
     /// <param name="yTarget">y - Coordinate</param>
     /// <returns></returns>
-    public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // checking if there is a piece of the same color on the TargetPoint
-        foreach (var piece in pieces)
-        {
-            if (checkCondition(piece, TargetPoint))
-            {
-                return false;
-            }
-        }
-
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);
 
-        return x == y;
+        return (x == y);
     }
 
     #region Check Condition
