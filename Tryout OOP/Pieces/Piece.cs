@@ -86,36 +86,138 @@ public abstract class Piece
 
     #region Methods
     /// <summary>
-    /// Assumption: xTarget and yTarget always above 0
-    /// Assumption: Targeted Point != StartingPoint
-    /// Assumption: Nobody nearby/ in the way
-    /// Logic for each piece individual -> needs to implement in child class
+    /// check the target point and the way to the target to see if movement is possible
     /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <returns>move is valid</returns>
-    public abstract bool CanMove(PointStruct Target, List<Piece> pieces);
-    
-    /// <summary>
-    /// Logic to move a Piece to a specific Location 
-    /// and checking before if the Piece can move to it
-    /// </summary>
-    /// <param name="Target"></param>
+    /// <param name="TargetPoint"></param>
     /// <param name="pieces"></param>
-    /// <returns></returns>
-    public bool MoveTo(PointStruct Target, List<Piece> pieces)
+    /// <param name="movedPiece"></param>
+    /// <returns> if the move is possible </returns>
+    public virtual bool CanMove(PointStruct TargetPoint, List<Piece> pieces, Piece movedPiece)
+    {
+        // check the target location if there is a piece of same color
+        foreach (var piece in pieces)
+        {
+            if (piece.Position.X == TargetPoint.X
+                && piece.Position.Y == TargetPoint.Y
+                && piece.IsWhite == isWhite)
+            {
+                return false;
+            }
+
+            /*if (piece.isWhite != isWhite
+                && piece.CanMove(King.Position, pieces, piece))
+            {
+                return false;
+            }*/
+        }
+
+        // check the way to the target location if it's in the first quadrant
+        if (TargetPoint.X >= this.Point.X
+            && TargetPoint.Y > this.Point.Y)
+        {
+            // check the way from the selected piece to the target if the move is possible
+            for (int x = this.Point.X; x <= TargetPoint.X; x++)
+            {
+                for (int y = this.Point.Y + 1; y < TargetPoint.Y; y++)
+                {
+                    foreach (var piece in pieces)
+                    {
+                        if (piece.Position.X == x
+                            && piece.Position.Y == y
+                            && movedPiece.Movement(new PointStruct(x, y)))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        // check the way to the target location if it's in the fourth quadrant
+        if (TargetPoint.X > this.Point.X
+            && TargetPoint.Y <= this.Point.Y)
+        {
+            // check the way from the selected piece to the target if the move is possible
+            for (int x = this.Point.X + 1; x < TargetPoint.X; x++)
+            {
+                for (int y = this.Point.Y; y >= TargetPoint.Y; y--)
+                {
+                    foreach (var piece in pieces)
+                    {
+                        if (piece.Position.X == x
+                            && piece.Position.Y == y
+                            && movedPiece.Movement(new PointStruct(x, y)))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        // check the way to the target location if it's in the third quadrant
+        if (TargetPoint.X <= this.Point.X
+            && TargetPoint.Y < this.Point.Y)
+        {
+            // check the way from the selected piece to the target if the move is possible
+            for (int x = this.Point.X; x >= TargetPoint.X; x--)
+            {
+                for (int y = this.Point.Y - 1; y > TargetPoint.Y; y--)
+                {
+                    foreach (var piece in pieces)
+                    {
+                        if (piece.Position.X == x
+                            && piece.Position.Y == y
+                            && movedPiece.Movement(new PointStruct(x, y)))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        // check the way to the target location if it's in the second quadrant
+        if (TargetPoint.X < this.Point.X
+            && TargetPoint.Y >= this.Point.Y)
+        {
+            // check the way from the selected piece to the target if the move is possible
+            for (int x = this.Point.X - 1; x > TargetPoint.X; x--)
+            {
+                for (int y = this.Point.Y; y <= TargetPoint.Y; y++)
+                {
+                    foreach (var piece in pieces)
+                    {
+                        if (piece.Position.X == x
+                            && piece.Position.Y == y
+                            && movedPiece.Movement(new PointStruct(x, y)))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return movedPiece.Movement(TargetPoint);
+    }
+    public abstract bool Movement(PointStruct Target);
+
+    public virtual bool CapturePiece(PointStruct TargetPoint)
+    {
+        return false;
+    }
+
+    public bool MoveTo(PointStruct Target, List<Piece> pieces, Piece movedPiece)
     {
         // if the Move if false then returned False
-        if (!CanMove(Target, pieces))
+        if (!CanMove(Target, pieces, movedPiece))
         {
             return false;
         }
 
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
-        
-        // Try to implement
-        this.hasMoved = true;
         return true;
     }
 

@@ -54,7 +54,7 @@ internal class Coloring_Movement
     private void Coloring(int i, int j)
     {
         // check if the piece can move legally
-        if (movedPiece.CanMove(new PointStruct(i, j), pieces))
+        if (movedPiece.CanMove(new PointStruct(i, j), pieces, movedPiece))
         {
             // helping the Move Decision
             // by coloring the Background in Yellow
@@ -91,7 +91,7 @@ internal class Coloring_Movement
     /// <returns></returns>
     bool checkConditionRemoveColor(Piece piece, int i, int j)
     {
-        return piece.Position.X == i && piece.Position.Y == j && movedPiece.IsWhite == piece.IsWhite && movedPiece.CanMove(new PointStruct(i, j), pieces);
+        return piece.Position.X == i && piece.Position.Y == j && movedPiece.IsWhite == piece.IsWhite && movedPiece.CanMove(new PointStruct(i, j), pieces, movedPiece);
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ internal class Coloring_Movement
     /// <returns></returns>
     bool checkConditionEnemyInWay(Piece piece, int i, int j)
     {
-        return piece.Position.X == i && piece.Position.Y == j && movedPiece.IsWhite != piece.IsWhite && movedPiece.CanMove(new PointStruct(i, j), pieces);
+        return piece.Position.X == i && piece.Position.Y == j && movedPiece.IsWhite != piece.IsWhite && movedPiece.CanMove(new PointStruct(i, j), pieces, movedPiece);
     }
     #endregion
 
