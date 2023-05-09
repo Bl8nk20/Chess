@@ -81,7 +81,7 @@ internal class FEN_Startup
     {
         if (File.Exists(_filename))
         {
-            this._fileStream = new FileStream(_filename, FileMode.OpenOrCreate);
+            this._fileStream = new FileStream(_filename, FileMode.Open);
             this._streamReader = new StreamReader(_fileStream);
         }
         else
@@ -100,7 +100,7 @@ internal class FEN_Startup
     /// </summary>
     void createNewFile(string FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
     {
-        File.Open(_filename, FileMode.OpenOrCreate);
+        File.Open(_filename, FileMode.Create);
         _streamWriter.WriteLine(FEN);
     }
 
