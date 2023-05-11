@@ -97,8 +97,7 @@ public abstract class Piece
         // check the target location if there is a piece of same color
         foreach (var piece in pieces)
         {
-            if (piece.Position.X == TargetPoint.X
-                && piece.Position.Y == TargetPoint.Y
+            if (piece.Position.Equals(TargetPoint)
                 && piece.IsWhite == isWhite)
             {
                 return false;
@@ -122,8 +121,7 @@ public abstract class Piece
                 {
                     foreach (var piece in pieces)
                     {
-                        if (piece.Position.X == x
-                            && piece.Position.Y == y
+                        if (piece.Position.Equals(new PointStruct(x, y))
                             && movedPiece.Movement(new PointStruct(x, y)))
                         {
                             return false;
@@ -144,8 +142,7 @@ public abstract class Piece
                 {
                     foreach (var piece in pieces)
                     {
-                        if (piece.Position.X == x
-                            && piece.Position.Y == y
+                        if (piece.Position.Equals(new PointStruct(x,y))
                             && movedPiece.Movement(new PointStruct(x, y)))
                         {
                             return false;
@@ -166,8 +163,7 @@ public abstract class Piece
                 {
                     foreach (var piece in pieces)
                     {
-                        if (piece.Position.X == x
-                            && piece.Position.Y == y
+                        if (piece.Position.Equals(new PointStruct(x, y))
                             && movedPiece.Movement(new PointStruct(x, y)))
                         {
                             return false;
@@ -188,8 +184,7 @@ public abstract class Piece
                 {
                     foreach (var piece in pieces)
                     {
-                        if (piece.Position.X == x
-                            && piece.Position.Y == y
+                        if (piece.Position.Equals(new PointStruct(x, y))
                             && movedPiece.Movement(new PointStruct(x, y)))
                         {
                             return false;
@@ -198,9 +193,9 @@ public abstract class Piece
                 }
             }
         }
-
         return movedPiece.Movement(TargetPoint);
     }
+
     public abstract bool Movement(PointStruct Target);
 
     public bool MoveTo(PointStruct Target, List<Piece> pieces, Piece movedPiece)

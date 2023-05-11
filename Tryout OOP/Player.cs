@@ -22,7 +22,7 @@ public class Player
         get { return isTurn; }
     }
     private FEN_Startup FEN_Startup;
-    
+
     private List<Piece> pieces;
     public List<Piece> Pieces
     {
@@ -66,6 +66,7 @@ public class Player
     public void SwitchTurns()
     {
         isTurn = !isTurn;
+
     }
 
     /// <summary>
@@ -93,12 +94,12 @@ public class Player
     public List<Piece> CreatePieces()
     {
         // call fen class to convert a string in a list with the pieces
-        List <Piece> CompleteFENList = FEN_Startup.ConvertStringToList();
+        List<Piece> CompleteFENList = FEN_Startup.ConvertStringToList();
         Pieces = new List<Piece>();
         // Looping for the complete list and search for own colored pieces
         foreach (Piece piece in CompleteFENList)
         {
-            if(this.isWhite == piece.IsWhite)
+            if (this.isWhite == piece.IsWhite)
             {
                 Pieces.Add(piece);
             }
@@ -150,43 +151,77 @@ public class Player
     /// a method to validate if certain moves are valid
     /// e.g. En passant or Castling or Promoting
     /// </summary>
-    //internal void specialMoves()
-    //{
-    //    foreach (var piece in pieces)
-    //    {
-    //        // En Passant:
-    //        // check if movedPiece is from type Pawn
-    //        // check if on the left or right is another (enemy) pawn
-    //        // check if he has moved two forward
-    //        // throw diagonally
-    //        if (movedPiece is Pawn && piece.Position.Y == movedPiece.Position.Y)
-    //        {
+    internal void specialMoves()
+    {
+        foreach (var piece in pieces)
+        {
+            // En Passant:
+            // check if movedPiece is from type Pawn
+            // check if on the left or right is another (enemy) pawn
+            // check if he has moved two forward
+            // throw diagonally
+            if (SelectedPiece is Pawn && (piece.Position.Equals(new PointStruct(SelectedPiece.Position.Y, SelectedPiece.Position.X + 1))
+                                       || piece.Position.Equals(new PointStruct(SelectedPiece.Position.Y, SelectedPiece.Position.X - 1))))
+            {
 
-    //        }
+            }
 
-    //        // Castling
-    //        // check if movedPiece is from type King
-    //        // check if king and one of the Rooks haven´t been moved yet
-    //        // check if the way is free (no bishop or knight or other piece is on same line)
-    //        // move king two steps in rooks direction -> place rook on the left or right nearby
-    //        // set king and rook to moved
-    //        if (movedPiece is King)
-    //        {
+            // Castling
+            // check if movedPiece is from type King
+            // check if king and one of the Rooks haven´t been moved yet
+            // check if the way is free (no bishop or knight or other piece is on same line)
+            // move king two steps in rooks direction -> place rook on the left or right nearby
+            // set king and rook to moved
+            if (SelectedPiece is King && SelectedPiece.HasMoved == false)
+            {
 
-    //        }
+            }
 
-    //        // Promotion
-    //        // check if pawn has reached end of board
-    //        // ask player to which piece the pawn should be promoted
-    //        // remove pawn -> replace it with players choice
-    //        if (selectedPiece is Pawn && selectedPiece.Position.X == 7)
-    //        {
-    //            // piece needed to replace either with the user input or a specific piece
-    //            selectedPiece.IsKilled = true;
-    //            //pieces.Add(new ...(movedPiece.Position));
-    //        }
-    //    }
-    //}
+            // Promotion
+            // check if pawn has reached end of board
+            // ask player to which piece the pawn should be promoted
+            // remove pawn -> replace it with players choice
+            if (SelectedPiece is Pawn)
+            {
+                Promotion();
+            }
+        }
+
+        #region Promotion
+        void Promotion()
+        {
+            MainWindow Promotion = (MainWindow)Application.Current.MainWindow;
+            /* 
+             * First check if a pawn is at the end of the board
+             * then open the promotion window
+             */
+
+            // check if its black or white
+            if (!SelectedPiece.IsWhite && SelectedPiece.Position.Equals(new PointStruct(SelectedPiece.Position.X, 0)))
+            {
+                // Window
+                //Promotion.promationContentB();
+                // piece needed to replace either with the user input or a specific piece
+                SelectedPiece.IsKilled = true;
+                //pieces.Add(new ...(movedPiece.Position));
+
+            }
+
+            if (SelectedPiece.IsWhite && SelectedPiece.Position.Equals(new PointStruct(SelectedPiece.Position.X, 7)))
+            {
+                // Window
+                //Promotion.promationContentW();
+
+                // piece needed to replace either with the user input or a specific piece
+                SelectedPiece.IsKilled = true;
+                //pieces.Add(new ...(movedPiece.Position));
+
+            }
+        }
+
+
+    }
+    #endregion
     #endregion
 
     #endregion

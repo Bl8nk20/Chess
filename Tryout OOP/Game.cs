@@ -74,8 +74,12 @@ internal class Game
         }
         // check if piece has not moved
         // maybe need to use goto?
+<<<<<<< HEAD
         if (currentplayer.SelectedPiece.Position.Equals(TargetPoint)
             || !(currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece)))
+=======
+        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint) || currentplayer.SelectedPiece == null)
+>>>>>>> 7ed753110e4c15c513950f63dc4d0d36dd786589
         {
             return;
         }
@@ -87,6 +91,11 @@ internal class Game
 
             // move piece to targeted point
             currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces, currentplayer.SelectedPiece);
+
+            // ! Special Moves Like EnPassant, Castling, Promotion !
+            currentplayer.specialMoves();
+
+            // Capture Pieces
             Capture(currentplayer.SelectedPiece);
 
             
@@ -105,12 +114,22 @@ internal class Game
             // update list if needed
             currentplayer.updateList(Pieces);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7ed753110e4c15c513950f63dc4d0d36dd786589
             // if everything is done switch turn sides
             Player1.SwitchTurns();
             Player2.SwitchTurns();
         }
         // check if the game has ended
-        isEnd();
+        if (isEnd())
+        {
+            MainWindow VictoryScreen = (MainWindow)Application.Current.MainWindow;
+            // open the Victory Screen !
+            // maybe switch case or own method to check who won 
+        }
+
     }
 
     #endregion
@@ -139,6 +158,7 @@ internal class Game
     }
     #endregion
 
+    #region Piece Searching
     /// <summary>
     /// A Method to search The ChessPieces 
     /// in the List, which should be moved
@@ -158,7 +178,9 @@ internal class Game
         }
         return null;
     }
+    #endregion
 
+    #region Capture
     /// <summary>
     /// Method for the capute logic
     /// needed: List of All Pieces
@@ -204,6 +226,8 @@ internal class Game
         // return ether true or false
         return this.GAMESTATUS != GameStatus.ACTIVE;
     }
+
+    #endregion
 
     #endregion
 }
