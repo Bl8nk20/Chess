@@ -66,13 +66,9 @@ internal class Game
 
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
-        if (currentplayer.SelectedPiece == null)
-        {
-            return;
-        }
-
-        // check if its the turn of the player
-        if (!currentplayer.IsTurn)
+        // check if its the turn of the player and if he selected a piece
+        if (!currentplayer.IsTurn
+            || currentplayer.SelectedPiece == null)
         {
             return;
         }
