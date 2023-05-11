@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Tryout_OOP;
@@ -124,6 +125,24 @@ public class Player
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// search the King of the current player
+    /// </summary>
+    /// <param name="currentPlayer"></param>
+    /// <returns></returns>
+    public Piece searchKing()
+    {
+        foreach (Piece piece in pieces)
+        {
+            if(piece is King)
+            {
+                return piece;
+            }
+        }
+
+        return null;
     }
 
     #region Special Moves

@@ -50,7 +50,7 @@ public class King : Piece
     }
 
 
-    /*public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces, Pieces movedPiece)
+    /*public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces, Piece movedPiece)
     {
         // check the target location if there is a piece of same color
         foreach (var piece in pieces)
@@ -67,8 +67,7 @@ public class King : Piece
         {
             if (piece.IsWhite != isWhite)
             {
-                if (!(piece is King)
-                    && !(piece is Pawn)
+                if (!(piece is Pawn)
                     && piece.CanMove(TargetPoint, pieces, piece))
                 {
                     return false;
@@ -76,12 +75,6 @@ public class King : Piece
 
                 if (piece is Pawn
                     && piece.CapturePiece(TargetPoint))
-                {
-                    return false;
-                }
-
-                if (piece is King
-                    && piece.Movement(TargetPoint))
                 {
                     return false;
                 }

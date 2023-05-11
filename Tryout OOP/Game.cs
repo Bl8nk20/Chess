@@ -62,14 +62,15 @@ internal class Game
         {
             turn(Player2, TargetPoint);
         }
-
-        // if everything is done switch turn sides
-        Player1.SwitchTurns();
-        Player2.SwitchTurns();
     }
 
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
+        if (currentplayer.SelectedPiece == null)
+        {
+            return;
+        }
+
         // check if its the turn of the player
         if (!currentplayer.IsTurn)
         {
@@ -77,19 +78,40 @@ internal class Game
         }
         // check if piece has not moved
         // maybe need to use goto?
-        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint))
+        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint)
+            || !(currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece)))
         {
             return;
         }
         // check if player can move piece to his target
         if (currentplayer.CanMove(Player1.SelectedPiece))
         {
+            // save last location to cancel a false move
+            PointStruct lastLocation = currentplayer.SelectedPiece.Position;
+
             // move piece to targeted point
             currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces, currentplayer.SelectedPiece);
             Capture(currentplayer.SelectedPiece);
 
+            
+
+            // check if any enemy piece can move to current players king to check if the move is legit
+            foreach (var piece in Pieces)
+            {
+                if (piece.IsWhite != currentplayer.IsWhite
+                    && piece.CanMove(currentplayer.searchKing().Position, Pieces, piece))
+                {
+                    currentplayer.SelectedPiece.CancelMove(lastLocation);
+                    return;
+                }
+            }
+
             // update list if needed
             currentplayer.updateList(Pieces);
+
+            // if everything is done switch turn sides
+            Player1.SwitchTurns();
+            Player2.SwitchTurns();
         }
         // check if the game has ended
         isEnd();
