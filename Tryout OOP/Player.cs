@@ -128,6 +128,24 @@ public class Player
         }
     }
 
+    /// <summary>
+    /// search the King of the current player
+    /// </summary>
+    /// <param name="currentPlayer"></param>
+    /// <returns></returns>
+    public Piece searchKing()
+    {
+        foreach (Piece piece in pieces)
+        {
+            if(piece is King)
+            {
+                return piece;
+            }
+        }
+
+        return null;
+    }
+
     #region Special Moves
     /// <summary>
     /// a method to validate if certain moves are valid

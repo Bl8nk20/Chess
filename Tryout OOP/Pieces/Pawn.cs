@@ -117,7 +117,7 @@ public class Pawn : Piece
     /// </summary>
     /// <param name="TargetPoint"></param>
     /// <returns></returns>
-    public override bool CapturePiece(PointStruct TargetPoint)
+    public bool CapturePiece(PointStruct TargetPoint)
     {
         if (this.isWhite
             && TargetPoint.Y == this.Position.Y + 1
