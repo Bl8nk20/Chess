@@ -51,13 +51,6 @@ namespace Tryout_OOP
             Game Game = new Game();
             Board Board = new Board(spielfeld, TextBlocks);
             Board.DrawPieces(TextBlocks, Game.InitialPieces());
-            // check if game has ended
-            if (Game.isEnd())
-            {
-                FEN_Startup fEN_Startup = new FEN_Startup();
-                fEN_Startup.OverWriteFile(Board.TextBlocks, Game.Pieces);
-                Close();
-            }
         }
 
         //---------------------------------------- ------------------------------------------
@@ -177,54 +170,6 @@ namespace Tryout_OOP
             promationContentW.BeginAnimation(HeightProperty, promotionAnimationW);
         }
 
-        /// <summary>
-        /// opens the window to the coressponding color
-        /// </summary>
-
-        /*
-        private void PawnAtTheEnd()
-        {
-            if(pawn reached the end of each side)
-            {
-                //check if the pawn is black or white 
-                if (isWhite ? '\u2657' : '\u265D')
-                {
-                    PromotionDropdownOpenB();
-                    PromotionDropdownOpenW();
-                }
-            }
-        }
-
-        /// <summary>
-        /// closes window and change the pawn to the selected piece
-        /// </summary>
-        private void ChossenPiece()
-        {
-            piece = selected piece
-            switch(piece)
-            {
-                case 1:
-                    pawn changes to Queen;
-                    PromotionDropdownCloseB();
-                    PromotionDropdownCloseW();
-
-                case 2:
-                    pawn changes to Rook;
-                    PromotionDropdownCloseB();
-                    PromotionDropdownCloseW();
-
-                case 3:
-                    pawn changes to Bishop;
-                    PromotionDropdownCloseB();
-                    PromotionDropdownCloseW();
-
-                case 4:
-                    pawn changes to Knight;
-                    PromotionDropdownCloseB();
-                    PromotionDropdownCloseW();       
-            }
-        }
-        */
         #endregion
 
         #region NotImplementedYet
