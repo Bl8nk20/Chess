@@ -194,6 +194,8 @@ public class Player
             /* 
              * First check if a pawn is at the end of the board
              * then open the promotion window
+             * 
+             * ! Waiting for Phils events and windows !
              */
 
             // check if its black or white
