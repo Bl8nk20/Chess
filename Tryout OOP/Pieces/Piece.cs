@@ -198,11 +198,6 @@ public abstract class Piece
 
     public abstract bool Movement(PointStruct Target);
 
-    public virtual bool CapturePiece(PointStruct TargetPoint)
-    {
-        return false;
-    }
-
     public bool MoveTo(PointStruct Target, List<Piece> pieces, Piece movedPiece)
     {
         // if the Move if false then returned False
@@ -214,6 +209,11 @@ public abstract class Piece
         // if not false -> set targeted Coordinates and return true
         this.Position = Target;
         return true;
+    }
+
+    public void CancelMove(PointStruct lastLocation)
+    {
+        this.Position = lastLocation;
     }
 
     /// <summary>

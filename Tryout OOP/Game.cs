@@ -66,20 +66,29 @@ internal class Game
 
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
-        // check if its the turn of the player
-        if (!currentplayer.IsTurn)
+        // check if its the turn of the player and if he selected a piece
+        if (!currentplayer.IsTurn
+            || currentplayer.SelectedPiece == null)
         {
             return;
         }
         // check if piece has not moved
         // maybe need to use goto?
+<<<<<<< HEAD
+        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint)
+            || !(currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece)))
+=======
         if (currentplayer.SelectedPiece.Position.Equals(TargetPoint) || currentplayer.SelectedPiece == null)
+>>>>>>> 7ed753110e4c15c513950f63dc4d0d36dd786589
         {
             return;
         }
         // check if player can move piece to his target
         if (currentplayer.CanMove(Player1.SelectedPiece))
         {
+            // save last location to cancel a false move
+            PointStruct lastLocation = currentplayer.SelectedPiece.Position;
+
             // move piece to targeted point
             currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces, currentplayer.SelectedPiece);
 
@@ -89,10 +98,26 @@ internal class Game
             // Capture Pieces
             Capture(currentplayer.SelectedPiece);
 
+            
+
+            // check if any enemy piece can move to current players king to check if the move is legit
+            foreach (var piece in Pieces)
+            {
+                if (piece.IsWhite != currentplayer.IsWhite
+                    && piece.CanMove(currentplayer.searchKing().Position, Pieces, piece))
+                {
+                    currentplayer.SelectedPiece.CancelMove(lastLocation);
+                    return;
+                }
+            }
+
             // update list if needed
             currentplayer.updateList(Pieces);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 7ed753110e4c15c513950f63dc4d0d36dd786589
             // if everything is done switch turn sides
             Player1.SwitchTurns();
             Player2.SwitchTurns();

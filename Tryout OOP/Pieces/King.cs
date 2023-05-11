@@ -49,48 +49,6 @@ public class King : Piece
         return x + y == 1 || x * y == 1;
     }
 
-
-    /*public override bool CanMove(PointStruct TargetPoint, List<Pieces> pieces, Pieces movedPiece)
-    {
-        // check the target location if there is a piece of same color
-        foreach (var piece in pieces)
-        {
-            if (piece.Position.X == TargetPoint.X
-                && piece.Position.Y == TargetPoint.Y
-                && piece.IsWhite == isWhite)
-            {
-                return false;
-            }
-        }
-
-        foreach (var piece in pieces)
-        {
-            if (piece.IsWhite != isWhite)
-            {
-                if (!(piece is King)
-                    && !(piece is Pawn)
-                    && piece.CanMove(TargetPoint, pieces, piece))
-                {
-                    return false;
-                }
-
-                if (piece is Pawn
-                    && piece.CapturePiece(TargetPoint))
-                {
-                    return false;
-                }
-
-                if (piece is King
-                    && piece.Movement(TargetPoint))
-                {
-                    return false;
-                }
-            }
-        }
-
-        return Movement(TargetPoint);
-    }*/
-
     #region Castling Methods (WIP)
     /// <summary>
     /// check if the castlingmoevemnt is valid
