@@ -74,15 +74,12 @@ internal class Game
         }
         // check if piece has not moved
         // maybe need to use goto?
-<<<<<<< HEAD
         if (currentplayer.SelectedPiece.Position.Equals(TargetPoint)
-            || !(currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece)))
-=======
-        if (currentplayer.SelectedPiece.Position.Equals(TargetPoint) || currentplayer.SelectedPiece == null)
->>>>>>> 7ed753110e4c15c513950f63dc4d0d36dd786589
+            || !(currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece)) || currentplayer.SelectedPiece == null)
         {
             return;
         }
+
         // check if player can move piece to his target
         if (currentplayer.CanMove(Player1.SelectedPiece))
         {
@@ -114,10 +111,6 @@ internal class Game
             // update list if needed
             currentplayer.updateList(Pieces);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7ed753110e4c15c513950f63dc4d0d36dd786589
             // if everything is done switch turn sides
             Player1.SwitchTurns();
             Player2.SwitchTurns();
