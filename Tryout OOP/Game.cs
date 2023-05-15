@@ -14,6 +14,8 @@ internal class Game
     Player Player1;
     Player Player2;
     public List<Piece> Pieces;
+    MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+
     #endregion
 
     #region Constructor
@@ -39,11 +41,14 @@ internal class Game
         if (Player1.IsTurn)
         {
             Player1.SelectedPiece = searchPiece(SelectedPoint);
+            wnd.TurnWhite();
 
         }
         else if ( Player2.IsTurn)
         {
             Player2.SelectedPiece = searchPiece(SelectedPoint);
+            wnd.TurnBlack();
+
         }
     }
 
@@ -200,10 +205,17 @@ internal class Game
                 {
                     // set the gamestatuws to everything except active
                     GAMESTATUS = (piece.IsWhite) ? GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
-                    // close window / show victory screen 
+                    if (GAMESTATUS == GameStatus.BLACK_WIN)
+                    {
+                        wnd.Black_Won();
+                    }
+                    else if (GAMESTATUS == GameStatus.WHITE_WIN)
+                    {
+                        wnd.White_Won();
+                    }                    // close window / show victory screen 
                     // MainWindow.Won();
                     // Show a messagebox to visualize victory
-                    MessageBox.Show(GAMESTATUS.ToString());
+                    //MessageBox.Show(GAMESTATUS.ToString());
                 }
                 // break to remove it later from the list
                 break;
