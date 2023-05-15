@@ -22,6 +22,8 @@ namespace Tryout_OOP
         private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
         // creates a new timer
         DispatcherTimer timer = new DispatcherTimer();
+        Game game = new Game();
+
         #endregion
 
         #region Constructor
@@ -122,6 +124,64 @@ namespace Tryout_OOP
         }
         #endregion
 
+        #region Turns
+        public void TurnWhite()
+        {
+            TurnLabel.Content = "White";
+        }
+        public void TurnBlack()
+        {
+            TurnLabel.Content = "Black";
+        }
+        #endregion
+
+        #region Graveyard
+
+        int c = 0;
+
+
+        public List<Piece> Pieces;
+        public void CounterG()
+        {
+            foreach (Piece piece in Pieces)
+            {
+                if (piece is Pawn && piece.IsKilled == true && piece.IsWhite)
+                {
+                    GCBP.Content = c++;
+                    GCWP.Content = c++;
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region GameOver
+
+        public void FF(object sender, RoutedEventArgs e)
+        {
+            GameOverOverlay.Visibility = Visibility.Visible;
+            GameState.Content = "~ FF ~";
+        }
+
+        public void Black_Won()
+        {
+            GameOverOverlay.Visibility = Visibility.Visible;
+            GameState.Content = "~ Black Won ~";
+        }
+
+        public void White_Won()
+        {
+            GameOverOverlay.Visibility = Visibility.Visible;
+            GameState.Content = "~ White Won ~";
+        }
+
+        public void Stalemate()
+        {
+            GameOverOverlay.Visibility = Visibility.Visible;
+            GameState.Content = "~ Stalemate ~";
+        }
+        #endregion
 
         #region Promotion
         /// <summary>
@@ -169,6 +229,47 @@ namespace Tryout_OOP
             DoubleAnimation promotionAnimationW = new DoubleAnimation(0, _openCloseDuration);
             promationContentW.BeginAnimation(HeightProperty, promotionAnimationW);
         }
+
+        /// <summary>
+        /// promotion white
+        /// </summary>
+        private void WQ(object sender, MouseButtonEventArgs e)
+        {
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+        private void WR(object sender, MouseButtonEventArgs e)
+        {
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+        private void WB(object sender, MouseButtonEventArgs e)
+        {
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+        private void WN(object sender, MouseButtonEventArgs e)
+        {
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// promotion black
+        /// </summary>
+        private void BQ(object sender, MouseButtonEventArgs e)
+        {
+            promationContentB.Visibility = Visibility.Hidden;
+        }
+        private void BR(object sender, MouseButtonEventArgs e)
+        {
+            promationContentB.Visibility = Visibility.Hidden;
+        }
+        private void BB(object sender, MouseButtonEventArgs e)
+        {
+            promationContentB.Visibility = Visibility.Hidden;
+        }
+        private void BN(object sender, MouseButtonEventArgs e)
+        {
+            promationContentB.Visibility = Visibility.Hidden;
+        }
+
 
         #endregion
 

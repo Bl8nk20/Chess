@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ms85866\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj": {}
+    "C:\\Users\\ph89214\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ms85866\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj": {
+    "C:\\Users\\ph89214\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ms85866\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj",
+        "projectUniqueName": "C:\\Users\\ph89214\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj",
         "projectName": "Tryout OOP",
-        "projectPath": "C:\\Users\\ms85866\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj",
-        "packagesPath": "C:\\Users\\ms85866\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ms85866\\source\\repos\\Chess\\Tryout OOP\\obj\\",
+        "projectPath": "C:\\Users\\ph89214\\source\\repos\\Chess\\Tryout OOP\\Tryout OOP.csproj",
+        "packagesPath": "C:\\Users\\ph89214\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ph89214\\source\\repos\\Chess\\Tryout OOP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ms85866\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ph89214\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -68,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
