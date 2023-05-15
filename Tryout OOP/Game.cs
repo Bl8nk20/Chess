@@ -12,39 +12,50 @@ internal class Game
     #region Properties
     GameStatus GAMESTATUS;
     GameMode GAMEMODE;
-    Player Player1;
-    Player Player2;
     public List<Piece> Pieces;
+    Player[] players;
     #endregion
 
     #region Constructor
     public Game()
     {
-
-        this.Player1 = new Player(true); // WHite Player
-        Player1.IsTurn = true;
-        this.Player2 = new Player(); // Black Player
-        Player2.IsTurn = false;
+        this.players = new Player[2];
+        this.players[0] = new Player(true); // White Player
+        players[0].IsTurn = true;
+        this.players[1] = new Player(); // Black Player
+        players[1].IsTurn = false;
         this.Pieces = InitialPieces();
     }
     #endregion
 
     #region Methods
+
     #region PlayerTurnStuff
+
+    /// <summary>
+    /// Method to set the current Player
+    /// with shortened boolean writing
+    /// </summary>
+    /// <returns></returns>
+    private Player setCurrentPlayer()
+    {
+        return (players[0].IsTurn) ? players[0] : players[1];
+    }
+
     /// <summary>
     /// A method to set the selected piece according, which players turn is
     /// </summary>
     /// <param name="SelectedPoint"></param>
     public void SetSelectedPiece(PointStruct SelectedPoint)
     {
-        if (Player1.IsTurn)
+        if (players[0].IsTurn)
         {
-            Player1.SelectedPiece = searchPiece(SelectedPoint);
+            players[0].SelectedPiece = players[0].searchPiece(SelectedPoint);
 
         }
-        else if ( Player2.IsTurn)
+        else if (players[1].IsTurn)
         {
-            Player2.SelectedPiece = searchPiece(SelectedPoint);
+            players[1].SelectedPiece = players[1].searchPiece(SelectedPoint);
         }
     }
 
@@ -55,18 +66,22 @@ internal class Game
     /// </summary>
     public void playerMovement(PointStruct TargetPoint)
     {
-        if (Player1.IsTurn)
-        {
-            turn(Player1, TargetPoint);    
-        }
-        else if(Player2.IsTurn)
-        {
-            turn(Player2, TargetPoint);
-        }
+        // Set the current player
+        Player currentPlayer = setCurrentPlayer();
+
+        // TurnLogic chess
+        turn(currentPlayer, TargetPoint);
     }
 
+
+    /// <summary>
+    /// Internal Logic for the turns in chess
+    /// </summary>
+    /// <param name="currentplayer"></param>
+    /// <param name="TargetPoint"></param>
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
+<<<<<<< Updated upstream
         if(currentplayer.SelectedPiece is King && Math.Abs(TargetPoint.X - currentplayer.SelectedPiece.Position.X) > 1)
         {
             // ! Special Moves Like EnPassant, Castling, Promotion !
@@ -75,6 +90,24 @@ internal class Game
             // if everything is done switch turn sides
             Player1.SwitchTurns();
             Player2.SwitchTurns();
+=======
+        // En Passant Switching if a Pawn is "Passable"
+        foreach (var piece in currentplayer.Pieces)
+        {
+            // skip pieces which are not a Pawn
+            if (piece is not Pawn)
+            {
+                continue;
+            }
+
+            Pawn pawn = (Pawn)piece;
+            if (!pawn.CanBePassed)
+            {
+                continue;
+            }
+            pawn.SwitchCanBePassed();
+
+>>>>>>> Stashed changes
         }
 
         // check if its the turn of the player and if he selected a piece
@@ -83,6 +116,7 @@ internal class Game
         {
             return;
         }
+
         // check if piece has not moved
         // maybe need to use goto?
         if (currentplayer.SelectedPiece.Position.Equals(TargetPoint)
@@ -91,8 +125,15 @@ internal class Game
             return;
         }
 
+        // Castling Opportunity ? 
+        if (currentplayer.SelectedPiece is King)
+        {
+            // Castling
+            currentplayer.Castling(currentplayer.SelectedPiece);
+        }
+
         // check if player can move piece to his target
-        if (currentplayer.CanMove(Player1.SelectedPiece))
+        if (currentplayer.CanMove(currentplayer.SelectedPiece))
         {
             // save last location to cancel a false move
             PointStruct lastLocation = currentplayer.SelectedPiece.Position;
@@ -115,16 +156,26 @@ internal class Game
                 }
             }
 
+            // Switch EnPassant Possibility
+            if (currentplayer.SelectedPiece is Pawn
+                && (currentplayer.SelectedPiece.Position.Equals(new PointStruct(lastLocation.X, lastLocation.Y + 2)) 
+                || currentplayer.SelectedPiece.Position.Equals(new PointStruct(lastLocation.X, lastLocation.Y - 2))))
+            {
+                Pawn pawn = (Pawn)currentplayer.SelectedPiece;
+                pawn.SwitchCanBePassed();
+            }
+
             // update list if needed
             currentplayer.updateList(Pieces);
 
             // if everything is done switch turn sides
-            Player1.SwitchTurns();
-            Player2.SwitchTurns();
+            players[0].SwitchTurns();
+            players[1].SwitchTurns();
         }
         // check if the game has ended
         if (isEnd())
         {
+            // WAITING FOR PHIL !!!!
             MainWindow VictoryScreen = (MainWindow)Application.Current.MainWindow;
             // open the Victory Screen !
             // maybe switch case or own method to check who won 
@@ -142,14 +193,14 @@ internal class Game
     internal List<Piece> InitialPieces()
     {
         // Looping for each player list to one list with both contents
-        var pieces = new List<Piece>(Player1.Pieces.Count() + Player2.Pieces.Count());
+        var pieces = new List<Piece>(players[0].Pieces.Count() + players[1].Pieces.Count());
 
         // loop through the pieces of each player to add them in a bigger list
-        foreach (var item in Player1.Pieces)
+        foreach (var item in players[0].Pieces)
         {
             pieces.Add(item);
         }
-        foreach (var item in Player2.Pieces)
+        foreach (var item in players[1].Pieces)
         {
             pieces.Add(item);
         }
@@ -157,29 +208,7 @@ internal class Game
         return pieces;
     }
     #endregion
-
-    #region Piece Searching
-    /// <summary>
-    /// A Method to search The ChessPieces 
-    /// in the List, which should be moved
-    /// </summary>
-    /// <param name="p"></param>
-    /// <returns>nothing (void)</returns>
-    internal Piece searchPiece(PointStruct p)
-    {
-        // Find Piece to move
-        foreach (var piece in Pieces)
-        {
-            // if it matches set the movedPiece to the piece at the corresponding index
-            if (piece.Position.Equals(p))
-            {
-                return piece;
-            }
-        }
-        return null;
-    }
-    #endregion
-
+    
     #region Capture
     /// <summary>
     /// Method for the capute logic
@@ -217,6 +246,7 @@ internal class Game
             }
         }
     }
+
     /// <summary>
     /// checking for end state
     /// </summary>

@@ -46,7 +46,11 @@ public class King : Piece
     {
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);
+<<<<<<< Updated upstream
 
+=======
+       
+>>>>>>> Stashed changes
         return x + y == 1 || x * y == 1;
     }
 

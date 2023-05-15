@@ -88,6 +88,11 @@ public abstract class Piece
 
     #region Methods
 
+<<<<<<< Updated upstream
+=======
+    
+
+>>>>>>> Stashed changes
     /// <summary>
     /// check the target point and the way to the target to see if movement is possible
     /// </summary>
