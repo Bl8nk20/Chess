@@ -50,12 +50,12 @@ internal class Game
     {
         if (players[0].IsTurn)
         {
-            players[0].SelectedPiece = players[0].searchPiece(SelectedPoint);
+            players[0].SelectedPiece = players[0].SearchPiece(SelectedPoint);
 
         }
         else if (players[1].IsTurn)
         {
-            players[1].SelectedPiece = players[1].searchPiece(SelectedPoint);
+            players[1].SelectedPiece = players[1].SearchPiece(SelectedPoint);
         }
     }
 
@@ -81,16 +81,15 @@ internal class Game
     /// <param name="TargetPoint"></param>
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
-<<<<<<< Updated upstream
-        if(currentplayer.SelectedPiece is King && Math.Abs(TargetPoint.X - currentplayer.SelectedPiece.Position.X) > 1)
+        if (currentplayer.SelectedPiece is King && Math.Abs(TargetPoint.X - currentplayer.SelectedPiece.Position.X) > 1)
         {
             // ! Special Moves Like EnPassant, Castling, Promotion !
             currentplayer.Castling(currentplayer.SelectedPiece, TargetPoint);
 
             // if everything is done switch turn sides
-            Player1.SwitchTurns();
-            Player2.SwitchTurns();
-=======
+            players[0].SwitchTurns();
+            players[1].SwitchTurns();
+        }
         // En Passant Switching if a Pawn is "Passable"
         foreach (var piece in currentplayer.Pieces)
         {
@@ -106,8 +105,6 @@ internal class Game
                 continue;
             }
             pawn.SwitchCanBePassed();
-
->>>>>>> Stashed changes
         }
 
         // check if its the turn of the player and if he selected a piece
@@ -129,7 +126,7 @@ internal class Game
         if (currentplayer.SelectedPiece is King)
         {
             // Castling
-            currentplayer.Castling(currentplayer.SelectedPiece);
+            currentplayer.Castling(currentplayer.SelectedPiece, TargetPoint);
         }
 
         // check if player can move piece to his target
