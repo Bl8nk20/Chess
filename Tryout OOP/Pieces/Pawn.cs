@@ -6,6 +6,9 @@ namespace Tryout_OOP;
 
 public class Pawn : Piece
 {
+    private bool canBePassed;
+    public bool CanBePassed;
+
     /// <summary>
     /// Constructor for the Roock Chesspiece
     /// </summary>
@@ -14,9 +17,16 @@ public class Pawn : Piece
         : base(Point, isWhite, isWhite ? '\u2659' : '\u265F')
     {
         this.PieceValue = 1;
+        this.canBePassed = false;
         // empty Constructor cause nothing is needed :D
         // and also because everything is handed to the mother class
     }
+
+    public void SwitchCanBePassed()
+    {
+        canBePassed = !canBePassed;
+    }
+
 
     /// <summary>
     /// 
@@ -38,20 +48,16 @@ public class Pawn : Piece
         else if (!this.isWhite && !hasMoved)
         {
             // if pawn is NOT white and have NOT moved already : 2 step OR 1 step "down"
-            return (TargetPoint.Y == this.Position.Y - 2
-                && this.Position.X == TargetPoint.X)
-                || (TargetPoint.Y == this.Position.Y - 1
-                && this.Position.X == TargetPoint.X);
+            return TargetPoint.Equals(new PointStruct(this.Position.X, this.Position.Y - 2))
+                || TargetPoint.Equals(new PointStruct(this.Position.X, this.Position.Y - 1));
         }
         // white Pawn movement
         if (hasMoved)
         {
             return TargetPoint.X == Position.X && TargetPoint.Y == Position.Y + 1;
         }
-        return ((TargetPoint.Y == this.Position.Y + 2
-            && this.Position.X == TargetPoint.X)
-            || (TargetPoint.Y == this.Position.Y + 1
-            && this.Position.X == TargetPoint.X));
+        return TargetPoint.Equals(new PointStruct(this.Position.X, this.Position.Y + 2))
+            || TargetPoint.Equals(new PointStruct(this.Position.X, this.Position.Y + 1));
     }
 
     public override bool CanMove(PointStruct TargetPoint, List<Piece> pieces, Piece movedPiece)
@@ -59,53 +65,25 @@ public class Pawn : Piece
         // check the target location if there is a piece of same color
         foreach (var piece in pieces)
         {
-            if (piece.Position.X == TargetPoint.X
-                && piece.Position.Y == TargetPoint.Y
+            if (piece.Position.Equals(TargetPoint)
                 && piece.IsWhite == isWhite)
             {
                 return false;
             }
         }
 
-        if (movedPiece.IsWhite == true)
+        foreach (var piece in pieces)
         {
+            if (CapturePiece(TargetPoint)
+                && piece.Position.X == TargetPoint.X
+                && piece.Position.Y == TargetPoint.Y)
             {
-                foreach (var piece in pieces)
-                {
-                    if (CapturePiece(TargetPoint)
-                        && piece.Position.X == TargetPoint.X
-                        && piece.Position.Y == TargetPoint.Y)
-                    {
-                        return true;
-                    }
-
-                    if (movedPiece.Movement(TargetPoint)
-                        && piece.Position.X == this.Point.X
-                        && piece.Position.Y == this.Point.Y + 1)
-                    {
-                        return false;
-                    }
-                }
+                return true;
             }
-        }
 
-        if (movedPiece.IsWhite == false)
-        {
-            foreach (var piece in pieces)
+            if (piece.Position.Equals(TargetPoint))
             {
-                if (CapturePiece(TargetPoint)
-                        && piece.Position.X == TargetPoint.X
-                        && piece.Position.Y == TargetPoint.Y)
-                {
-                    return true;
-                }
-
-                if (movedPiece.Movement(TargetPoint)
-                    && piece.Position.X == this.Point.X
-                    && piece.Position.Y == this.Point.Y - 1)
-                {
-                    return false;
-                }
+                return false;
             }
         }
 

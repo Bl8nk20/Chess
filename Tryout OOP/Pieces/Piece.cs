@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -12,6 +13,7 @@ namespace Tryout_OOP;
 public abstract class Piece
 {
     #region Properties
+
     // not important at that stage of the development
     protected byte piecevalue;
     public byte PieceValue 
@@ -85,6 +87,7 @@ public abstract class Piece
     #endregion
 
     #region Methods
+
     /// <summary>
     /// check the target point and the way to the target to see if movement is possible
     /// </summary>
@@ -102,12 +105,6 @@ public abstract class Piece
             {
                 return false;
             }
-
-            /*if (piece.isWhite != isWhite
-                && piece.CanMove(King.Position, pieces, piece))
-            {
-                return false;
-            }*/
         }
 
         // check the way to the target location if it's in the first quadrant
@@ -211,9 +208,10 @@ public abstract class Piece
         return true;
     }
 
-    public void CancelMove(PointStruct lastLocation)
+    public void Move(PointStruct lastLocation)
     {
         this.Position = lastLocation;
+        this.hasMoved = true;
     }
 
     /// <summary>

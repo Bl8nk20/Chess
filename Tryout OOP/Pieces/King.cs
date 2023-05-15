@@ -46,48 +46,9 @@ public class King : Piece
     {
         int x = Math.Abs(this.Point.X - TargetPoint.X);
         int y = Math.Abs(this.Point.Y - TargetPoint.Y);
+
         return x + y == 1 || x * y == 1;
     }
-
-    #region Castling Methods (WIP)
-    /// <summary>
-    /// check if the castlingmoevemnt is valid
-    /// castling: rook not moved!
-    ///           king not moved
-    ///           knight and bishop out of the way
-    /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <returns></returns>
-    //private bool isValidCastling(Board board,
-    //                                Spot start, Spot end)
-    //{
-    //    // check if it has been done before
-    //    if (this.isCastlingDone)
-    //    {
-    //        return false;
-    //    }
-
-    //    // Logic for returning true or false
-    //    // implement it
-    //    return false;
-    //}
-
-    /// <summary>
-    /// execute the castling moevement !
-    /// IMPLEMENTION NEEDED !!!
-    /// </summary>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <returns></returns>
-    //public bool isCastlingMove(Spot start, Spot end)
-    //{
-    //    // check if the starting and
-    //    // ending position are correct
-    //    return false;
-    //}
-    #endregion
 
     #endregion
 }
