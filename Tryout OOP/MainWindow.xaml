@@ -14,353 +14,6 @@
         Background="{x:Null}" 
         Foreground="{x:Null}">
     <Grid Background="{StaticResource BackgroundM}">
-        <!-- Board -->
-        <!--
-        <Grid HorizontalAlignment="Left" Height="600" Width="600" Margin="120,0,0,0" VerticalAlignment="Center" Background="#FF968E8E">
-            -->
-        <!-- Outline of the Board -->
-        <!--
-            
-            <Border BorderThickness="15" BorderBrush="{StaticResource BoardOutLine}">
-                <Grid>
-                    -->
-        <!-- Rows of the Board -->
-        <!--
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    -->
-        <!-- Colums of the Board -->
-        <!--
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    -->
-        <!-- Row 0 -->
-        <!-- DragEnter="DragMoveEnter" DragLeave="DragMoveLeave" -->
-        <!--
-                    <Grid Grid.Row="0" Grid.Column="0" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BRook.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BRook.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="8" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="1" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BKnight.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BKnight.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="2" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BBishop.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BBishop.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="3" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BQueen.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BQueen.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="4" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BKing.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BKing.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="5" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BBishop.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BBishop.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="6" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BKnight.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BKnight.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="7" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="72" Source="/BRook.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BRook.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    
-                    -->
-        <!-- Row 1 -->
-        <!--
-                    <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource BlackTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="7" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="1" Background="{StaticResource WhiteTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="2" Background="{StaticResource BlackTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="3" Background="{StaticResource WhiteTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="4" Background="{StaticResource BlackTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="5" Background="{StaticResource WhiteTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="6" Background="{StaticResource BlackTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="7" Background="{StaticResource WhiteTile}">
-                        <Image Height="71" VerticalAlignment="Center" Width="61" Source="/BPawn.png" Stretch="Fill" HorizontalAlignment="Center" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    
-                    -->
-        <!-- Row 2 -->
-        <!--
-                    <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource WhiteTile}">
-                        <TextBlock Text="6" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="1" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="2" Grid.Column="2" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="2" Grid.Column="3" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="2" Grid.Column="4" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="2" Grid.Column="5" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="2" Grid.Column="6" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="2" Grid.Column="7" Background="{StaticResource BlackTile}"/>
-                    
-                    -->
-        <!-- Row 3 -->
-        <!--
-                    <Grid Grid.Row="3" Grid.Column="0" Background="{StaticResource BlackTile}">
-                        <TextBlock Text="5" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="3" Grid.Column="1" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="3" Grid.Column="2" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="3" Grid.Column="3" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="3" Grid.Column="4" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="3" Grid.Column="5" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="3" Grid.Column="6" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="3" Grid.Column="7" Background="{StaticResource WhiteTile}"/>
-                    
-                    -->
-        <!-- Row 4 -->
-        <!--
-                    <Grid Grid.Row="4" Grid.Column="0" Background="{StaticResource WhiteTile}">
-                        <TextBlock Text="4" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="4" Grid.Column="1" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="4" Grid.Column="2" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="4" Grid.Column="3" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="4" Grid.Column="4" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="4" Grid.Column="5" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="4" Grid.Column="6" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="4" Grid.Column="7" Background="{StaticResource BlackTile}"/>
-                    
-                    -->
-        <!-- Row 5 -->
-        <!--
-                    <Grid Grid.Row="5" Grid.Column="0" Background="{StaticResource BlackTile}">
-                        <TextBlock Text="3" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="5" Grid.Column="1" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="5" Grid.Column="2" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="5" Grid.Column="3" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="5" Grid.Column="4" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="5" Grid.Column="5" Background="{StaticResource WhiteTile}"/>
-                    <Grid Grid.Row="5" Grid.Column="6" Background="{StaticResource BlackTile}"/>
-                    <Grid Grid.Row="5" Grid.Column="7" Background="{StaticResource WhiteTile}"/>
-                    
-                    -->
-        <!-- Row 6 -->
-        <!--
-                    <Grid Grid.Row="6" Grid.Column="0" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="2" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="1" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="2" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="3" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="4" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                         </Image>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="5" Background="{StaticResource BlackTile}">
-                         <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                         </Image>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="6" Background="{StaticResource WhiteTile}">
-                         <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                         </Image>
-                    </Grid>
-                    <Grid Grid.Row="6" Grid.Column="7" Background="{StaticResource BlackTile}">
-                         <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WPawn.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                         </Image>
-                    </Grid>
-
-                                -->
-        <!-- Row 7 -->
-        <!--
-                    <Grid Grid.Row="7" Grid.Column="0" Background="{StaticResource BlackTile}" >
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WRook.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WRook.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="A" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                        <TextBlock Text="1" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,1,0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="1" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WKnight.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WKnight.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="B" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="2" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WBishop.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WBishop.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="C" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="3" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WQueen.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WQueen.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="D" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="4" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WKing.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WKing.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="E" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="5" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WBishop.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WBishop.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="F" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="6" Background="{StaticResource BlackTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WKnight.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WKnight.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="G" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="7" Grid.Column="7" Background="{StaticResource WhiteTile}">
-                        <Image HorizontalAlignment="Center" Height="72" VerticalAlignment="Center" Width="72" Source="/WRook.png" Stretch="Fill" DragEnter="DragMoveEnter" DragLeave="DragMoveLeave">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/WRook.png" Stretch="Fill"/>
-                            </Image.OpacityMask>
-                        </Image>
-                        <TextBlock Text="H" Foreground="Black" FontSize="25" FontFamily="72 Black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    </Grid>
-                </Grid>
-            </Border>-->
-        <!--</Grid>-->
-
         <!-- ____________________________________________________  -->
         <Border BorderThickness="10" BorderBrush="#FF474545" Width="570" Height="570">
             <Canvas x:Name="spielfeld" Width="550" Height="550">
@@ -372,7 +25,7 @@
         <Label Content="Turn:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="0,50,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
         <!-- current Player Label -->
-        <Label Content="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="50,50,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="TurnLabel" x:FieldModifier="public" Content="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="50,50,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
         <!-- Log label -->
         <Label Content="Log:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Margin="0,150,0,0"/>
@@ -413,18 +66,21 @@
         <TextBlock x:Name="TxtWK" HorizontalAlignment="Right" Height="72" Margin="0,499,8,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♔" FontSize="66"/>
 
         <!-- Counters for all the capure -->
-        <Label Content="0 / 1" HorizontalAlignment="Right" Height="Auto" Margin="0,281,15,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16" />
-        <Label Content="0 / 2" HorizontalAlignment="Right" Height="Auto" Margin="0,191,15,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 1" HorizontalAlignment="Right" Height="Auto" Margin="0,281,95,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="755,191,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 1" HorizontalAlignment="Left" Height="Auto" Margin="755,569,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 1" HorizontalAlignment="Left" Height="Auto" Margin="835,569,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="755,475,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 8" HorizontalAlignment="Left" Height="Auto" Margin="755,98,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="835,98,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="835,475,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 8" HorizontalAlignment="Left" Height="Auto" Margin="755,382,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="835,382,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBK" x:FieldModifier="public" Content="" HorizontalAlignment="Right" Height="Auto" Margin="0,281,25,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16" />
+        <Label x:Name="GCBQ" x:FieldModifier="public" Content="" HorizontalAlignment="Right" Height="Auto" Margin="0,281,105,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBB" x:FieldModifier="public" Content="" HorizontalAlignment="Right" Height="Auto" Margin="0,191,25,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBR" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,191,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBN" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,98,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBP" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,98,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+
+
+        <Label x:Name="GCWK" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,568,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWQ" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,568,0,1" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWB" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,477,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWR" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,477,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWN" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,383,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWP" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,383,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+
 
         <!-- CheckBox for the small menu -->
         <CheckBox
@@ -564,7 +220,8 @@
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center" Height="309" Width="439">
                 <!-- Win text -->
-                <Label Content="~~ ... Won ~~" VerticalAlignment="Center" 
+                <Label x:Name="GameState" x:FieldModifier="public"
+                       Content="" VerticalAlignment="Center" 
                        Height="90" FontSize="60" 
                        Foreground="White" 
                        FontFamily="Tw Cen MT" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,-5">
@@ -733,13 +390,13 @@
                 </StackPanel.Resources>
 
                 <!-- Black pieces -->
-                <TextBlock FontFamily="Arial" Foreground="Black" Text="♛" FontSize="50" TextAlignment="Center" Height="50" Width="50"/>
+                <TextBlock x:Name="PBQ" FontFamily="Arial" Foreground="Black" Text="♛" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="BQ"/>
 
-                <TextBlock FontFamily="Arial" Foreground="Black" Text="♜" FontSize="50" TextAlignment="Center" Height="50" Width="50"/>
+                <TextBlock x:Name="PBR" FontFamily="Arial" Foreground="Black" Text="♜" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="BR"/>
 
-                <TextBlock FontFamily="Arial" Foreground="Black" Text="♝" FontSize="50" TextAlignment="Center" Height="50" Width="50"/>
+                <TextBlock x:Name="PBB" FontFamily="Arial" Foreground="Black" Text="♝" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="BB"/>
 
-                <TextBlock FontFamily="Arial" Foreground="Black" Text="♞" FontSize="50" TextAlignment="Center" Width="50" Height="50"/>
+                <TextBlock x:Name="PBN" FontFamily="Arial" Foreground="Black" Text="♞" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="BN"/>
 
             </StackPanel>
         </Border>
@@ -787,13 +444,13 @@
                 </StackPanel.Resources>
 
                 <!-- White pieces -->
-                <TextBlock FontFamily="Arial" Foreground="White" Text="♕" FontSize="50" TextAlignment="Center" Height="50" Width="50"/>
+                <TextBlock x:Name="PWQ" FontFamily="Arial" Foreground="White" Text="♕" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="WQ"/>
 
-                <TextBlock FontFamily="Arial" Foreground="White" Text="♖" FontSize="50" TextAlignment="Center" Width="50" Height="50"/>
+                <TextBlock x:Name="PWR" FontFamily="Arial" Foreground="White" Text="♖" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="WR"/>
 
-                <TextBlock FontFamily="Arial" Foreground="White" Text="♗" FontSize="50" TextAlignment="Center" Width="50" Height="50"/>
+                <TextBlock x:Name="PWB" FontFamily="Arial" Foreground="White" Text="♗" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="WB"/>
 
-                <TextBlock FontFamily="Arial" Foreground="White" Text="♘" FontSize="50" TextAlignment="Center" Width="50" Height="50"/>
+                <TextBlock x:Name="PWN" FontFamily="Arial" Foreground="White" Text="♘" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="WN"/>
 
             </StackPanel>
         </Border>
@@ -836,5 +493,6 @@
                 </Label.Background>
             </Label>
         </Grid>
+        <Button Content="FF" HorizontalAlignment="Left" Height="41" Margin="23,529,0,0" VerticalAlignment="Top" Width="117" Click="FF"/>
     </Grid>
 </Window>

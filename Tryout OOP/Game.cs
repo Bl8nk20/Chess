@@ -13,7 +13,12 @@ internal class Game
     GameStatus GAMESTATUS;
     GameMode GAMEMODE;
     public List<Piece> Pieces;
+<<<<<<< HEAD
     Player[] players;
+=======
+    MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+
+>>>>>>> main
     #endregion
 
     #region Constructor
@@ -50,12 +55,23 @@ internal class Game
     {
         if (players[0].IsTurn)
         {
+<<<<<<< HEAD
             players[0].SelectedPiece = players[0].SearchPiece(SelectedPoint);
+=======
+            Player1.SelectedPiece = searchPiece(SelectedPoint);
+            wnd.TurnWhite();
+>>>>>>> main
 
         }
         else if (players[1].IsTurn)
         {
+<<<<<<< HEAD
             players[1].SelectedPiece = players[1].SearchPiece(SelectedPoint);
+=======
+            Player2.SelectedPiece = searchPiece(SelectedPoint);
+            wnd.TurnBlack();
+
+>>>>>>> main
         }
     }
 
@@ -233,10 +249,17 @@ internal class Game
                 {
                     // set the gamestatuws to everything except active
                     GAMESTATUS = (piece.IsWhite) ? GameStatus.BLACK_WIN : GameStatus.WHITE_WIN;
-                    // close window / show victory screen 
+                    if (GAMESTATUS == GameStatus.BLACK_WIN)
+                    {
+                        wnd.Black_Won();
+                    }
+                    else if (GAMESTATUS == GameStatus.WHITE_WIN)
+                    {
+                        wnd.White_Won();
+                    }                    // close window / show victory screen 
                     // MainWindow.Won();
                     // Show a messagebox to visualize victory
-                    MessageBox.Show(GAMESTATUS.ToString());
+                    //MessageBox.Show(GAMESTATUS.ToString());
                 }
                 // break to remove it later from the list
                 break;
