@@ -283,5 +283,23 @@ internal class FEN_Startup
 
     }
 
+    ///// <summary>
+    ///// A Method to write / Overwrite a File so that you can load it later again if you like to
+    ///// </summary>
+    ///// <param name="MovesDictList">a List with the generated String per move</param>
+    ///// <param name="filename">Default Value is "LastGame.txt"</param>
+    //public void OverWriteFile(string FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", string filename = "Default.txt")
+    //{
+    //    FileStream fileStream = new FileStream(filename, FileMode.OpenOrCreate);
+    //    StreamWriter _streamWriter = new StreamWriter(fileStream);
+
+    //    _streamWriter.WriteLine(FEN);
+        
+    //    // close the streams
+    //    _streamWriter.Dispose();
+    //    fileStream.Dispose();
+
+    //}
+
     #endregion
 }

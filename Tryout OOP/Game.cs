@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -66,6 +67,16 @@ internal class Game
 
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
+        if(currentplayer.SelectedPiece is King && Math.Abs(TargetPoint.X - currentplayer.SelectedPiece.Position.X) > 1)
+        {
+            // ! Special Moves Like EnPassant, Castling, Promotion !
+            currentplayer.Castling(currentplayer.SelectedPiece, TargetPoint);
+
+            // if everything is done switch turn sides
+            Player1.SwitchTurns();
+            Player2.SwitchTurns();
+        }
+
         // check if its the turn of the player and if he selected a piece
         if (!currentplayer.IsTurn
             || currentplayer.SelectedPiece == null)
@@ -75,7 +86,7 @@ internal class Game
         // check if piece has not moved
         // maybe need to use goto?
         if (currentplayer.SelectedPiece.Position.Equals(TargetPoint)
-            || !(currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece)) || currentplayer.SelectedPiece == null)
+            || !currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece))
         {
             return;
         }
@@ -86,16 +97,12 @@ internal class Game
             // save last location to cancel a false move
             PointStruct lastLocation = currentplayer.SelectedPiece.Position;
 
+            
             // move piece to targeted point
             currentplayer.SelectedPiece.MoveTo(TargetPoint, Pieces, currentplayer.SelectedPiece);
 
-            // ! Special Moves Like EnPassant, Castling, Promotion !
-            currentplayer.specialMoves();
-
             // Capture Pieces
             Capture(currentplayer.SelectedPiece);
-
-            
 
             // check if any enemy piece can move to current players king to check if the move is legit
             foreach (var piece in Pieces)
@@ -103,7 +110,7 @@ internal class Game
                 if (piece.IsWhite != currentplayer.IsWhite
                     && piece.CanMove(currentplayer.searchKing().Position, Pieces, piece))
                 {
-                    currentplayer.SelectedPiece.CancelMove(lastLocation);
+                    currentplayer.SelectedPiece.Move(lastLocation);
                     return;
                 }
             }
