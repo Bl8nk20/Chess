@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,24 +14,26 @@ internal class Game
 {
     #region Properties
     GameStatus GAMESTATUS;
-    GameMode GAMEMODE;
+    private Player[] players;
+    //GameMode GAMEMODE;
     public List<Piece> Pieces;
-<<<<<<< HEAD
-    Player[] players;
-=======
+    public Player currentPlayer;
+    
     MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-
->>>>>>> main
+    
     #endregion
 
     #region Constructor
     public Game()
     {
-        this.players = new Player[2];
-        this.players[0] = new Player(true); // White Player
+        players = new Player[]
+        {
+            new Player(true),
+            new Player()
+        };
         players[0].IsTurn = true;
-        this.players[1] = new Player(); // Black Player
         players[1].IsTurn = false;
+        currentPlayer = setCurrentPlayer();
         this.Pieces = InitialPieces();
     }
     #endregion
@@ -55,23 +60,17 @@ internal class Game
     {
         if (players[0].IsTurn)
         {
-<<<<<<< HEAD
             players[0].SelectedPiece = players[0].SearchPiece(SelectedPoint);
-=======
-            Player1.SelectedPiece = searchPiece(SelectedPoint);
+            players[1].SelectedPiece = players[1].SearchPiece(SelectedPoint);
             wnd.TurnWhite();
->>>>>>> main
 
         }
         else if (players[1].IsTurn)
         {
-<<<<<<< HEAD
             players[1].SelectedPiece = players[1].SearchPiece(SelectedPoint);
-=======
-            Player2.SelectedPiece = searchPiece(SelectedPoint);
+            players[0].SelectedPiece = players[0].SearchPiece(SelectedPoint);
             wnd.TurnBlack();
 
->>>>>>> main
         }
     }
 
@@ -97,6 +96,22 @@ internal class Game
     /// <param name="TargetPoint"></param>
     internal void turn(Player currentplayer, PointStruct TargetPoint)
     {
+        //foreach(Piece piece in Pieces)
+        //{
+        //    if(piece is Pawn && piece.IsWhite == currentplayer.IsWhite)
+        //    {
+        //        Pawn pawn = (Pawn)piece;
+        //        pawn.CanBePassed = false;
+        //    }
+        //}
+
+        // check if its the turn of the player and if he selected a piece
+        if (!currentplayer.IsTurn
+            || currentplayer.SelectedPiece == null)
+        {
+            return;
+        }
+
         if (currentplayer.SelectedPiece is King && Math.Abs(TargetPoint.X - currentplayer.SelectedPiece.Position.X) > 1)
         {
             // ! Special Moves Like EnPassant, Castling, Promotion !
@@ -106,29 +121,13 @@ internal class Game
             players[0].SwitchTurns();
             players[1].SwitchTurns();
         }
-        // En Passant Switching if a Pawn is "Passable"
-        foreach (var piece in currentplayer.Pieces)
-        {
-            // skip pieces which are not a Pawn
-            if (piece is not Pawn)
-            {
-                continue;
-            }
 
-            Pawn pawn = (Pawn)piece;
-            if (!pawn.CanBePassed)
-            {
-                continue;
-            }
-            pawn.SwitchCanBePassed();
-        }
+        // Promotion
+        //if (currentplayer.SelectedPiece is Pawn)
+        //{
+        //    Promotion(currentplayer, Pieces);
+        //}
 
-        // check if its the turn of the player and if he selected a piece
-        if (!currentplayer.IsTurn
-            || currentplayer.SelectedPiece == null)
-        {
-            return;
-        }
 
         // check if piece has not moved
         // maybe need to use goto?
@@ -136,13 +135,6 @@ internal class Game
             || !currentplayer.SelectedPiece.CanMove(TargetPoint, Pieces, currentplayer.SelectedPiece))
         {
             return;
-        }
-
-        // Castling Opportunity ? 
-        if (currentplayer.SelectedPiece is King)
-        {
-            // Castling
-            currentplayer.Castling(currentplayer.SelectedPiece, TargetPoint);
         }
 
         // check if player can move piece to his target
@@ -169,6 +161,7 @@ internal class Game
                 }
             }
 
+            // En passant possibility ? !!!!
             // Switch EnPassant Possibility
             if (currentplayer.SelectedPiece is Pawn
                 && (currentplayer.SelectedPiece.Position.Equals(new PointStruct(lastLocation.X, lastLocation.Y + 2)) 
@@ -188,10 +181,7 @@ internal class Game
         // check if the game has ended
         if (isEnd())
         {
-            // WAITING FOR PHIL !!!!
-            MainWindow VictoryScreen = (MainWindow)Application.Current.MainWindow;
-            // open the Victory Screen !
-            // maybe switch case or own method to check who won 
+
         }
 
     }
@@ -256,11 +246,9 @@ internal class Game
                     else if (GAMESTATUS == GameStatus.WHITE_WIN)
                     {
                         wnd.White_Won();
-                    }                    // close window / show victory screen 
-                    // MainWindow.Won();
-                    // Show a messagebox to visualize victory
-                    //MessageBox.Show(GAMESTATUS.ToString());
+                    }
                 }
+
                 // break to remove it later from the list
                 break;
             }
@@ -275,6 +263,85 @@ internal class Game
     {
         // return ether true or false
         return this.GAMESTATUS != GameStatus.ACTIVE;
+    }
+
+    #endregion
+
+    #region Promotion
+
+    public void Promotion(Player currentplayer, List<Piece> Pieces)
+    {
+
+        /* 
+         * First check if a pawn is at the end of the board
+         * then open the promotion window
+         */
+
+        int y = (currentplayer.IsWhite) ? 7 : 0;
+        Pawn pawn = (Pawn)currentplayer.SelectedPiece;
+
+        if (pawn.Position.Equals(new PointStruct(currentplayer.SelectedPiece.Position.X, y)))
+        {
+            pawn.CanBePromoted = true;
+        }
+        // Checks if a pawn is at the end of the board
+        if (pawn.CanBePromoted)
+        {
+            // Open Window for piece choosing
+            wnd.promationContentW.Visibility = currentplayer.IsWhite ? Visibility.Visible : Visibility.Hidden;
+            wnd.promationContentB.Visibility = !currentplayer.IsWhite ? Visibility.Visible : Visibility.Hidden;
+            // replace selected piece accordingly to userinput
+
+            switchingPieces(currentplayer, Pieces);
+        }
+    }
+
+    /// <summary>
+    /// Method to check a given string if that string 
+    /// contains a message whether the pawn at the end 
+    /// is now a queen or any other viable piece
+    /// </summary>
+    /// <param name="currentplayer"></param>
+    /// <param name="Pieces"></param>
+    /// <param name="Promotion"></param>
+    void switchingPieces(Player currentplayer, List<Piece> Pieces)
+    {
+        string promoted = wnd.PromotedTo;
+
+        if (promoted == "" || promoted == null)
+        {
+            return;
+        }
+
+        switch (promoted)
+        {
+            case "Queen":
+                {
+                    Pieces.Add(new Queen(currentplayer.SelectedPiece.Position, currentplayer.IsWhite));
+                    currentplayer.SelectedPiece.IsKilled = true;
+                    break;
+                }
+            case "Bishop":
+                {
+                    Pieces.Add(new Queen(currentplayer.SelectedPiece.Position, currentplayer.IsWhite));
+                    currentplayer.SelectedPiece.IsKilled = true;
+                    break;
+                }
+            case "Rook":
+                {
+                    Pieces.Add(new Queen(currentplayer.SelectedPiece.Position, currentplayer.IsWhite));
+                    currentplayer.SelectedPiece.IsKilled = true;
+                    break;
+                }
+            case "Knight":
+                {
+                    Pieces.Add(new Queen(currentplayer.SelectedPiece.Position, currentplayer.IsWhite));
+                    currentplayer.SelectedPiece.IsKilled = true;
+                    break;
+                }
+        }
+
+        wnd.PromotedTo = "";
     }
 
     #endregion
