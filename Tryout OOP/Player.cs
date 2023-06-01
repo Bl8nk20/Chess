@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Controls;
+using System.Runtime.ConstrainedExecution;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Tryout_OOP;
 
@@ -127,7 +125,6 @@ public class Player
         }
     }
 
-
     #region Piece Searching
 
     /// <summary>
@@ -248,38 +245,18 @@ public class Player
     #endregion
 
     #region Promotion
-    //void Promotion()
-    //{
-    //    MainWindow Promotion = (MainWindow)Application.Current.MainWindow;
-    //    /* 
-    //     * First check if a pawn is at the end of the board
-    //     * then open the promotion window
-    //     * 
-    //     * ! Waiting for Phils events and windows !
-    //     */
+    //Funktion istPromotionszug(ziehenderBauer, ziehendesFeld):
+    //Wenn ziehenderBauer ist ein Bauer und befindet sich auf der achten Reihe(für Weiß) oder auf der ersten Reihe(für Schwarz) :
+    //    Wenn das ziehende Feld leer ist:
+    //        Figur = WähleFigur()  // Hier erfolgt die Auswahl der Figur
+    //        Rückgabe Figur
+    //Rückgabe false
 
-    //    // check if its black or white
-    //    if (!SelectedPiece.IsWhite && SelectedPiece.Position.Equals(new PointStruct(SelectedPiece.Position.X, 0)))
-    //    {
-    //        // Window
-    //        //Promotion.promationContentB();
-    //        // piece needed to replace either with the user input or a specific piece
-    //        SelectedPiece.IsKilled = true;
-    //        //pieces.Add(new ...(movedPiece.Position));
+    //Funktion WähleFigur():
+    //Wähle eine Figur aus den verfügbaren Optionen(z.B.Dame, Turm, Läufer, Springer)
+    //Rückgabe ausgewählte Figur
 
-    //    }
 
-    //    if (SelectedPiece.IsWhite && SelectedPiece.Position.Equals(new PointStruct(SelectedPiece.Position.X, 7)))
-    //    {
-    //        // Window
-    //        //Promotion.promationContentW();
-
-    //        // piece needed to replace either with the user input or a specific piece
-    //        SelectedPiece.IsKilled = true;
-    //        //pieces.Add(new ...(movedPiece.Position));
-
-    //    }
-    //}
     #endregion
 
 

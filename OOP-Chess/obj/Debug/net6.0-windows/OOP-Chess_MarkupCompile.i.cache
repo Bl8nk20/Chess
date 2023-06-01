@@ -4,28 +4,16 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\ms85866\source\repos\Chess\OOP-Chess\obj\Debug\net6.0-windows\
-=======
-C:\Users\ph89214\source\repos\Chess\OOP-Chess\obj\Debug\net6.0-windows\
->>>>>>> main
 OOP_Chess
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-<<<<<<< HEAD
 C:\Users\ms85866\source\repos\Chess\OOP-Chess\App.xaml
 11407045341
 
 21-2635493
 196613262763
-=======
-C:\Users\ph89214\source\repos\Chess\OOP-Chess\App.xaml
-11407045341
-
-21-2635493
-1961097113373
->>>>>>> main
 MainWindow.xaml;
 
 True

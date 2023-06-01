@@ -111,15 +111,13 @@ internal class FEN_Startup
     /// <returns></returns>
     public List<Piece> ConvertStringToList(string _filename = "Default.txt")
     {
-        // read the file to get the fen string
-        startpos = _streamReader.ReadToEnd();
         // create a new Empty list
         List<Piece> Pieces = new();
 
         // split the string in an array,
         // where each index describes another
         // part of the fen Notation
-        string[] sectors = startpos.Split(" ");
+        string[] sectors = _streamReader.ReadToEnd().Split(" ");
 
         int row = 0;
         int column = 7;

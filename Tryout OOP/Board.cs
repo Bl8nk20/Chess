@@ -131,6 +131,12 @@ internal class Board
         return new PointStruct(0, 0);
     }
 
+    public TextBlock findTexBlockCoordinates(PointStruct pointStruct, List<TextBlock> textBlock)
+    {
+        // when nothing matches -> return Point
+        return textBlock[pointStruct.X * 8 + pointStruct.Y];
+    }
+
     #region MouseEvents
     /// <summary>
     /// Mouse clicked event

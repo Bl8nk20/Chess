@@ -350,7 +350,7 @@
         <!-- Promation window Black -->
         <Border x:Name="promationContentB"
                 Background="#313131" 
-                Visibility="Visible" 
+                Visibility="Hidden" 
                 Height="205" Width="62.5">
             <StackPanel x:Name="promationInnerContentB" Height="NaN" Width="NaN">
                 <StackPanel.Resources>
@@ -404,7 +404,7 @@
         <!-- Promation window White -->
         <Border x:Name="promationContentW"
                 Background="#313131" 
-                Visibility="Visible" 
+                Visibility="Hidden" 
                 Height="205" Width="62.5" Margin="419,197,419,198">
             <StackPanel x:Name="promationInnerContentW" Height="NaN" Width="NaN">
                 <StackPanel.Resources>
