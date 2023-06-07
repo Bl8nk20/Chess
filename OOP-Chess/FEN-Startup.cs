@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Tryout_OOP;
+namespace OOP_Chess;
 
 internal class FEN_Startup
 {
     /* 
      * Constructor : 
-     *  string Regex
+     *  string FEN
      *  
      * 1. Method : ReadAndArrayGeneration() -> string[]
      *  1. Read a string from Json file (Constructor !)
@@ -45,7 +45,7 @@ internal class FEN_Startup
     private readonly string _filename = "Default.txt";
     private Stream _fileStream;
     private StreamReader _streamReader;
-    private StreamWriter _streamWriter;
+    private readonly StreamWriter _streamWriter;
 
     private string startpos;
     public string Startpos
@@ -79,15 +79,10 @@ internal class FEN_Startup
     /// </summary>
     void checkForFile(string _filename)
     {
-        if (File.Exists(_filename) && File.ReadAllText(_filename) != "")
+        if (File.Exists(_filename))
         {
             this._fileStream = new FileStream(_filename, FileMode.Open);
             this._streamReader = new StreamReader(_fileStream);
-        }
-        else if (File.Exists(_filename) && File.ReadAllText(_filename) == "")
-        {
-            this._streamWriter = new StreamWriter(_fileStream);
-            _streamWriter.WriteLine("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
         }
         else
         {

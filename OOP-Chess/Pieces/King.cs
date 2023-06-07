@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 
 namespace OOP_Chess;
 
-public class King : Pieces
+public class King : Piece
 {
+    #region Properties
     // bool for the Castling movement if done
     private bool isCastlingDone = false;
     public bool IsCastlingDone
@@ -11,95 +14,42 @@ public class King : Pieces
         get { return isCastlingDone; }
         set { isCastlingDone = value; }
     }
+    #endregion
+
+    #region Constructor
     /// <summary>
-    /// Constructor for the Roock Chesspiece
+    /// Constructor for the King Chesspiece
     /// </summary>
-    /// <param name="isWhite"></param>
-    public King(byte x, byte y, bool isWhite)
-        : base(x, y, isWhite, isWhite ? '\u2656' : '\u265C')
+    /// <param name="x">Current X Coordinate</param>
+    /// <param name="y">Current Y Coordinate</param>
+    /// <param name="isWhite">Bool value if the Piece is White or not</param>
+    public King(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite ? '\u2654' : '\u265A')
     {
-        // empty Constructor cause nothing is needed :D
+        // setting the PieceValue to the max Value of a byte,
+        // that the AI can later search for the highest value move
+        this.PieceValue = byte.MaxValue;
+        // unicode: '\u2654' -> white King
+        // unicode: '\u265A' -> black King
     }
+    #endregion
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <returns></returns>
-    public override bool CanMove(byte xTarget, byte yTarget)
-    {
-        // we can't move the piece to a spot that has
-        // a piece of the same colour
-
-        return xTarget == x || yTarget == y;
-    }
-
+    #region Methods
     /// <summary>
     /// Overridden method for the King movement
     /// King Movement: 1 forward around the King
     /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
+    /// <param name="TargetPoint">Point where the King wants to move</param>
     /// <returns></returns>
-    //public override bool CanMove(Board board, Spot start, Spot end)
-    //{
-    //    // we can't move the piece to a Spot that
-    //    // has a piece of the same color
-    //    if (end.Piece.IsWhite == this.IsWhite)
-    //    {
-    //        return false;
-    //    }
-
-    //    int x = Math.Abs(start.X - end.X);
-    //    int y = Math.Abs(start.Y - end.Y);
-    //    if (x + y == 1)
-    //    {
-    //        // check if this move will not result in the king
-    //        // being attacked if so return true
-    //        return true;
-    //    }
-
-    //    return this.isValidCastling(board, start, end);
-    //}
-
-    /// <summary>
-    /// check if the castlingmoevemnt is valid
-    /// castling: rook not moved!
-    ///           king not moved
-    ///           knight and bishop out of the way
-    /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <returns></returns>
-    private bool isValidCastling(Board board,
-                                    Spot start, Spot end)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // check if it has been done before
-        if (this.isCastlingDone)
-        {
-            return false;
-        }
+        // calculate the Absolute value of the difference of the current position and the targetpoint
+        int x = Math.Abs(this.Point.X - TargetPoint.X);
+        int y = Math.Abs(this.Point.Y - TargetPoint.Y);
 
-        // Logic for returning true or false
-        // implement it
-        return false;
+        // return either true if the sum OR the product is eqal 1
+        return x + y == 1 || x * y == 1;
     }
 
-    /// <summary>
-    /// execute the castling moevement !
-    /// IMPLEMENTION NEEDED !!!
-    /// </summary>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <returns></returns>
-    public bool isCastlingMove(Spot start, Spot end)
-    {
-        // check if the starting and
-        // ending position are correct
-        return false;
-    }
+    #endregion
 }

@@ -10,5 +10,4 @@ public enum GameStatus
     WHITE_WIN,
     FORFEIT,
     STALEMATE,
-    RESIGNATION
 }
