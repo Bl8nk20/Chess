@@ -1,11 +1,11 @@
-﻿<Window x:Class="Chess.MainWindow"
+﻿<Window x:Class="OOP_Chess.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Chess"
+        xmlns:local="clr-namespace:OOP_Chess"
         mc:Ignorable="d"
-        Title="Chess" 
+        Title="spielfeld" 
         Height="600" Width="900"
         MinHeight="600" MinWidth="800" 
         WindowStartupLocation="CenterScreen" 
@@ -14,126 +14,81 @@
         Background="{x:Null}" 
         Foreground="{x:Null}">
     <Grid Background="{StaticResource BackgroundM}">
-        <!-- Board -->
-        <Grid HorizontalAlignment="Left" Height="600" Width="600" Margin="120,0,0,0" VerticalAlignment="Center" Background="#FF968E8E">
-            <!-- Outline of the Board -->
-            <Border BorderThickness="10" BorderBrush="{StaticResource BoardOutLine}">
-                <Canvas x:Name="spielfeld">
-                    
-                </Canvas>
-            </Border>
-        </Grid>
+        <!-- ____________________________________________________  -->
+        <Border BorderThickness="10" BorderBrush="#FF474545" Width="570" Height="570">
+            <Canvas x:Name="spielfeld" Width="550" Height="550">
+
+            </Canvas>
+        </Border>
 
         <!-- Turn indicator -->
-        <Label Content="Turn:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="0,50,0,0"/>
+        <Label Content="Turn:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="0,50,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <!-- current Player Label -->
+        <Label x:Name="TurnLabel" x:FieldModifier="public" Content="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="White" Margin="50,50,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
         <!-- Log label -->
         <Label Content="Log:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Margin="0,150,0,0"/>
 
         <!-- Log of all the turns-->
-        <ListBox HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="16" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" SelectedIndex="-1" Height="324" Width="120"/>
+        <ListBox HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="16" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" SelectedIndex="-1" Height="324"/>
 
         <!-- Graveyard divider -->
-        <Rectangle HorizontalAlignment="Left" Height="5" Margin="725,317,0,0" VerticalAlignment="Top" Width="175" Fill="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="5" Margin="751,317,0,0" VerticalAlignment="Top" Width="149" Fill="White"/>
 
-        <!-- Placeholder for the Images of the Pieces -->
+        <!-- Placeholder for the Images of the Pieces in the Graveyard-->
         <!-- Black pieces -->
 
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,33,90,0" VerticalAlignment="Top" Width="72" Source="/BPawn.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/BPawn.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtBP" HorizontalAlignment="Right" Height="71" Margin="0,30,84,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="Black" Text="♟︎" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,33,10,0" VerticalAlignment="Top" Width="72" Source="/BBishop.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/BBishop.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtBN" HorizontalAlignment="Right" Height="71" Margin="0,30,10,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="Black" Text="♞" FontSize="76"/>
 
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,129,90,0" VerticalAlignment="Top" Width="72" Source="/BKnight.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/BKnight.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtBB" HorizontalAlignment="Right" Height="71" Margin="0,130,84,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="Black" Text="♝" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,129,10,0" VerticalAlignment="Top" Width="72" Source="/BRook.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/BRook.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtBR" HorizontalAlignment="Right" Height="71" Margin="0,129,6,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="Black" Text="♜" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,222,90,0" VerticalAlignment="Top" Width="72" Source="/BQueen.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/BQueen.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtBQ" HorizontalAlignment="Right" Height="71" Margin="0,222,84,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="Black" Text="♛" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="71" Margin="0,222,10,0" VerticalAlignment="Top" Width="72" Source="/BKing.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/BKing.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtBK" HorizontalAlignment="Right" Height="71" Margin="0,222,6,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="Black" Text="♚" FontSize="66"/>
 
         <!-- White pieces -->
 
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,326,90,0" VerticalAlignment="Top" Width="72" Source="/WPawn.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/WPawn.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtWP" HorizontalAlignment="Right" Height="72" Margin="0,326,84,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♙" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,326,10,0" VerticalAlignment="Top" Width="72" Source="/WBishop.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/WBishop.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtWN" HorizontalAlignment="Right" Height="72" Margin="0,318,12,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♘" FontSize="76"/>
 
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,413,10,0" VerticalAlignment="Top" Width="72" Source="/WKnight.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/WKnight.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtWB" HorizontalAlignment="Right" Height="72" Margin="0,413,4,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♗" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,413,90,0" VerticalAlignment="Top" Width="72" Source="/WRook.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/WRook.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtWR" HorizontalAlignment="Right" Height="72" Margin="0,413,84,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♖" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,506,10,0" VerticalAlignment="Top" Width="72" Source="/WKing.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/WKing.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtWQ" HorizontalAlignment="Right" Height="72" Margin="0,499,84,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♕" FontSize="66"/>
 
-        <Image HorizontalAlignment="Right" Height="72" Margin="0,506,90,0" VerticalAlignment="Top" Width="72" Source="/WQueen.png" Stretch="Fill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/WQueen.png" Stretch="Fill"/>
-            </Image.OpacityMask>
-        </Image>
+        <TextBlock x:Name="TxtWK" HorizontalAlignment="Right" Height="72" Margin="0,499,8,0" VerticalAlignment="Top" Width="72" FontFamily="Arial" Foreground="White" Text="♔" FontSize="66"/>
 
         <!-- Counters for all the capure -->
-        <Label Content="0 / 1" HorizontalAlignment="Right" Height="Auto" Margin="0,281,15,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16" />
-        <Label Content="0 / 2" HorizontalAlignment="Right" Height="Auto" Margin="0,191,15,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 1" HorizontalAlignment="Right" Height="Auto" Margin="0,281,95,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="755,191,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 1" HorizontalAlignment="Left" Height="Auto" Margin="755,569,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 1" HorizontalAlignment="Left" Height="Auto" Margin="835,569,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="755,475,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 8" HorizontalAlignment="Left" Height="Auto" Margin="755,98,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="835,98,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="835,475,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 8" HorizontalAlignment="Left" Height="Auto" Margin="755,382,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
-        <Label Content="0 / 2" HorizontalAlignment="Left" Height="Auto" Margin="835,382,0,0" VerticalAlignment="Top" Width="50" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBK" x:FieldModifier="public" Content="" HorizontalAlignment="Right" Height="Auto" Margin="0,281,25,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16" />
+        <Label x:Name="GCBQ" x:FieldModifier="public" Content="" HorizontalAlignment="Right" Height="Auto" Margin="0,281,105,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBB" x:FieldModifier="public" Content="" HorizontalAlignment="Right" Height="Auto" Margin="0,191,25,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBR" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,191,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBN" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,98,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCBP" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,98,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+
+
+        <Label x:Name="GCWK" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,568,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWQ" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,568,0,1" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWB" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,477,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWR" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,477,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWN" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="845,383,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+        <Label x:Name="GCWP" x:FieldModifier="public" Content="" HorizontalAlignment="Left" Height="Auto" Margin="765,383,0,0" VerticalAlignment="Top" Width="30" Foreground="White" FontSize="16"/>
+
 
         <!-- CheckBox for the small menu -->
         <CheckBox
             x:Name="cbDropdown"
             Grid.Column="1"
-            Checked="OpenDropdown"
+            Checked="SmallMenuDropdownOpen"
             RenderTransformOrigin="0.5 0.5"
-            Unchecked="CloseDropdown" 
+            Unchecked="SmallMenuDropdownClose" 
             HorizontalAlignment="Right" 
             VerticalAlignment="Top" 
             Height="30" Width="30" 
@@ -189,14 +144,14 @@
 
         <!-- small mneu in the main window -->
         <!-- Dropdown -->
-        <Border x:Name="dropdownContent"
+        <Border x:Name="smallMenuContent"
                 Background="#313131" 
                 Width="148" Height="205" 
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Top" 
                 Margin="0,41,1,0"
                 Visibility="Visible">
-            <StackPanel x:Name="dropdownInnerContent">
+            <StackPanel x:Name="smallMenuInnerContent">
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="MaxWidth" Value="500" />
@@ -265,7 +220,8 @@
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center" Height="309" Width="439">
                 <!-- Win text -->
-                <Label Content="~~ ... Won ~~" VerticalAlignment="Center" 
+                <Label x:Name="GameState" x:FieldModifier="public"
+                       Content="" VerticalAlignment="Center" 
                        Height="90" FontSize="60" 
                        Foreground="White" 
                        FontFamily="Tw Cen MT" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,-5">
@@ -391,6 +347,134 @@
             </Label>
         </Grid>
 
+        <!-- Promation window Black -->
+        <Border x:Name="promationContentB"
+                Background="#313131" 
+                Visibility="Hidden" 
+                Height="205" Width="62.5">
+            <StackPanel x:Name="promationInnerContentB" Height="NaN" Width="NaN">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="MaxWidth" Value="500" />
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Padding" Value="20 10" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!-- animation to change the color when the mouse is over it (highlight)-->
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                    To="#FF4B4B4B"
+                                                    Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <!-- animation to change the color when the mouse is not over it -->
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                    To="Transparent"
+                                                    Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+
+                <!-- Black pieces -->
+                <TextBlock x:Name="PBQ" FontFamily="Arial" Foreground="Black" Text="♛" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="BQ"/>
+
+                <TextBlock x:Name="PBR" FontFamily="Arial" Foreground="Black" Text="♜" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="BR"/>
+
+                <TextBlock x:Name="PBB" FontFamily="Arial" Foreground="Black" Text="♝" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="BB"/>
+
+                <TextBlock x:Name="PBN" FontFamily="Arial" Foreground="Black" Text="♞" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="BN"/>
+
+            </StackPanel>
+        </Border>
+
+        <!-- Promation window White -->
+        <Border x:Name="promationContentW"
+                Background="#313131" 
+                Visibility="Hidden" 
+                Height="205" Width="62.5" Margin="419,197,419,198">
+            <StackPanel x:Name="promationInnerContentW" Height="NaN" Width="NaN">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="MaxWidth" Value="500" />
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Padding" Value="20 10" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!-- animation to change the color when the mouse is over it (highlight)-->
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                    To="#FF4B4B4B"
+                                                    Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <!-- animation to change the color when the mouse is not over it -->
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation
+                                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                    To="Transparent"
+                                                    Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+
+                <!-- White pieces -->
+                <TextBlock x:Name="PWQ" FontFamily="Arial" Foreground="White" Text="♕" FontSize="50" TextAlignment="Center" Height="50" Width="50" MouseDown="WQ"/>
+
+                <TextBlock x:Name="PWR" FontFamily="Arial" Foreground="White" Text="♖" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="WR"/>
+
+                <TextBlock x:Name="PWB" FontFamily="Arial" Foreground="White" Text="♗" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="WB"/>
+
+                <TextBlock x:Name="PWN" FontFamily="Arial" Foreground="White" Text="♘" FontSize="50" TextAlignment="Center" Width="50" Height="50" MouseDown="WN"/>
+
+            </StackPanel>
+        </Border>
+
+        <!-- window for the credits -->
+        <!-- window for the settings -->
+
+
+        <!-- trigger Checkbox for promation windowB  -->
+        <CheckBox Background="#FF504D4D"
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Bottom" 
+                  Margin="10,0,0,10" 
+                  Checked="PromotionDropdownOpenB" 
+                  Unchecked="PromotionDropdownCloseB" Content="B"/>
+        <!-- trigger Checkbox for promation windowW  -->
+        <CheckBox Background="#FF504D4D"
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  Margin="42,575,0,0" 
+                  Checked="PromotionDropdownOpenW" 
+                  Unchecked="PromotionDropdownCloseW" Content="W"/>
+
+
         <!-- Not implemented yet overlay -->
         <Grid x:Name="NotImplementedOverlay"
               Background="Transparent"
@@ -409,5 +493,6 @@
                 </Label.Background>
             </Label>
         </Grid>
+        <Button Content="FF" HorizontalAlignment="Left" Height="41" Margin="23,529,0,0" VerticalAlignment="Top" Width="117" Click="FF"/>
     </Grid>
 </Window>

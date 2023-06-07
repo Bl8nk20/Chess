@@ -1,163 +1,359 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Timers;
 using System.Windows.Threading;
-using OOP_Chess;
 
-namespace Chess
+namespace OOP_Chess;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    #region Fields
+    public readonly List<TextBlock> TextBlocks = new List<TextBlock>();
+    public string PromotedTo;
+    private Game game;
+    // duration for how long the items are highlighted
+    private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
+    // creates a new timer
+    DispatcherTimer timer = new DispatcherTimer();
+
+    #endregion
+
+    #region Constructor
+    public MainWindow()
     {
-        // duration for how long the items are highlighted
-        private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
-        // creates a new timer
-        DispatcherTimer timer = new DispatcherTimer();
+        InitializeComponent();
+        Setup();
 
-        Pieces[] pieces = new Pieces[1];
-        TextBlock[,] textBlocks = new TextBlock[8, 8];
-        /// <summary>
-        /// sets the small menu window height to zero
-        /// timer with a 2 second span
-        /// </summary>
-        public MainWindow()
+        smallMenuContent.Height = 0;
+        //promationContentB.Height = 0;
+        //promationContentW.Height = 0;
+
+        timer.Tick += new EventHandler(timer_tick);
+        timer.Interval = new TimeSpan(0, 0, 2);
+
+        //
+    }
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void Setup()
+    {
+        this.game = new();
+        Board Board = new(spielfeld, TextBlocks);
+        Board.DrawPieces(TextBlocks, this.game.InitialPieces());
+    }
+
+    //---------------------------------------- ------------------------------------------
+    #region smallMenuBar
+    /// <summary>
+    /// animation for the small menu to open from the top
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void SmallMenuDropdownOpen(object sender, RoutedEventArgs e)
+    {
+        smallMenuInnerContent.Measure(new Size(smallMenuContent.MaxWidth, smallMenuContent.MaxHeight));
+        DoubleAnimation heightAnimation = new DoubleAnimation(0, smallMenuInnerContent.DesiredSize.Height, _openCloseDuration);
+        smallMenuContent.BeginAnimation(HeightProperty, heightAnimation);
+    }
+
+    /// <summary>
+    /// animation for the small menu to close from the buttom
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void SmallMenuDropdownClose(object sender, RoutedEventArgs e)
+    {
+        DoubleAnimation heightAnimation = new DoubleAnimation(0, _openCloseDuration);
+        smallMenuContent.BeginAnimation(HeightProperty, heightAnimation);
+    }
+    #endregion
+
+    #region Windows
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Resume(object sender, MouseButtonEventArgs e)
+    {
+        GameOverOverlay.Visibility = Visibility.Hidden;
+        StartOverlay.Visibility = Visibility.Hidden;
+    }
+
+    /// <summary>
+    /// to open the main menu
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void MainMenu(object sender, MouseButtonEventArgs e)
+    {
+        StartOverlay.Visibility = Visibility.Visible;
+    }
+
+    /// <summary>
+    /// close the application 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Exit(object sender, MouseButtonEventArgs e)
+    {
+        Close();
+    }
+
+    /// <summary>
+    /// to open the won window
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Won(object sender, MouseButtonEventArgs e)
+    {
+        GameOverOverlay.Visibility = Visibility.Visible;
+    }
+    #endregion
+
+    #region Turns
+    public void TurnWhite()
+    {
+        TurnLabel.Content = "White";
+    }
+    public void TurnBlack()
+    {
+        TurnLabel.Content = "Black";
+    }
+    #endregion
+
+    #region Graveyard
+
+    int c = 0;
+
+
+    public List<Piece> Pieces;
+    public void CounterG()
+    {
+        foreach (Piece piece in Pieces)
         {
-            InitializeComponent();
-
-            dropdownContent.Height = 0;
-
-            timer.Tick += new EventHandler(timer_tick);
-            timer.Interval = new TimeSpan(0, 0, 2);
-
-            pieces[0] = new Rook(2, 3, false);
-
-            DrawBoard();
-        }
-
-        private void DrawBoard()
-        {
-            // load the board to the gui
-            for (byte i = 0; i < 8; i++)
+            if (piece is Pawn && piece.IsKilled == true && piece.IsWhite)
             {
-                for (byte j = 0; j < 8; j++)
-                {
-                    TextBlock b = new TextBlock();
-                    // draw the chessboard
-                    b.Width = 72.5;
-                    b.Height = 72.5;
-                    b.Text = i.ToString();
-                    b.FontSize = 25;
-                    b.Background = ((i + j) % 2 != 0) ? Brushes.White : Brushes.LightGray;
-                    spielfeld.Children.Add(b);
-                    textBlocks[i, j] = b;
-                    Canvas.SetLeft(b, 72.5 * i);
-                    Canvas.SetBottom(b, 72.5 * j);
-                }
+                GCBP.Content = c++;
+                GCWP.Content = c++;
             }
 
-            for(byte i = 0; i < 8; i++)
-            {
-                for(byte j = 0; j < 8; j++)
-                {
-                    textBlocks[i, j].Text = "";
-                    for (byte k = 0; k < pieces.Length; k++)
-                    {
-                        if (pieces[k].X == i && pieces[k].Y == j)
-                        {
-                            textBlocks[i, j].Text = pieces[k].Look.ToString();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// animation for the small menu to open from the top
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OpenDropdown(object sender, RoutedEventArgs e)
-        {
-            dropdownInnerContent.Measure(new Size(dropdownContent.MaxWidth, dropdownContent.MaxHeight));
-            DoubleAnimation heightAnimation = new DoubleAnimation(0, dropdownInnerContent.DesiredSize.Height, _openCloseDuration);
-            dropdownContent.BeginAnimation(HeightProperty, heightAnimation);
-        }
-
-        /// <summary>
-        /// animation for the small menu to close from the buttom
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CloseDropdown(object sender, RoutedEventArgs e)
-        {
-            DoubleAnimation heightAnimation = new DoubleAnimation(0, _openCloseDuration);
-            dropdownContent.BeginAnimation(HeightProperty, heightAnimation);
-        }
-
-        /// <summary>
-        /// makes the GameOverOverlay Visible
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void WonWindow(object sender, RoutedEventArgs e)
-        {
-            GameOverOverlay.Visibility = Visibility.Visible;
-        }
-
-        /// <summary>
-        /// makes the NotImplementedOverlay Hidden
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timer_tick(object sender, EventArgs e)
-        {
-            NotImplementedOverlay.Visibility = Visibility.Hidden;
-        }
-
-        private void Resume(object sender, MouseButtonEventArgs e)
-        {
-            GameOverOverlay.Visibility = Visibility.Hidden;
-            StartOverlay.Visibility = Visibility.Hidden;
-        }
-
-        private void MainMenu(object sender, MouseButtonEventArgs e)
-        {
-            StartOverlay.Visibility = Visibility.Visible;
-        }
-
-        private void Exit(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-
-        private void Won(object sender, MouseButtonEventArgs e)
-        {
-            GameOverOverlay.Visibility = Visibility.Visible;
-        }
-
-        private void notImplementedYet(object sender, MouseButtonEventArgs e)
-        {
-            NotImplementedOverlay.Visibility = Visibility.Visible;
-            timer.Start();
         }
     }
+
+    #endregion
+
+    #region GameOver
+
+    public void FF(object sender, RoutedEventArgs e)
+    {
+        GameOverOverlay.Visibility = Visibility.Visible;
+        GameState.Content = "~ FF ~";
+    }
+
+    public void Black_Won()
+    {
+        GameOverOverlay.Visibility = Visibility.Visible;
+        GameState.Content = "~ Black Won ~";
+    }
+
+    public void White_Won()
+    {
+        GameOverOverlay.Visibility = Visibility.Visible;
+        GameState.Content = "~ White Won ~";
+    }
+
+    public void Stalemate()
+    {
+        GameOverOverlay.Visibility = Visibility.Visible;
+        GameState.Content = "~ Stalemate ~";
+    }
+    #endregion
+
+    #region Promotion
+    /// <summary>
+    /// to open the promotion window Black
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void PromotionDropdownOpenB(object sender, RoutedEventArgs e)
+    {
+        promationInnerContentB.Measure(new Size(promationContentB.MaxWidth, promationContentB.MaxHeight));
+        DoubleAnimation promotionAnimationB = new(0, promationInnerContentB.DesiredSize.Height, _openCloseDuration);
+        promationContentB.BeginAnimation(HeightProperty, promotionAnimationB);
+    }
+
+    /// <summary>
+    /// to open the promotion window White
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void PromotionDropdownOpenW(object sender, RoutedEventArgs e)
+    {
+        promationInnerContentW.Measure(new Size(promationContentW.MaxWidth, promationContentW.MaxHeight));
+        DoubleAnimation promotionAnimationW = new DoubleAnimation(0, promationInnerContentW.DesiredSize.Height, _openCloseDuration);
+        promationContentW.BeginAnimation(HeightProperty, promotionAnimationW);
+    }
+
+    /// <summary>
+    /// to close the promation window Black
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void PromotionDropdownCloseB(object sender, RoutedEventArgs e)
+    {
+        DoubleAnimation promotionAnimationB = new DoubleAnimation(0, _openCloseDuration);
+        promationContentB.BeginAnimation(HeightProperty, promotionAnimationB);
+    }
+
+    /// <summary>
+    /// to close the promation window White
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void PromotionDropdownCloseW(object sender, RoutedEventArgs e)
+    {
+        DoubleAnimation promotionAnimationW = new DoubleAnimation(0, _openCloseDuration);
+        promationContentW.BeginAnimation(HeightProperty, promotionAnimationW);
+    }
+
+    /// <summary>
+    /// promotion white
+    /// </summary>
+    private void WQ(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Queen";
+            this.game.Promotion(this.game.currentPlayer, this.game.Pieces);
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+    private void WR(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Rook";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+    private void WB(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Bishop";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+    private void WN(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Knight";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+
+    /// <summary>
+    /// promotion black
+    /// </summary>
+    private void BQ(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Queen";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+    private void BR(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Rook";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+    private void BB(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Bishop";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+    private void BN(object sender, MouseButtonEventArgs e)
+    {
+        // Clicked TextBlock
+        TextBlock s = (TextBlock)sender;
+
+        if (s != null)
+        {
+            PromotedTo = "Knight";
+            promationContentW.Visibility = Visibility.Hidden;
+        }
+    }
+
+
+    #endregion
+
+    #region NotImplementedYet
+    /// <summary>
+    /// makes the NotImplementedOverlay Hidden
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void timer_tick(object sender, EventArgs e)
+    {
+        NotImplementedOverlay.Visibility = Visibility.Hidden;
+    }
+
+    /// <summary>
+    /// place holder fo thing that i was to lazy to implement
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void notImplementedYet(object sender, MouseButtonEventArgs e)
+    {
+        NotImplementedOverlay.Visibility = Visibility.Visible;
+        timer.Start();
+    }
+    #endregion
+
+    #endregion
 }
+
+

@@ -49,24 +49,24 @@ public class Pawn : Piece
         int y = Math.Abs(this.Position.Y - TargetPoint.Y);
 
         // first time movement two steps foward
-        if (y == 2  && x == 0 && !hasMoved)
+        if (y == 2 && x == 0 && !hasMoved)
         {
             // enpassant preparation
             CanBePassed = true;
             // IDK !?
-            //hasMoved = true;
+            hasMoved = true;
             return true;
         }
 
         // first time movements single step forward
-        if (hasMoved || (y == 1 && x == 0))
+        if (!hasMoved && (y == 1 && x == 0))
         {
-            //hasMoved = true;
+            hasMoved = true;
             return true;
         }
 
         // basic movement
-        if (hasMoved && (y == 1 && x == 0))
+        if (hasMoved || (y == 1 && x == 0))
         {
             hasMoved = true;
             return true;
@@ -91,26 +91,28 @@ public class Pawn : Piece
             int x = Math.Abs(this.Position.X - piece.Position.X);
             int y = Math.Abs(this.Position.Y - piece.Position.Y);
 
-            // Stop Movement if anybody is standing in front of them
-            if (piece.Position.Equals(TargetPoint)
-                && piece.IsWhite == isWhite)
-            {
-                return false;
-            }
 
             // Basic Capturing
             if (CapturePiece(TargetPoint)
                 && piece.Position.Equals(TargetPoint))
             {
+                hasMoved = true;
                 return true;
             }
 
-            // EnPassant
-            if(piece is Pawn )
+            // Stop Movement if anybody is standing in front of them
+            if (piece.Position.Equals(TargetPoint))
             {
-                CapturePiece(TargetPoint, (Pawn)piece);
+                return false;
             }
+
+            // EnPassant
+            //if(piece is Pawn )
+            //{
+            //    CapturePiece(TargetPoint, (Pawn)piece);
+            //}
         }
+        hasMoved = true;
 
         return Movement(TargetPoint);
     }

@@ -1,34 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOP_Chess;
 
-public class Bishop : Pieces
+public class Bishop : Piece
 {
+    #region Constructor
     /// <summary>
-    /// Constructor for the Roock Chesspiece
+    /// Constructor for the Bishop Chesspiece
     /// </summary>
-    /// <param name="isWhite"></param>
-    public Bishop(byte x, byte y, bool isWhite)
-        : base(x, y, isWhite, isWhite ? '\u2656' : '\u265C')
+    /// <param name="x">Current X Coordinate</param>
+    /// <param name="y">Current Y Coordinate</param>
+    /// <param name="isWhite">Bool value if the Piece is White or not</param>
+    public Bishop(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite ? '\u2657' : '\u265D')
     {
-        // empty Constructor cause nothing is needed :D
+        // setting the Piecevalue to 3 but it is not used yet
+        this.PieceValue = 3;
+        // unicode: '\u2657' -> white Bishop
+        // unicode: '\u265D' -> black Bishop
     }
+    #endregion
 
+    #region Methods
     /// <summary>
-    /// 
+    /// Overwriting the Method to check if the Piece can Move according to the Rules
+    /// Bishop Movement : Diagonal
     /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
+    /// <param name="xTarget">x - Coordinate</param>
+    /// <param name="yTarget">y - Coordinate</param>
     /// <returns></returns>
-    public override bool CanMove(byte xTarget, byte yTarget)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // we can't move the piece to a spot that has
-        // a piece of the same colour
+        int x = Math.Abs(this.Point.X - TargetPoint.X);
+        int y = Math.Abs(this.Point.Y - TargetPoint.Y);
 
-        return xTarget == x || yTarget == y;
+        return (x == y);
     }
-    //    int x = Math.Abs(start.X - end.X);
-    //    int y = Math.Abs(start.Y - end.Y);
-    //    return x / y == 1;
+
+    #region Check Condition
+    bool checkCondition(Piece piece, PointStruct TargetPoint)
+    {
+        return piece.Position.Equals(TargetPoint) && isWhite == piece.IsWhite;
+    }
+    #endregion
+
+    #endregion
 }

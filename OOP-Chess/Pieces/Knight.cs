@@ -1,53 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOP_Chess;
 
-public class Knight : Pieces
+public class Knight : Piece
 {
     /// <summary>
-    /// Constructor for the Roock Chesspiece
+    /// Constructor for the Knight Chesspiece
     /// </summary>
-    /// <param name="isWhite"></param>
-    public Knight(byte x, byte y, bool isWhite)
-        : base(x, y, isWhite, isWhite ? '\u2656' : '\u265C')
+    /// <param name="x">Current X Coordinate</param>
+    /// <param name="y">Current Y Coordinate</param>
+    /// <param name="isWhite">Bool value if the Piece is White or not</param>
+    public Knight(PointStruct Point, bool isWhite)
+        : base(Point, isWhite, isWhite ? '\u2658' : '\u265E')
     {
-        // empty Constructor cause nothing is needed :D
+        // setting the PieceValue for later use
+        this.PieceValue = 3;
+        // unicode: '\u2658' -> white Knight
+        // unicode: '\u265E' -> black Knight
     }
 
     /// <summary>
-    /// 
+    /// Overwriting the Method to check if the Piece can Move according to the Rules
+    /// Knight Movement : Product of X and Y must be 2
     /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
+    /// <param name="TargetPoint">Destination Point</param>
     /// <returns></returns>
-    public override bool CanMove(byte xTarget, byte yTarget)
+    public override bool Movement(PointStruct TargetPoint)
     {
-        // we can't move the piece to a spot that has
-        // a piece of the same colour
+        // calculating the Abolute Value of the Coordinates 
+        int x = Math.Abs(this.Point.X - TargetPoint.X);
+        int y = Math.Abs(this.Point.Y - TargetPoint.Y);
 
-        return xTarget == x || yTarget == y;
+        // the product of x and y must be equal to 2 
+        return x * y == 2;
     }
-    /// <summary>
-    /// overridden method to generate / ceck the movement of the Knight class
-    /// knight movement : y +=2 && x +=1 || y+=1 && x*=2
-    /// </summary>
-    /// <param name="board"></param>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <returns></returns>
-    //public override bool CanMove(Board board, Spot start, Spot end)
-    //{
-    //    // we can't move the piece to a spot that has
-    //    // a piece of the same colour
-    //    if (end.Piece.IsWhite == this.IsWhite)
-    //    {
-    //        return false;
-    //    }
-
-    //    // the product of x and y must be equal to 2 
-    //    int x = Math.Abs(start.X - end.X);
-    //    int y = Math.Abs(start.Y - end.Y);
-    //    return x * y == 2;
-    //}
 }
